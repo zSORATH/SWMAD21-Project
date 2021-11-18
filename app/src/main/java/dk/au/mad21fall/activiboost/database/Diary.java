@@ -1,5 +1,6 @@
 package dk.au.mad21fall.activiboost.database;
 
+// This is inspired by "Demo: Rick and Morty Gallery with Volley and Glide" from L6 in this course
 public class Diary {
 
     // data stored

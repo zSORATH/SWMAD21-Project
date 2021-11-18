@@ -11,6 +11,8 @@ import java.util.concurrent.Executors;
 import dk.au.mad21fall.activiboost.database.Diary;
 import dk.au.mad21fall.activiboost.database.DiaryDatabase;
 
+// This is inspired by "Code Demo / walkthrough : using Room (and SharedPreferences)" from lecture 4
+// And the "Room Demo Asynch" code provided in L5.
 public class Repository {
 
     private DiaryDatabase db;               //database
