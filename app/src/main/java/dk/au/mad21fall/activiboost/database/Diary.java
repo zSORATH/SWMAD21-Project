@@ -1,7 +1,14 @@
 package dk.au.mad21fall.activiboost.database;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 // This is inspired by "Demo: Rick and Morty Gallery with Volley and Glide" from L6 in this course
+@Entity
 public class Diary {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     // data stored
     private String content;
@@ -16,6 +23,15 @@ public class Diary {
     }
 
     // getters and setters
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getContent() {
         return content;
