@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.home;
+package dk.au.mad21fall.activiboost.ui.shared.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {

@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.home;
+package dk.au.mad21fall.activiboost.ui.shared.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

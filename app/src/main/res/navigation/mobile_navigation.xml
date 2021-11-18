@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="dk.au.mad21fall.activiboost.ui.home.HomeFragment"
+        android:name="dk.au.mad21fall.activiboost.ui.shared.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="dk.au.mad21fall.activiboost.ui.dashboard.DashboardFragment"
+        android:name="dk.au.mad21fall.activiboost.ui.patient.diary.diaryFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="dk.au.mad21fall.activiboost.ui.notifications.NotificationsFragment"
+        android:name="dk.au.mad21fall.activiboost.ui.patient.activities.ActivitiesFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
