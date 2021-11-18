@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.Model;
+package dk.au.mad21fall.activiboost.models;
 
 import java.util.Date;
 
