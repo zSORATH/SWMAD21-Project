@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "107280765463",
+    "project_id": "swmad-app-project",
+    "storage_bucket": "swmad-app-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107280765463:android:3ddc3d9c5a84584bddc252",
+        "android_client_info": {
+          "package_name": "dk.au.mad21fall.activiboost"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107280765463-ujptrriaobgc7frj5ciuoicl3gpru26n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAr8T9ZRneH86ADZZpq7lBujFnB7_AvB_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107280765463-ujptrriaobgc7frj5ciuoicl3gpru26n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
