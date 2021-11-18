@@ -1,16 +1,16 @@
-package dk.au.mad21fall.activiboost.ui.patient.diary;
+package dk.au.mad21fall.activiboost.ui.caregiver.patients;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DiaryViewModel extends ViewModel {
+public class PatientsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DiaryViewModel() {
+    public PatientsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is patients fragment");
     }
 
     public LiveData<String> getText() {

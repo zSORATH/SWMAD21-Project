@@ -1,4 +1,6 @@
-package dk.au.mad21fall.activiboost.ui.patient.activities;
+package dk.au.mad21fall.activiboost.ui.shared.activities;
+
+import android.widget.Button;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,7 +12,7 @@ public class ActivitiesViewModel extends ViewModel {
 
     public ActivitiesViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is patient activities fragment");
+        mText.setValue("This is activities fragment");
     }
 
     public LiveData<String> getText() {

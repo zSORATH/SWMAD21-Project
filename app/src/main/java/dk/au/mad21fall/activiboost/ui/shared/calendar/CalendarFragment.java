@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.shared.home;
+package dk.au.mad21fall.activiboost.ui.shared.calendar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,23 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import dk.au.mad21fall.activiboost.databinding.FragmentHomeBinding;
+import dk.au.mad21fall.activiboost.databinding.FragmentCalendarBinding;
 
-public class HomeFragment extends Fragment {
+public class CalendarFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
+    private CalendarViewModel calendarViewModel;
+    private FragmentCalendarBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        calendarViewModel =
+                new ViewModelProvider(this).get(CalendarViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentCalendarBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textCalendar;
+        calendarViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

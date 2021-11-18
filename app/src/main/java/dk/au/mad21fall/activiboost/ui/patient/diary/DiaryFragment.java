@@ -12,22 +12,22 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import dk.au.mad21fall.activiboost.databinding.FragmentDashboardBinding;
+import dk.au.mad21fall.activiboost.databinding.FragmentDiaryBinding;
 
 public class DiaryFragment extends Fragment {
 
     private DiaryViewModel diaryViewModel;
-    private FragmentDashboardBinding binding;
+    private FragmentDiaryBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         diaryViewModel =
                 new ViewModelProvider(this).get(DiaryViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentDiaryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
+        final TextView textView = binding.textDiary;
         diaryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {

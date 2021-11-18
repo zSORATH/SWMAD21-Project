@@ -7,15 +7,19 @@
         android:title="@string/title_home" />
     <item
         android:id="@+id/navigation_calendar"
+        android:icon="@drawable/ic_calendar"
         android:title="@string/title_calendar" />
     <item
         android:id="@+id/navigation_diary"
+        android:icon="@drawable/ic_diary"
         android:title="@string/title_diary"></item>
     <item
         android:id="@+id/navigation_patients"
+        android:icon="@drawable/ic_patients"
         android:title="@string/title_patients" />
     <item
         android:id="@+id/navigation_activities"
+        android:icon="@drawable/ic_activities"
         android:title="@string/title_activities" />
 
 </menu>
