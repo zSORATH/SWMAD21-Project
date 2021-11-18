@@ -10,7 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ActiviBoost">
         <activity
+            android:name=".ui.shared.activities.suggest.SuggestActivity"
+            android:exported="false" />
+        android:label="@string/title_suggest">
+        <activity
+            android:name=".ui.shared.activities.add.AddActivity"
+            android:exported="false" />
+        android:label="@string/title_add">
+        <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.shared.login.LoginActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>

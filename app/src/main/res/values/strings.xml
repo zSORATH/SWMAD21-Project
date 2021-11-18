@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">ActiviBoost</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_diary">Diary</string>
+    <string name="title_patients">Patients</string>
+    <string name="title_activities">Activities</string>
+    <string name="title_suggest">Suggest an activity</string>
+    <string name="title_add">Add activities</string>
 </resources>

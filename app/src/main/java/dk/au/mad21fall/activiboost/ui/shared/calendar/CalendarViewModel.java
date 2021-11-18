@@ -1,16 +1,16 @@
-package dk.au.mad21fall.activiboost.ui.patient.diary;
+package dk.au.mad21fall.activiboost.ui.shared.calendar;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DiaryViewModel extends ViewModel {
+public class CalendarViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DiaryViewModel() {
+    public CalendarViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is diary fragment");
+        mText.setValue("This is calendar fragment");
     }
 
     public LiveData<String> getText() {

@@ -1,6 +1,5 @@
 package dk.au.mad21fall.activiboost.database;
 
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;

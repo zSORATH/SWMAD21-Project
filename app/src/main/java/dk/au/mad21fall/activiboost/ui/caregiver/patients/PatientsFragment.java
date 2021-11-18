@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.patient.activities;
+package dk.au.mad21fall.activiboost.ui.caregiver.patients;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,23 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import dk.au.mad21fall.activiboost.databinding.FragmentNotificationsBinding;
+import dk.au.mad21fall.activiboost.databinding.FragmentPatientsBinding;
 
-public class ActivitiesFragment extends Fragment {
+public class PatientsFragment extends Fragment {
 
-    private ActivitiesViewModel activitiesViewModel;
-    private FragmentNotificationsBinding binding;
+    private PatientsViewModel patientsViewModel;
+    private FragmentPatientsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        activitiesViewModel =
-                new ViewModelProvider(this).get(ActivitiesViewModel.class);
+        patientsViewModel =
+                new ViewModelProvider(this).get(PatientsViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentPatientsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
-        activitiesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textPatients;
+        patientsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
