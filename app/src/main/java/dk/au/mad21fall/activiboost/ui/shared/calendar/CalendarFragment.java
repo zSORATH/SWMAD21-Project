@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.patient.activities;
+package dk.au.mad21fall.activiboost.ui.shared.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,23 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import dk.au.mad21fall.activiboost.databinding.FragmentNotificationsBinding;
+import dk.au.mad21fall.activiboost.databinding.FragmentHomeBinding;
 
-public class ActivitiesFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
-    private ActivitiesViewModel activitiesViewModel;
-    private FragmentNotificationsBinding binding;
+    private HomeViewModel homeViewModel;
+    private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        activitiesViewModel =
-                new ViewModelProvider(this).get(ActivitiesViewModel.class);
+        homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
-        activitiesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textHome;
+        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

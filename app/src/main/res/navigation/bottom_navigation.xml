@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_diary"
+        android:name="dk.au.mad21fall.activiboost.ui.patient.diary.DiaryFragment"
+        android:label="@string/title_diary"
+        tools:layout="@layout/fragment_diary" />
+    <fragment
+        android:id="@+id/navigation_patient_activities"
+        android:name="dk.au.mad21fall.activiboost.ui.patient.activities.ActivitiesFragment"
+        android:label="@string/title_patient_activities"
+        tools:layout="@layout/fragment_patients" />
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="dk.au.mad21fall.activiboost.ui.shared.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_calendar"
+        android:name="dk.au.mad21fall.activiboost.ui.shared.calendar.CalendarFragment"
+        android:label="@string/title_calendar" />
+
+    <fragment
+        android:id="@+id/navigation_patients"
+        android:name="dk.au.mad21fall.activiboost.ui.caregiver.patients.PatientsFragment"
+        android:label="@string/title_patients" />
+    <fragment
+        android:id="@+id/navigation_caregiver_activities"
+        android:name="dk.au.mad21fall.activiboost.ui.caregiver.activities.ActivitiesFragment"
+        android:label="@string/title_caregiver_activities" />
+</navigation>
