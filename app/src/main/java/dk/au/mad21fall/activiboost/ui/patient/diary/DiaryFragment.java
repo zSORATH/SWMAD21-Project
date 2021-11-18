@@ -14,15 +14,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import dk.au.mad21fall.activiboost.databinding.FragmentDashboardBinding;
 
-public class diaryFragment extends Fragment {
+public class DiaryFragment extends Fragment {
 
-    private diaryViewModel diaryViewModel;
+    private DiaryViewModel diaryViewModel;
     private FragmentDashboardBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         diaryViewModel =
-                new ViewModelProvider(this).get(diaryViewModel.class);
+                new ViewModelProvider(this).get(DiaryViewModel.class);
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

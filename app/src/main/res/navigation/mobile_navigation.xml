@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="dk.au.mad21fall.activiboost.ui.patient.diary.diaryFragment"
+        android:name="dk.au.mad21fall.activiboost.ui.patient.diary.DiaryFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
