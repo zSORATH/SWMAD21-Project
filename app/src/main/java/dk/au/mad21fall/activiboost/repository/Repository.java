@@ -1,24 +1,40 @@
 package dk.au.mad21fall.activiboost.repository;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
+import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import dk.au.mad21fall.activiboost.database.Diary;
 import dk.au.mad21fall.activiboost.database.DiaryDatabase;
+import dk.au.mad21fall.activiboost.models.Activity;
+import dk.au.mad21fall.activiboost.models.Patient;
 
 // This is inspired by "Code Demo / walkthrough : using Room (and SharedPreferences)" from lecture 4
 // And the "Room Demo Asynch" code provided in L5.
 public class Repository {
 
+    private static final String TAG = "Getting document:";
+    private FirebaseFirestore fdb;
     private DiaryDatabase db;               //database
     private ExecutorService executor;       //for asynch processing
     private LiveData<List<Diary>> diary;    //livedata
     private static Repository instance;     //for Singleton pattern
+    private MutableLiveData<ArrayList<Patient>> patients;
+    private MutableLiveData<ArrayList<Activity>> activities;
 
     //Singleton pattern to make sure there is only one instance of the Repository in use
     public static Repository getInstance(Application app){
@@ -30,9 +46,11 @@ public class Repository {
 
     //constructor - takes Application object for context
     private Repository(Application app){
+        fdb = FirebaseFirestore.getInstance();
         db = DiaryDatabase.getDatabase(app.getApplicationContext());  //initialize database
         executor = Executors.newSingleThreadExecutor();                //executor for background processing
         diary = db.diaryDAO().getAll();                             //get LiveData reference to all entries
+        loadData("patients", "p");
     }
 
     //update Diary in database
@@ -67,7 +85,45 @@ public class Repository {
             }
         });
     }
-
+    //Firebase requests
+    private void loadData(String collectionName, String type) {
+        fdb.collection(collectionName)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot valueg, @Nullable FirebaseFirestoreException error) {
+                        if(valueg != null && !valueg.isEmpty()){
+                            if(type.equals("p")) {
+                                ArrayList<Patient> updatedPatients = new ArrayList<>();
+                                for (DocumentSnapshot docg : valueg.getDocuments()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
+                                    Patient p = docg.toObject(Patient.class);
+                                    if (p != null) {
+                                        updatedPatients.add(p);
+                                    }
+                                }
+                                if (patients == null) {
+                                    patients = new MutableLiveData<ArrayList<Patient>>();
+                                }
+                                patients.setValue(updatedPatients);
+                            }
+                            if(type.equals("a")){
+                                ArrayList<Activity> updatedActivities = new ArrayList<>();
+                                for(DocumentSnapshot docg : valueg.getDocuments()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
+                                    Activity a = docg.toObject(Activity.class);
+                                    if (a != null) {
+                                        updatedActivities.add(a);
+                                    }
+                                }
+                               if (activities == null) {
+                                    activities = new MutableLiveData<ArrayList<Activity>>();
+                                }
+                                activities.setValue(updatedActivities);
+                            }
+                        }
+                    }
+                });
+    }
 
 
 }

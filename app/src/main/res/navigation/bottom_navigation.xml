@@ -18,12 +18,15 @@
     <fragment
         android:id="@+id/navigation_calendar"
         android:name="dk.au.mad21fall.activiboost.ui.shared.calendar.CalendarFragment"
+        tools:layout="@layout/fragment_calendar"
         android:label="@string/title_calendar" />
 
     <fragment
         android:id="@+id/navigation_patients"
         android:name="dk.au.mad21fall.activiboost.ui.caregiver.patients.PatientsFragment"
+        tools:layout="@layout/fragment_patients"
         android:label="@string/title_patients" />
+
     <fragment
         android:id="@+id/navigation_activities"
         android:name="dk.au.mad21fall.activiboost.ui.shared.activities.ActivitiesFragment"

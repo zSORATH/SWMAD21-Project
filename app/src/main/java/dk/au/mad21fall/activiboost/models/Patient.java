@@ -1,5 +1,7 @@
 package dk.au.mad21fall.activiboost.models;
 
+import java.util.ArrayList;
+
 public class Patient {
 
     private String name;
@@ -31,4 +33,5 @@ public class Patient {
     public void setId(String id) {
         this.id = id;
     }
+
 }
