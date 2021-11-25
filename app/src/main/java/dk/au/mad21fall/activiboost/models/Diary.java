@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.database;
+package dk.au.mad21fall.activiboost.models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

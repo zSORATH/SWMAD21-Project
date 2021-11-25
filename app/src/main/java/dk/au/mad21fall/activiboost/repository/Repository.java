@@ -7,12 +7,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.database.annotations.Nullable;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.MetadataChanges;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import dk.au.mad21fall.activiboost.database.Diary;
+import dk.au.mad21fall.activiboost.models.Diary;
 import dk.au.mad21fall.activiboost.database.DiaryDatabase;
 import dk.au.mad21fall.activiboost.models.Activity;
 import dk.au.mad21fall.activiboost.models.Patient;
