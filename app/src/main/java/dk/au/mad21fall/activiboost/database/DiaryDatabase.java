@@ -6,6 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import dk.au.mad21fall.activiboost.models.Diary;
+
 // This is from the "Code Demo / walkthrough : using Room (and SharedPreferences)" from lecture 4
 @Database(entities = {Diary.class}, version = 4)
 public abstract class DiaryDatabase extends RoomDatabase{

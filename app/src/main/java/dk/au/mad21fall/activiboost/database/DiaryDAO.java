@@ -10,7 +10,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import dk.au.mad21fall.activiboost.database.Diary;
+import dk.au.mad21fall.activiboost.models.Diary;
 
 // This is inspired by the code in L3 "Data storage demo" in this course.
 @Dao
