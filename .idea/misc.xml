@@ -3,12 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/activity_main.xml" value="0.1640625" />
-        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1640625" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_add.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_main.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_suggest.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_diary.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_home.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_patients.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/menu/bottom_nav_menu.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/test/test2/SWMAD21-Project/app/src/main/res/layout/fragment_activities.xml" value="0.20520833333333333" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import dk.au.mad21fall.activiboost.databinding.ActivityMainBinding;
 import dk.au.mad21fall.activiboost.ui.shared.activities.ActivitiesFragment;
+import dk.au.mad21fall.activiboost.weatherApi.WeatherApi;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private NavController navController;
     private BottomNavigationView navView;
+
+    WeatherApi api = new WeatherApi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     // https://stackoverflow.com/questions/26939759/android-getintent-from-a-fragment
     void setUserType() {
+        api.getLocalWeather("aarhus", this);
         ActivitiesFragment activitiesFragment = new ActivitiesFragment();
         userType = getIntent().getIntExtra("user", userType);
         Bundle bundle = new Bundle();

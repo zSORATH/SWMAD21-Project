@@ -66,4 +66,9 @@ dependencies {
 
     // Dependency FirebaseUI for Firebase Realtime Database
     implementation 'com.firebaseui:firebase-ui-database:8.0.0'
+
+    // Volley
+    implementation 'com.android.volley:volley:1.2.1'
+    //GSON
+    implementation 'com.google.code.gson:gson:2.8.8'
 }
