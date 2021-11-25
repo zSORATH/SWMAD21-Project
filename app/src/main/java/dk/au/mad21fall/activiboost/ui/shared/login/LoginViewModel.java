@@ -18,7 +18,6 @@ public class LoginViewModel extends AndroidViewModel {
     public LoginViewModel(@NonNull Application app) {
         super(app);
         repository = Repository.getInstance(app);
-
     }
 
 }

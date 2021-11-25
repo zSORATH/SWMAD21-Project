@@ -7,10 +7,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.MetadataChanges;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class Repository {
     private LiveData<List<Diary>> diary;    //livedata
     private static Repository instance;     //for Singleton pattern
     private MutableLiveData<ArrayList<Patient>> patients;
+    private MutableLiveData<ArrayList<Patient>> activitypatients;
     private MutableLiveData<ArrayList<Activity>> activities;
 
     //Singleton pattern to make sure there is only one instance of the Repository in use
@@ -51,6 +54,7 @@ public class Repository {
         executor = Executors.newSingleThreadExecutor();                //executor for background processing
         diary = db.diaryDAO().getAll();                             //get LiveData reference to all entries
         loadData("patients", "p");
+        loadActivityPaticipants("p");
     }
 
     //update Diary in database
@@ -123,6 +127,31 @@ public class Repository {
                         }
                     }
                 });
+    }
+
+    private void loadActivityPaticipants(String type){
+        fdb.collection("activities").document("000001").collection("activitypatients")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot valueg, @Nullable FirebaseFirestoreException error) {
+                        if(valueg != null && !valueg.isEmpty()){
+                            if(type.equals("p")) {
+                                ArrayList<Patient> updatedPatients = new ArrayList<>();
+                                for (DocumentSnapshot docg : valueg.getDocuments()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
+                                    Patient p = docg.toObject(Patient.class);
+                                    if (p != null) {
+                                        updatedPatients.add(p);
+                                    }
+                                }
+                                if (activitypatients == null) {
+                                    activitypatients = new MutableLiveData<ArrayList<Patient>>();
+                                }
+                                activitypatients.setValue(updatedPatients);
+                            }
+                        }
+            }
+        });
     }
 
 
