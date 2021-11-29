@@ -1,8 +1,15 @@
 package dk.au.mad21fall.activiboost.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 
+@Entity
 public class Patient {
+
+    @PrimaryKey(autoGenerate = true)
+    private int pid;
 
     private String name;
     private int age;
