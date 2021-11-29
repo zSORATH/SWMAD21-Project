@@ -12,7 +12,7 @@ public class Activity {
 
     private String activityName;
     private Date time;
-
+    private Map<String, Boolean> patients;
 
 
     public Activity(){}
@@ -31,6 +31,14 @@ public class Activity {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Map<String, Boolean> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(Map<String, Boolean> patients) {
+        this.patients = patients;
     }
 
 }

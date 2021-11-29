@@ -35,7 +35,7 @@ import dk.au.mad21fall.activiboost.ui.shared.activities.suggest.SuggestActivity;
 import dk.au.mad21fall.activiboost.ui.shared.activities.add.AddActivity;
 import dk.au.mad21fall.activiboost.databinding.FragmentActivitiesBinding;
 
-public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IActivitiesItemClickedListener{
+public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IActivitiesItemClickedListener, MyActivitiesAdapter.IMyActivitiesItemClickedListener{
 
     private static final String TAG = "ACTIVITIES FRAGMENT";
 
@@ -45,9 +45,12 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
     private Intent intent;
     private TextView firstTextView, secondTextView;
     private ActivitiesAdapter activitiesAdapter;
+    private MyActivitiesAdapter myActivitiesAdapter;
     private RecyclerView rcvMyActivities, rcvActivities;
     private ArrayList<Activity> activities;
+    private ArrayList<Activity> myActivities;
     private LiveData<ArrayList<Activity>> lactivities;
+    private String userId = "1234567899";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -57,20 +60,29 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
         binding = FragmentActivitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        activities = new ArrayList<Activity>();
+        myActivities = new ArrayList<Activity>();
         firstTextView = binding.activityTextView1;
+        firstTextView.setText(R.string.myActivities);
         secondTextView = binding.activityTextView2;
+        secondTextView.setText(R.string.Activities);
         activitiesAdapter = new ActivitiesAdapter(this);
+        myActivitiesAdapter = new MyActivitiesAdapter(this);
         rcvActivities = binding.activityRCV2;
         rcvActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvActivities.setAdapter(activitiesAdapter);
 
         rcvMyActivities = binding.activityRCV1;
+        rcvMyActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rcvMyActivities.setAdapter(myActivitiesAdapter);
 
         lactivities = activitiesViewModel.getActivities();
         lactivities.observe(getActivity(), new Observer<ArrayList<Activity>>() {
             @Override
             public void onChanged(ArrayList<Activity> nactivities) {
                 activitiesAdapter.updateActivitiesList(nactivities);
+                myActivities(nactivities);
+                activities = nactivities;
             }
         });
 
@@ -104,7 +116,7 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
     @Override
     public void onActivityClicked(int index) {
         ArrayList<Activity> al = activities;
-        showDialogue(al.get(index));
+       // showDialogue(al.get(index));
     }
 
     //show a dialogue
@@ -116,5 +128,14 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
         builder.create().show();
+    }
+
+    private void myActivities(ArrayList<Activity> list){
+        for(Activity a : list){
+            if(a.getPatients().containsKey(userId)){
+                myActivities.add(a);
+            }
+        }
+        myActivitiesAdapter.updateActivitiesList(myActivities);
     }
 }

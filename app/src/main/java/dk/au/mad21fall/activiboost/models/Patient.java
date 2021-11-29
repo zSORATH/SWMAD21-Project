@@ -4,6 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @Entity
 public class Patient {
@@ -39,6 +40,14 @@ public class Patient {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
     }
 
 }
