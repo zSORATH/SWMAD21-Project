@@ -52,6 +52,7 @@ public class Repository {
         executor = Executors.newSingleThreadExecutor();                //executor for background processing
         diaries = db.diaryDAO().getAll();                             //get LiveData reference to all entries
         loadData("patients", "p");
+        loadData("activities", "a");
         loadActivityPaticipants("p");
     }
 
@@ -95,6 +96,12 @@ public class Repository {
             }
         });
     }
+
+    public LiveData<ArrayList<Activity>> getActivities() {
+        return activities;
+    }
+
+
     //Firebase requests
     private void loadData(String collectionName, String type) {
         fdb.collection(collectionName)

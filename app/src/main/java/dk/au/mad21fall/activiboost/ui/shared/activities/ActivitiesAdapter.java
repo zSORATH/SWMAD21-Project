@@ -15,16 +15,16 @@ import dk.au.mad21fall.activiboost.models.Activity;
 
 public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewHolder>{
 
-    private ArrayList<Activity> activityList;
-    private ActivitiesAdapter.IAdviceItemClickedListener activitiesListener;
+    private ArrayList<Activity> activitiesList;
+    private ActivitiesAdapter.IActivitiesItemClickedListener activitiesListener;
 
 
-    public ActivitiesAdapter(ActivitiesAdapter.IAdviceItemClickedListener activitiesListener){
+    public ActivitiesAdapter(ActivitiesAdapter.IActivitiesItemClickedListener activitiesListener){
         this.activitiesListener = activitiesListener;
     }
 
     public void updateActivitiesList(ArrayList<Activity> lists){
-        activityList = lists;
+        activitiesList = lists;
         notifyDataSetChanged();
     }
 
@@ -41,42 +41,42 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
 
     @Override
     public void onBindViewHolder(@NonNull ActivitiesAdapter.ActivitiesViewHolder viewHolder, int position) {
-        viewHolder.title.setText(activityList.get(position).getActivityName());
+        viewHolder.activitytitle.setText(activitiesList.get(position).getActivityName());
 
     }
 
     @Override
     public int getItemCount() {
-        if(activityList == null){
+        if(activitiesList == null){
             return 0;
         } else {
-            return activityList.size();
+            return activitiesList.size();
         }
     }
 
     //Lavet ud fra PersonViewHolder i Lists and grids demoen
     public class ActivitiesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView title;
+        TextView activitytitle;
 
-        ActivitiesAdapter.IAdviceItemClickedListener adviceListener;
+        ActivitiesAdapter.IActivitiesItemClickedListener activitiesListener;
 
-        public ActivitiesViewHolder(@NonNull View itemView, ActivitiesAdapter.IAdviceItemClickedListener adviceItemClickedListener) {
+        public ActivitiesViewHolder(@NonNull View itemView, ActivitiesAdapter.IActivitiesItemClickedListener activitiesItemClickedListener) {
             super(itemView);
 
-            title = itemView.findViewById(R.id.title_activity);
+            activitytitle = itemView.findViewById(R.id.title_activity);
 
-            adviceListener = adviceItemClickedListener;
+            activitiesListener = activitiesItemClickedListener;
             itemView.setOnClickListener(this);
 
         }
         @Override
         public void onClick(View view) {
-            adviceListener.onAdviceClicked(getAdapterPosition());
+            activitiesListener.onActivityClicked(getAdapterPosition());
         }
     }
 
-    public static interface IAdviceItemClickedListener {
-        void onAdviceClicked(int index);
+    public static interface IActivitiesItemClickedListener {
+        void onActivityClicked(int index);
     }
 }

@@ -1,19 +1,36 @@
 package dk.au.mad21fall.activiboost.ui.shared.activities;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ActivitiesViewModel extends ViewModel {
+import java.util.ArrayList;
 
-    private MutableLiveData<String> mText;
+import dk.au.mad21fall.activiboost.models.Activity;
+import dk.au.mad21fall.activiboost.repository.Repository;
 
-    public ActivitiesViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is activities fragment");
-    }
+public class ActivitiesViewModel extends AndroidViewModel {
+        private Repository repository;
+        MutableLiveData<ArrayList<Activity>> lActivities;
+        LiveData<ArrayList<Activity>> activities;
 
-    public LiveData<String> getText() {
-        return mText;
-    }
+
+        public ActivitiesViewModel(@NonNull Application app){
+            super(app);
+            repository = Repository.getInstance(getApplication());
+            activities = repository.getActivities();
+
+        }
+
+        public LiveData<ArrayList<Activity>> getActivities() {
+            if(activities == null){
+                activities = new MutableLiveData<ArrayList<Activity>>();
+            }
+            return activities;
+        }
+
 }

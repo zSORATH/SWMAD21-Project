@@ -14,4 +14,6 @@
     <string name="diary_date">Date</string>
     <string name="diary_entry">Diary entry</string>
     <string name="button_add_diary">Add New Diary</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 </resources>

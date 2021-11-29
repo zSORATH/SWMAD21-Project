@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">ActiviBoost</string>
+    <string name="title_home">Home</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_diary">Diary</string>
+    <string name="title_patients">Patients</string>
+    <string name="title_activities">Activities</string>
+    <string name="title_suggest">Suggest an activity</string>
+    <string name="title_add">Add activities</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="activitySignupBtn">Sign up</string>
+    <string name="nameTxt">participants</string>
+    <string name="insuranceTxt">time</string>
+    <string name="diary_date">Date</string>
+    <string name="diary_entry">Diary entry</string>
+    <string name="button_add_diary">Add New Diary</string>
+    <string name="activitySignupBtn">Sign up</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 </resources>
