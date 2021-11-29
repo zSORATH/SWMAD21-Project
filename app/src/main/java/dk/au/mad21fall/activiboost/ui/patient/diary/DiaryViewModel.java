@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dk.au.mad21fall.activiboost.models.Diary;
 import dk.au.mad21fall.activiboost.models.Patient;
@@ -16,7 +17,7 @@ public class DiaryViewModel extends ViewModel {
 
     private Repository repository;
 
-    private MutableLiveData<ArrayList<Diary>> diaries;
+    private LiveData<List<Diary>> diaries;
 
     public DiaryViewModel() {
     }
@@ -26,7 +27,7 @@ public class DiaryViewModel extends ViewModel {
         diaries = repository.getDiaries();
     }
 
-    public MutableLiveData<ArrayList<Diary>> GetDiaryLiveData(){
+    public LiveData<List<Diary>> GetDiaryLiveData(){
         return diaries;
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.databinding.FragmentDiaryBinding;
@@ -24,7 +25,7 @@ import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.ui.caregiver.patients.PatientsAdapter;
 import dk.au.mad21fall.activiboost.ui.caregiver.patients.PatientsViewModel;
 
-public class DiaryFragment extends Fragment {
+public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemClickedListener {
 
     private RecyclerView rcvDiaries;
     private DiaryAdapter adapter;
@@ -32,11 +33,13 @@ public class DiaryFragment extends Fragment {
     private DiaryViewModel diaryViewModel;
     private FragmentDiaryBinding binding;
 
+    Button button_add_diary;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentDiaryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        adapter = new DiaryAdapter(root);
+        adapter = new DiaryAdapter(this);
         rcvDiaries = root.findViewById(R.id.rcv_diaries);
         rcvDiaries.setLayoutManager(new LinearLayoutManager(root.getContext()));
         rcvDiaries.setAdapter(adapter);
@@ -49,14 +52,23 @@ public class DiaryFragment extends Fragment {
         }
 
         // Updating the movies in the app upon any change
-        diaryViewModel.GetDiaryLiveData().observe(getViewLifecycleOwner(), new Observer<ArrayList<Diary>>() {
+        diaryViewModel.GetDiaryLiveData().observe(getViewLifecycleOwner(), new Observer<List<Diary>>() {
             @Override
-            public void onChanged(ArrayList<Diary> diaries) {
+            public void onChanged(List<Diary> diaries) {
                 adapter.updateDiaryList(diaries);
             }
         });
 
+        button_add_diary = root.findViewById(R.id.button_add_diary);
+        button_add_diary.setOnClickListener(view -> {
+            addDiary();
+        });
+
         return root;
+    }
+
+    private void addDiary() {
+        //TODO:
     }
 
 
@@ -67,4 +79,8 @@ public class DiaryFragment extends Fragment {
     }
 
 
+    @Override
+    public void onDiaryClicked(int index) {
+        //TODO:
+    }
 }

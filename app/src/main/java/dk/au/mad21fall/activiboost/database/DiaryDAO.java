@@ -21,7 +21,7 @@ public interface DiaryDAO {
     //TODO: Hvad mangler der ellers?
 
     @Query("SELECT * FROM diary")
-    MutableLiveData<ArrayList<Diary>> getAll();
+    LiveData<List<Diary>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addDiary(Diary diary);

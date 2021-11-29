@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hsalf.smileyrating.SmileyRating;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Diary;
@@ -25,14 +26,14 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
 
     private IDiaryItemClickedListener listener;
 
-    private ArrayList<Diary> diaryList;
+    private List<Diary> diaryList;
 
     // Constructor
     public DiaryAdapter(IDiaryItemClickedListener listener){
         this.listener = listener;
     }
 
-    public void updateDiaryList(ArrayList<Diary> lists){
+    public void updateDiaryList(List<Diary> lists){
         diaryList = lists;
         notifyDataSetChanged();
     }

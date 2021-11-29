@@ -31,7 +31,7 @@ public class Repository {
     private FirebaseFirestore fdb;
     private DiaryDatabase db;               //database
     private ExecutorService executor;       //for asynch processing
-    private MutableLiveData<ArrayList<Diary>> diaries;    //livedata
+    private LiveData<List<Diary>> diaries;    //livedata
     private static Repository instance;     //for Singleton pattern
     private MutableLiveData<ArrayList<Patient>> patients;
     private MutableLiveData<ArrayList<Patient>> activitypatients;
@@ -59,7 +59,7 @@ public class Repository {
         return patients;
     }
 
-    public MutableLiveData<ArrayList<Diary>> getDiaries() {
+    public LiveData<List<Diary>> getDiaries() {
         return diaries;
     }
 
