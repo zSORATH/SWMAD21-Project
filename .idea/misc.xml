@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_add.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_login.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_main.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_suggest.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_activities.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_calendar.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_diary.xml" value="0.28306159420289856" />
         <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_add.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_main.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_suggest.xml" value="0.26979166666666665" />
