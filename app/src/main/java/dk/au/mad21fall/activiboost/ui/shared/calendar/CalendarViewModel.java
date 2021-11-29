@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+// Using https://github.com/SpongeBobSun/mCalendarView
+
 public class CalendarViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;

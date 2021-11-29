@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import dk.au.mad21fall.activiboost.databinding.FragmentCalendarBinding;
 
+// Using https://github.com/SpongeBobSun/mCalendarView
+
 public class CalendarFragment extends Fragment {
 
     private CalendarViewModel calendarViewModel;
@@ -27,13 +29,6 @@ public class CalendarFragment extends Fragment {
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textCalendar;
-        calendarViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 
