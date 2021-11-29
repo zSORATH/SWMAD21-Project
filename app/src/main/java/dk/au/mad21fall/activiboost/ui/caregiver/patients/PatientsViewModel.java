@@ -26,9 +26,9 @@ public class PatientsViewModel extends ViewModel {
         patients = repository.getPatients();
     }
 
-    public ArrayList<Patient> getPatients(){
-        return patients.getValue();
-    }
+    //public ArrayList<Patient> getPatients(){
+    //    return patients.getValue();
+    //}
 
     public MutableLiveData<ArrayList<Patient>> GetPatientLiveData(){
         return patients;

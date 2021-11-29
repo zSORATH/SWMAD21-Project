@@ -41,13 +41,14 @@ public class ActivitiesFragment extends Fragment {
         binding = FragmentActivitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textActivities;
-        activitiesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        //TODO: Jeg har udkommenteret dette for at kunne køre koden, da den laver en fejl ved textActivities
+        //final TextView textView = binding.textActivities;
+        //activitiesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        //    @Override
+        //    public void onChanged(@Nullable String s) {
+        //        textView.setText(s);
+        //    }
+        //});
 
         // this is how we determine what type of user is corrently logged in
         // this will probably change when we implent user classes better
