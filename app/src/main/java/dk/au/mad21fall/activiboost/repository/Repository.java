@@ -31,7 +31,7 @@ public class Repository {
     private FirebaseFirestore fdb;
     private DiaryDatabase db;               //database
     private ExecutorService executor;       //for asynch processing
-    private LiveData<List<Diary>> diary;    //livedata
+    private MutableLiveData<ArrayList<Diary>> diaries;    //livedata
     private static Repository instance;     //for Singleton pattern
     private MutableLiveData<ArrayList<Patient>> patients;
     private MutableLiveData<ArrayList<Patient>> activitypatients;
@@ -50,13 +50,17 @@ public class Repository {
         fdb = FirebaseFirestore.getInstance();
         db = DiaryDatabase.getDatabase(app.getApplicationContext());  //initialize database
         executor = Executors.newSingleThreadExecutor();                //executor for background processing
-        diary = db.diaryDAO().getAll();                             //get LiveData reference to all entries
+        diaries = db.diaryDAO().getAll();                             //get LiveData reference to all entries
         loadData("patients", "p");
         loadActivityPaticipants("p");
     }
 
     public MutableLiveData<ArrayList<Patient>> getPatients() {
         return patients;
+    }
+
+    public MutableLiveData<ArrayList<Diary>> getDiaries() {
+        return diaries;
     }
 
     //update Diary in database
@@ -71,7 +75,7 @@ public class Repository {
     }
 
     //add a new Diary to database
-    public void addDiaryAsynch(String content, Double rating, String date){
+    public void addDiaryAsynch(String content, int rating, String date){
 
         executor.execute(new Runnable() {
             @Override

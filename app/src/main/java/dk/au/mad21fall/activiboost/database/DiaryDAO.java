@@ -1,6 +1,7 @@
 package dk.au.mad21fall.activiboost.database;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -8,6 +9,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dk.au.mad21fall.activiboost.models.Diary;
@@ -19,7 +21,7 @@ public interface DiaryDAO {
     //TODO: Hvad mangler der ellers?
 
     @Query("SELECT * FROM diary")
-    LiveData<List<Diary>> getAll();
+    MutableLiveData<ArrayList<Diary>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addDiary(Diary diary);

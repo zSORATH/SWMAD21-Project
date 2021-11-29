@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hsalf.smileyrating.SmileyRating;
+
 import java.util.ArrayList;
 
 import dk.au.mad21fall.activiboost.R;
@@ -44,21 +46,22 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
         return vh;
     }
 
+    // This is inspired by https://github.com/sujithkanna/SmileyRating
     // Getting the correct smiley according to the rating
     private int getSmiley(int rating) {
-        if (rating == 1) {
+        if (rating == SmileyRating.Type.TERRIBLE.getRating()) {
             return R.drawable.ic_terrible;
         }
-        if (rating == 2) {
+        if (rating == SmileyRating.Type.BAD.getRating()) {
             return R.drawable.ic_bad;
         }
-        if (rating == 3) {
+        if (rating == SmileyRating.Type.OKAY.getRating()) {
             return R.drawable.ic_okay;
         }
-        if (rating == 4) {
+        if (rating == SmileyRating.Type.GOOD.getRating()) {
             return R.drawable.ic_good;
         }
-        if (rating == 5) {
+        if (rating == SmileyRating.Type.GREAT.getRating()) {
             return R.drawable.ic_great;
         }
         return 0;
