@@ -7,9 +7,15 @@
         <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_login.xml" value="0.28306159420289856" />
         <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_main.xml" value="0.28306159420289856" />
         <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_suggest.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activitypatientitem.xml" value="0.33" />
         <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_activities.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_activity_patient.xml" value="0.276268115942029" />
         <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_calendar.xml" value="0.28306159420289856" />
         <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_diary.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_home.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_patients.xml" value="0.276268115942029" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/patientitem.xml" value="0.5" />
+        <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_add.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_main.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_suggest.xml" value="0.26979166666666665" />
@@ -18,11 +24,6 @@
         <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_patients.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/menu/bottom_nav_menu.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/jonas/AndroidStudioProjects/test/test2/SWMAD21-Project/app/src/main/res/layout/fragment_activities.xml" value="0.20520833333333333" />
-        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/activity_main.xml" value="0.1640625" />
-        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/activitypatientitem.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/fragment_activities.xml" value="0.21197916666666666" />
-        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/fragment_activity_patient.xml" value="0.21197916666666666" />
-        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1640625" />
       </map>
     </option>
   </component>

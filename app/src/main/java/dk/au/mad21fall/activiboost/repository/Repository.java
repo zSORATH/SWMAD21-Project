@@ -55,6 +55,10 @@ public class Repository {
         loadActivityPaticipants("p");
     }
 
+    public MutableLiveData<ArrayList<Patient>> getPatients() {
+        return patients;
+    }
+
     //update Diary in database
     public void updateDiaryAsynch(Diary diary){
 
