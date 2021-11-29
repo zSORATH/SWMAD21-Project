@@ -75,4 +75,7 @@ dependencies {
 
     // mCalendarView
     implementation 'sun.bob:mcalendarview:1.0.0'
+
+    // SmileyRating
+    implementation 'com.github.sujithkanna:smileyrating:2.0.0'
 }

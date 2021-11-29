@@ -12,11 +12,11 @@ public class Diary {
 
     // data stored
     private String content;
-    private Double rating;
+    private int rating;
     private String date;
 
     // constructor
-    public Diary(String content, Double rating, String date) {
+    public Diary(String content, int rating, String date) {
         this.content = content;
         this.rating = rating;
         this.date = date;
@@ -41,11 +41,11 @@ public class Diary {
         this.content = content;
     }
 
-    public Double getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -56,4 +56,5 @@ public class Diary {
     public void setDate(String date) {
         this.date = date;
     }
+
 }
