@@ -1,8 +1,9 @@
-package dk.au.mad21fall.activiboost.ui.shared.activities;
+package dk.au.mad21fall.activiboost.ui.shared.activities.patient;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Activity;
 
+//With inspiration from PersonAdapter in Lists and Grid demo
 public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewHolder>{
 
     private ArrayList<Activity> activitiesList;
@@ -58,6 +60,7 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
     public class ActivitiesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView activitytitle;
+        Button signUpBtn;
 
         ActivitiesAdapter.IActivitiesItemClickedListener activitiesListener;
 
@@ -65,9 +68,18 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
             super(itemView);
 
             activitytitle = itemView.findViewById(R.id.title_activity);
+            signUpBtn = itemView.findViewById(R.id.signUpBtn);
 
             activitiesListener = activitiesItemClickedListener;
             itemView.setOnClickListener(this);
+
+            //set click listener specifically for the invite button
+            signUpBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activitiesListener.addToActivity(activitiesList.get(getAdapterPosition()));
+                }
+            });
 
         }
         @Override
@@ -78,5 +90,6 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
 
     public static interface IActivitiesItemClickedListener {
         void onActivityClicked(int index);
+        void addToActivity(Activity activity);
     }
 }

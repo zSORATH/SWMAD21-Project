@@ -15,7 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import dk.au.mad21fall.activiboost.databinding.ActivityMainBinding;
-import dk.au.mad21fall.activiboost.ui.shared.activities.ActivitiesFragment;
+import dk.au.mad21fall.activiboost.ui.shared.activities.patient.ActivitiesFragment;
 import dk.au.mad21fall.activiboost.weatherApi.WeatherApi;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         navView = binding.navView;
 
-        setUserType();
+       setUserType();
 
         switch (userType) {
             case PATIENT:
@@ -65,12 +65,18 @@ public class MainActivity extends AppCompatActivity {
         if (navView.getMenu().findItem(R.id.navigation_patients) != null) {
             navView.getMenu().removeItem(R.id.navigation_patients);
         }
+       /* if (navView.getMenu().findItem(R.id.navigation_cactivities) != null) {
+            navView.getMenu().removeItem(R.id.navigation_cactivities);
+        }*/
     }
 
     void setCaregiverView() {
         if (navView.getMenu().findItem(R.id.navigation_diary) != null) {
             navView.getMenu().removeItem(R.id.navigation_diary);
         }
+        /*if (navView.getMenu().findItem(R.id.navigation_activities) != null) {
+            navView.getMenu().removeItem(R.id.navigation_activities);
+        }*/
     }
 
     // https://stackoverflow.com/questions/26939759/android-getintent-from-a-fragment

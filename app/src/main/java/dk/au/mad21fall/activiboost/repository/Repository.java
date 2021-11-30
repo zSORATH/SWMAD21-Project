@@ -3,10 +3,14 @@ package dk.au.mad21fall.activiboost.repository;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.annotations.Nullable;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -14,7 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -36,6 +42,7 @@ public class Repository {
     private MutableLiveData<ArrayList<Patient>> patients;
     private MutableLiveData<ArrayList<Patient>> activitypatients;
     private MutableLiveData<ArrayList<Activity>> activities;
+    private MutableLiveData<ArrayList<Activity>> suggestedactivities;
 
     //Singleton pattern to make sure there is only one instance of the Repository in use
     public static Repository getInstance(Application app){
@@ -53,6 +60,7 @@ public class Repository {
         diaries = db.diaryDAO().getAll();                             //get LiveData reference to all entries
         loadData("patients", "p");
         loadData("activities", "a");
+        loadData("activitySuggestions", "s");
         loadActivityPaticipants("p");
     }
 
@@ -137,6 +145,20 @@ public class Repository {
                                 }
                                 activities.setValue(updatedActivities);
                             }
+                            if(type.equals("s")){
+                                ArrayList<Activity> sActivities = new ArrayList<>();
+                                for(DocumentSnapshot docg : valueg.getDocuments()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
+                                    Activity a = docg.toObject(Activity.class);
+                                    if (a != null) {
+                                        sActivities.add(a);
+                                    }
+                                }
+                                if (suggestedactivities == null) {
+                                    suggestedactivities = new MutableLiveData<ArrayList<Activity>>();
+                                }
+                                suggestedactivities.setValue(sActivities);
+                            }
                         }
                     }
                 });
@@ -168,4 +190,41 @@ public class Repository {
     }
 
 
+    public void updateActivity(String userid, Activity a){
+        DocumentReference docRef = fdb.collection("activities").document(a.getActivityName());
+        docRef
+                .update("patients", a.getPatients())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
+
+
+    }
+    public void saveActivity(String userid, String date, int currentMood){
+        Map<String, Object> mood = new HashMap<>();
+        mood.put("mood", currentMood);
+        fdb.collection("mood"+userid).document(date)
+                .set(mood)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+    }
 }

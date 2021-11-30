@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.shared.activities;
+package dk.au.mad21fall.activiboost.ui.shared.activities.patient;
 
 import static dk.au.mad21fall.activiboost.ui.shared.login.User.CAREGIVER;
 import static dk.au.mad21fall.activiboost.ui.shared.login.User.PATIENT;
@@ -9,13 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
@@ -27,15 +23,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-import dk.au.mad21fall.activiboost.MainActivity;
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Activity;
 import dk.au.mad21fall.activiboost.ui.shared.activities.suggest.SuggestActivity;
 import dk.au.mad21fall.activiboost.ui.shared.activities.add.AddActivity;
 import dk.au.mad21fall.activiboost.databinding.FragmentActivitiesBinding;
 
-public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IActivitiesItemClickedListener, MyActivitiesAdapter.IMyActivitiesItemClickedListener{
+public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IActivitiesItemClickedListener, MyActivitiesAdapter.IMyActivitiesItemClickedListener {
 
     private static final String TAG = "ACTIVITIES FRAGMENT";
 
@@ -47,9 +43,7 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
     private ActivitiesAdapter activitiesAdapter;
     private MyActivitiesAdapter myActivitiesAdapter;
     private RecyclerView rcvMyActivities, rcvActivities;
-    private ArrayList<Activity> activities;
-    private ArrayList<Activity> myActivities;
-    private LiveData<ArrayList<Activity>> lactivities;
+    private LiveData<ArrayList<Activity>> lactivities, lmyactivities;
     private String userId = "1234567899";
 
 
@@ -60,8 +54,8 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
         binding = FragmentActivitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        activities = new ArrayList<Activity>();
-        myActivities = new ArrayList<Activity>();
+        //activities = new ArrayList<Activity>();
+        //myActivities = new ArrayList<Activity>();
         firstTextView = binding.activityTextView1;
         firstTextView.setText(R.string.myActivities);
         secondTextView = binding.activityTextView2;
@@ -76,13 +70,19 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
         rcvMyActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvMyActivities.setAdapter(myActivitiesAdapter);
 
-        lactivities = activitiesViewModel.getActivities();
+        lactivities = activitiesViewModel.getActivities(userId);
         lactivities.observe(getActivity(), new Observer<ArrayList<Activity>>() {
             @Override
             public void onChanged(ArrayList<Activity> nactivities) {
                 activitiesAdapter.updateActivitiesList(nactivities);
-                myActivities(nactivities);
-                activities = nactivities;
+            }
+        });
+
+        lmyactivities = activitiesViewModel.getMyActivities(userId);
+        lmyactivities.observe(getActivity(), new Observer<ArrayList<Activity>>() {
+            @Override
+            public void onChanged(ArrayList<Activity> nactivities) {
+                myActivitiesAdapter.updateActivitiesList(nactivities);
             }
         });
 
@@ -115,8 +115,18 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
 
     @Override
     public void onActivityClicked(int index) {
-        ArrayList<Activity> al = activities;
+       // ArrayList<Activity> al = activities;
        // showDialogue(al.get(index));
+    }
+
+    @Override
+    public void addToActivity(Activity a){
+        Map<String, Boolean> patients = a.getPatients();
+        patients.put(userId,true);
+        a.setPatients(patients);
+        activitiesViewModel.addUserToActivity(userId,a);
+
+
     }
 
     //show a dialogue
@@ -130,12 +140,6 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
         builder.create().show();
     }
 
-    private void myActivities(ArrayList<Activity> list){
-        for(Activity a : list){
-            if(a.getPatients().containsKey(userId)){
-                myActivities.add(a);
-            }
-        }
-        myActivitiesAdapter.updateActivitiesList(myActivities);
-    }
+
+
 }

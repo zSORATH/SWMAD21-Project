@@ -12,6 +12,7 @@ public class Activity {
 
     private String activityName;
     private Date time;
+    // map guide from: javatpoint.com/java-map
     private Map<String, Boolean> patients;
 
 
