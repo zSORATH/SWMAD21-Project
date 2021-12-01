@@ -82,7 +82,7 @@
 
     <Button
         android:id="@+id/button_diary_cancel"
-        android:layout_width="100"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
@@ -93,7 +93,7 @@
 
     <Button
         android:id="@+id/button_diary_savechanges"
-        android:layout_width="100"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"

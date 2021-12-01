@@ -26,7 +26,7 @@ public interface DiaryDAO {
     LiveData<List<Diary>> getAll();
 
     @Query("SELECT * FROM diary WHERE date LIKE :date LIMIT 1")
-    ListenableFuture<Diary> findDiary(String date);
+    ListenableFuture<Diary>findDiary(String date);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addDiary(Diary diary);

@@ -16,7 +16,7 @@ public class Diary {
     private String date;
 
     // constructor
-    public Diary(String content, int rating, String date) {
+    public Diary(String content, Integer rating, String date) {
         this.content = content;
         this.rating = rating;
         this.date = date;
