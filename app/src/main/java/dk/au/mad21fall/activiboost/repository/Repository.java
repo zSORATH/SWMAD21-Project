@@ -110,7 +110,7 @@ public class Repository {
     }
 
 
-    //Firebase requests
+    //Firebase requests : https://firebase.google.com/docs/firestore/query-data/listen
     private void loadData(String collectionName, String type) {
         fdb.collection(collectionName)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -164,6 +164,7 @@ public class Repository {
                 });
     }
 
+    // method from: https://firebase.google.com/docs/firestore/query-data/listen
     private void loadActivityPaticipants(String type){
         fdb.collection("activities").document("000001").collection("activitypatients")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -189,7 +190,7 @@ public class Repository {
         });
     }
 
-
+    // Method from firebase: https://firebase.google.com/docs/firestore/manage-data/add-data#java_20
     public void updateActivity(String userid, Activity a){
         DocumentReference docRef = fdb.collection("activities").document(a.getActivityName());
         docRef
@@ -209,11 +210,17 @@ public class Repository {
 
 
     }
-    public void saveActivity(String userid, String date, int currentMood){
-        Map<String, Object> mood = new HashMap<>();
-        mood.put("mood", currentMood);
-        fdb.collection("mood"+userid).document(date)
-                .set(mood)
+    // Method from firebase: https://firebase.google.com/docs/firestore/manage-data/add-data#java_20
+    public void suggestActivity(String collectionName, Activity a){
+        Map<String, Object> activity = new HashMap<>();
+        activity.put("activityName", a.getActivityName());
+        activity.put("time", a.getTime());
+        activity.put("description", a.getDescription());
+        activity.put("patients", a.getPatients());
+        activity.put("caregivers", a.getCaregivers());
+
+        fdb.collection(collectionName).document(a.getActivityName())
+                .set(activity)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

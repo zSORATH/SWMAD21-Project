@@ -73,23 +73,7 @@ public class CActivitiesFragment extends Fragment implements ActivitiesAdapter.I
         rcvMyActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvMyActivities.setAdapter(myActivitiesAdapter);
 
-        // this is how we determine what type of user is corrently logged in
-        // this will probably change when we implent user classes better
-        userType = getActivity().getIntent().getIntExtra("user", userType);
-        final FloatingActionButton btnAdd = binding.btnAdd;
-        btnAdd.setOnClickListener(view -> {
-            switch (userType) {
-                case PATIENT:
-                    intent = new Intent(view.getContext(), SuggestActivity.class);
-                    break;
-                case CAREGIVER:
-                    intent = new Intent(view.getContext(), AddActivity.class);
-                    break;
-                default:
-                    Log.d(TAG, "Error in selecting user type");
-            }
-            startActivity(intent);
-        });
+
 
 
         return root;

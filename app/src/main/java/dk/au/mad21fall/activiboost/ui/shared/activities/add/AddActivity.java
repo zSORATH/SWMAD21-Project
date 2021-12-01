@@ -16,7 +16,5 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        textView = findViewById(R.id.text_add);
-        textView.setText("This is add activity");
     }
 }

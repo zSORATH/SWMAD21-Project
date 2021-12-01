@@ -1,5 +1,6 @@
 package dk.au.mad21fall.activiboost.ui.shared.activities.patient;
 
+import static android.app.Activity.RESULT_OK;
 import static dk.au.mad21fall.activiboost.ui.shared.login.User.CAREGIVER;
 import static dk.au.mad21fall.activiboost.ui.shared.login.User.PATIENT;
 
@@ -9,8 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -44,7 +50,9 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
     private MyActivitiesAdapter myActivitiesAdapter;
     private RecyclerView rcvMyActivities, rcvActivities;
     private LiveData<ArrayList<Activity>> lactivities, lmyactivities;
+    private Button suggestBtn;
     private String userId = "1234567899";
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -86,26 +94,29 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
             }
         });
 
-        // this is how we determine what type of user is corrently logged in
-        // this will probably change when we implent user classes better
-        userType = getActivity().getIntent().getIntExtra("user", userType);
-        final FloatingActionButton btnAdd = binding.btnAdd;
-        btnAdd.setOnClickListener(view -> {
-            switch (userType) {
-                case PATIENT:
-                    intent = new Intent(view.getContext(), SuggestActivity.class);
-                    break;
-                case CAREGIVER:
-                    intent = new Intent(view.getContext(), AddActivity.class);
-                    break;
-                default:
-                    Log.d(TAG, "Error in selecting user type");
+        suggestBtn = binding.btnAddActivity;
+        suggestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getActivity(), SuggestActivity.class);
+                launcher.launch(intent);
             }
-            startActivity(intent);
         });
+
 
         return root;
     }
+
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                    }
+                }
+            });
 
     @Override
     public void onDestroyView() {
