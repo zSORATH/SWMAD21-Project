@@ -34,7 +34,7 @@ public class DiaryViewModel extends ViewModel {
         return diaries;
     }
 
-    public void addDiary(String content, Integer rating, String date){
+    public void addDiary(String content, int rating, String date){
         repository.addDiaryAsynch(content, rating, date);
     }
 

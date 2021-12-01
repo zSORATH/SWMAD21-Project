@@ -79,7 +79,7 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
             Toast.makeText(getActivity(), "You already added a diary for today.", Toast.LENGTH_SHORT).show();
             return;
         }
-        diaryViewModel.addDiary("",null, currentDate);
+        diaryViewModel.addDiary("",-1, currentDate);
         //TODO: THEN OPEN THE ADDED DIARY IN EDIT VIEW
     }
 
