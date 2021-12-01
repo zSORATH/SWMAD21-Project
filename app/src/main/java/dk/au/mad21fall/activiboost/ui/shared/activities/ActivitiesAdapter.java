@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.shared.activities.patient;
+package dk.au.mad21fall.activiboost.ui.shared.activities;
 
 import android.view.LayoutInflater;
 import android.view.View;

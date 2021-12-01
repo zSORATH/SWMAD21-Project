@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.shared.activities.suggest;
+package dk.au.mad21fall.activiboost.ui.patient.activities.suggest;
 
 import android.app.Application;
 

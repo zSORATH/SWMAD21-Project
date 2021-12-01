@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.shared.activities.suggest;
+package dk.au.mad21fall.activiboost.ui.patient.activities.suggest;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Activity;
-import dk.au.mad21fall.activiboost.ui.shared.activities.patient.ActivitiesViewModel;
+import dk.au.mad21fall.activiboost.ui.patient.activities.suggest.SuggestViewModel;
 
 public class SuggestActivity extends AppCompatActivity {
 
