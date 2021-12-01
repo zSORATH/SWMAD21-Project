@@ -12,7 +12,7 @@ public class Diary {
 
     // data stored
     private String content;
-    private int rating;
+    private Integer rating;
     private String date;
 
     // constructor
@@ -23,7 +23,6 @@ public class Diary {
     }
 
     // getters and setters
-
 
     public int getId() {
         return id;
@@ -45,7 +44,7 @@ public class Diary {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 

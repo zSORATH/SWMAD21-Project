@@ -49,7 +49,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
 
     // This is inspired by https://github.com/sujithkanna/SmileyRating
     // Getting the correct smiley according to the rating
-    private int getSmiley(int rating) {
+    private int getSmiley(Integer rating) {
         if (rating == SmileyRating.Type.TERRIBLE.getRating()) {
             return R.drawable.ic_terrible;
         }

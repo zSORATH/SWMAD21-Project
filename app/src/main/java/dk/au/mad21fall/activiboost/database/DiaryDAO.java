@@ -9,6 +9,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.google.common.util.concurrent.ListenableFuture;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,9 @@ public interface DiaryDAO {
 
     @Query("SELECT * FROM diary")
     LiveData<List<Diary>> getAll();
+
+    @Query("SELECT * FROM diary WHERE date LIKE :date LIMIT 1")
+    ListenableFuture<Diary> findDiary(String date);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addDiary(Diary diary);
