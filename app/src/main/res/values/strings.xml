@@ -11,7 +11,7 @@
     <string name="activitySignupBtn">Sign up</string>
     <string name="nameTxt">participants</string>
     <string name="insuranceTxt">time</string>
-    <string name="diary_date">Date</string>
+    <string name="diary_date">00-00-0000</string>
     <string name="diary_entry">Diary entry</string>
     <string name="button_add_diary">Add New Diary</string>
     <string name="ok">Ok</string>
@@ -19,6 +19,12 @@
     <string name="myActivities">My Activities List</string>
     <string name="sugActivities">Suggested activities</string>
     <string name="Activities">Activities List</string>
+    <string name="diary_text_date">Date</string>
+    <string name="diary_edit_textfield_hint">Write your notes here...</string>
+    <string name="button_delete_diary">Delete</string>
+    <string name="button_diary_cancel">Cancel</string>
+    <string name="button_save">Save</string>
+    />
     <string name="activityDescription">Enter description the activity</string>
     <string name="activityTitle">Enter title of activity</string>
     <string name="suggestBtn">Suggest</string>

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -84,7 +85,7 @@ public class Repository {
     }
 
     //add a new Diary to database
-    public void addDiaryAsynch(String content, int rating, String date){
+    public void addDiaryAsynch(String content, Integer rating, String date){
 
         executor.execute(new Runnable() {
             @Override
@@ -94,7 +95,7 @@ public class Repository {
         });
     }
 
-    //delete Diary
+    //delete Diary from database
     public void deleteDiaryAsynch(Diary diary){
 
         executor.execute(new Runnable() {
@@ -103,6 +104,11 @@ public class Repository {
                 db.diaryDAO().deleteDiary(diary);
             }
         });
+    }
+
+    //find diary with specific date
+    public ListenableFuture<Diary> findDiaryAsynch(String date) {
+        return db.diaryDAO().findDiary(date);
     }
 
     public LiveData<ArrayList<Activity>> getActivities() {

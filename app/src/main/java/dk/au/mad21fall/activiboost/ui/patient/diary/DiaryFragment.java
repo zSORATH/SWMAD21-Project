@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.databinding.FragmentDiaryBinding;
@@ -68,7 +72,15 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
     }
 
     private void addDiary() {
-        //TODO:
+        //Getting the date is inspired from https://stackoverflow.com/questions/8654990/how-can-i-get-current-date-in-android
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
+        if(diaryViewModel.isStored(currentDate)) {
+            Toast.makeText(getActivity(), "You already added a diary for today.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        diaryViewModel.addDiary("",null, currentDate);
+        //TODO: THEN OPEN THE ADDED DIARY IN EDIT VIEW
     }
 
 
@@ -81,6 +93,6 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
 
     @Override
     public void onDiaryClicked(int index) {
-        //TODO:
+        //TODO: OPEN THE CLICKED DIARY IN EDIT VIEW
     }
 }
