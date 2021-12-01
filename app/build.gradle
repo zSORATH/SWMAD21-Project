@@ -81,4 +81,4 @@ dependencies {
     implementation 'com.github.sujithkanna:smileyrating:2.0.0'
     // Google Play Services
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
-}
+}   
