@@ -1,6 +1,7 @@
 package dk.au.mad21fall.activiboost.ui.patient.diary;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import dk.au.mad21fall.activiboost.Constants;
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.databinding.FragmentDiaryBinding;
 import dk.au.mad21fall.activiboost.models.Diary;
@@ -80,7 +82,10 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
             return;
         }
         diaryViewModel.addDiary("",-1, currentDate);
-        //TODO: THEN OPEN THE ADDED DIARY IN EDIT VIEW
+
+        Intent intent = new Intent(getContext(), DiaryEditActivity.class);
+        intent.putExtra(Constants.DIARY_DATE, currentDate);
+        startActivity(intent);
     }
 
 
@@ -93,6 +98,9 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
 
     @Override
     public void onDiaryClicked(int index) {
-        //TODO: OPEN THE CLICKED DIARY IN EDIT VIEW
+        String diaryDate = diaryViewModel.getDiary(index).getDate();
+        Intent intent = new Intent(getContext(), DiaryEditActivity.class);
+        intent.putExtra(Constants.DIARY_DATE, diaryDate);
+        startActivity(intent);
     }
 }

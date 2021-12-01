@@ -34,16 +34,12 @@ public class DiaryViewModel extends ViewModel {
         return diaries;
     }
 
+    public Diary getDiary(int index){
+        return diaries.getValue().get(index);
+    }
+
     public void addDiary(String content, int rating, String date){
         repository.addDiaryAsynch(content, rating, date);
-    }
-
-    public void updateDiary(Diary diary){
-        repository.updateDiaryAsynch(diary);
-    }
-
-    public void deleteDiary(Diary diary){
-        repository.deleteDiaryAsynch(diary);
     }
 
     public Boolean isStored(String date){

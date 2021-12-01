@@ -20,8 +20,6 @@ import dk.au.mad21fall.activiboost.models.Diary;
 @Dao
 public interface DiaryDAO {
 
-    //TODO: Hvad mangler der ellers?
-
     @Query("SELECT * FROM diary")
     LiveData<List<Diary>> getAll();
 
