@@ -31,6 +31,7 @@
     <string name="activityDate">Enter date of activity</string>
     <string name="activityTime">Enter time of activity</string>
     <string name="addBtn">Add</string>
+    <string name="deleteBtn">Delete</string>
     <string name="TextSugActivities">Suggested activities</string>
     <string name="suggestActivityBtn">Suggest activity</string>
     <string name="activitySuggested">Activity suggested!</string>
@@ -41,6 +42,7 @@
     <string name="description">Description: </string>
     <string name="caregivers">Caregivers: </string>
     <string name="time">Time: </string>
+    <string name="attendingBtn">Attending</string>
 
 
 </resources>

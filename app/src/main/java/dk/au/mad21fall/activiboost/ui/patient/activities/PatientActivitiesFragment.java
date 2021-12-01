@@ -160,7 +160,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
                         getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
                         getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
-                .setNegativeButton(R.string.unsubscribe, (dialogInterface, i) -> {unsubscribeActivity(a); getActivities();});
+                .setNegativeButton(R.string.unsubscribe, (dialogInterface, i) -> {unsubscribeActivity(a);});
         builder.create().show();
     }
 
@@ -172,16 +172,18 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
                         getText(R.string.time) +" " + a.getTime() + "\n\n" +
                         getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
                         getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
-                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
+                .setPositiveButton(R.string.addBtn, (dialogInterface, i) -> {addToActivity(a);})
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
         builder.create().show();
     }
 
-    private void unsubscribeActivity(Activity a){
+    @Override
+    public void unsubscribeActivity(Activity a){
         Map<String, String> patients = a.getPatients();
         patients.remove(userId);
         a.setPatients(patients);
         activitiesViewModel.addUserToActivity(userId,a);
+        getActivities();
     }
 
     private String listOf(Collection<String> c){

@@ -115,6 +115,10 @@ public class Repository {
         return activities;
     }
 
+    public LiveData<ArrayList<Activity>> getSuggestedActivities() {
+        return suggestedactivities;
+    }
+
 
     //Firebase requests : https://firebase.google.com/docs/firestore/query-data/listen
     private void loadData(String collectionName, String type) {
@@ -158,6 +162,7 @@ public class Repository {
                                     Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
                                     Activity a = docg.toObject(Activity.class);
                                     if (a != null) {
+                                        a.setId(docg.getId());
                                         sActivities.add(a);
                                     }
                                 }
@@ -198,7 +203,7 @@ public class Repository {
     }
 
     // Method from firebase: https://firebase.google.com/docs/firestore/manage-data/add-data#java_20
-    public void updateActivity(String userid, Activity a){
+    public void updatePatientsActivity(String userid, Activity a){
         DocumentReference docRef = fdb.collection("activities").document(a.getId());
         docRef
                 .update("patients", a.getPatients())
@@ -217,6 +222,28 @@ public class Repository {
 
 
     }
+
+    // Method from firebase: https://firebase.google.com/docs/firestore/manage-data/add-data#java_20
+    public void updateCaregiverActivity(String userid, Activity a){
+        DocumentReference docRef = fdb.collection("activities").document(a.getId());
+        docRef
+                .update("caregivers", a.getCaregivers())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
+
+
+    }
+
     // Method from firebase: https://firebase.google.com/docs/firestore/manage-data/add-data#java_20
     public void suggestActivity(String collectionName, Activity a){
         Map<String, Object> activity = new HashMap<>();
@@ -238,6 +265,23 @@ public class Repository {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error writing document", e);
+                    }
+                });
+    }
+
+    public void deleteActivity(Activity a){
+        fdb.collection("activitySuggestions").document(a.getId())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
                     }
                 });
     }

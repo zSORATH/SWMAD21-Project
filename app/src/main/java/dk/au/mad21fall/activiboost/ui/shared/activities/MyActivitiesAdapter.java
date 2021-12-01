@@ -42,7 +42,9 @@ public class MyActivitiesAdapter extends  RecyclerView.Adapter<MyActivitiesAdapt
     @Override
     public void onBindViewHolder(@NonNull MyActivitiesAdapter.MyActivitiesViewHolder viewHolder, int position) {
         viewHolder.activitytitle.setText(activitiesList.get(position).getActivityName());
-        viewHolder.activitytime.setText(activitiesList.get(position).getTime().toString());
+       if(activitiesList.get(position).getTime() != null) {
+           viewHolder.activitytime.setText(activitiesList.get(position).getTime().toString());
+       }
 
     }
 
