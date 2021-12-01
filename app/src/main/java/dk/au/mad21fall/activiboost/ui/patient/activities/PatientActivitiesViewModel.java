@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.shared.activities.patient;
+package dk.au.mad21fall.activiboost.ui.patient.activities;
 
 import android.app.Application;
 
@@ -14,14 +14,14 @@ import java.util.Date;
 import dk.au.mad21fall.activiboost.models.Activity;
 import dk.au.mad21fall.activiboost.repository.Repository;
 
-public class ActivitiesViewModel extends AndroidViewModel {
+public class PatientActivitiesViewModel extends AndroidViewModel {
         private Repository repository;
         private MutableLiveData<ArrayList<Activity>> lMyActivities;
         private MutableLiveData<ArrayList<Activity>> lActivities;
         private LiveData<ArrayList<Activity>> activities;
 
 
-        public ActivitiesViewModel(@NonNull Application app){
+        public PatientActivitiesViewModel(@NonNull Application app){
             super(app);
             repository = Repository.getInstance(getApplication());
             activities = repository.getActivities();

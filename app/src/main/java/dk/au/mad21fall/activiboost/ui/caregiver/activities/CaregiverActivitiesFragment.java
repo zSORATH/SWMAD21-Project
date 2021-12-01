@@ -1,11 +1,7 @@
-package dk.au.mad21fall.activiboost.ui.shared.activities.caregiver;
-
-import static dk.au.mad21fall.activiboost.ui.shared.login.User.CAREGIVER;
-import static dk.au.mad21fall.activiboost.ui.shared.login.User.PATIENT;
+package dk.au.mad21fall.activiboost.ui.caregiver.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,31 +11,26 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
-import java.util.Map;
 
 import dk.au.mad21fall.activiboost.R;
-import dk.au.mad21fall.activiboost.databinding.FragmentActivitiesBinding;
+import dk.au.mad21fall.activiboost.databinding.FragmentCaregiverActivitiesBinding;
+import dk.au.mad21fall.activiboost.databinding.FragmentCaregiverActivitiesBinding;
 import dk.au.mad21fall.activiboost.models.Activity;
-import dk.au.mad21fall.activiboost.ui.shared.activities.add.AddActivity;
-import dk.au.mad21fall.activiboost.ui.shared.activities.patient.ActivitiesAdapter;
-import dk.au.mad21fall.activiboost.ui.shared.activities.patient.ActivitiesViewModel;
-import dk.au.mad21fall.activiboost.ui.shared.activities.patient.MyActivitiesAdapter;
-import dk.au.mad21fall.activiboost.ui.shared.activities.suggest.SuggestActivity;
+import dk.au.mad21fall.activiboost.ui.patient.activities.PatientActivitiesViewModel;
+import dk.au.mad21fall.activiboost.ui.shared.activities.ActivitiesAdapter;
+import dk.au.mad21fall.activiboost.ui.shared.activities.MyActivitiesAdapter;
 
-public class CActivitiesFragment extends Fragment implements ActivitiesAdapter.IActivitiesItemClickedListener, MyActivitiesAdapter.IMyActivitiesItemClickedListener {
+public class CaregiverActivitiesFragment extends Fragment implements ActivitiesAdapter.IActivitiesItemClickedListener, MyActivitiesAdapter.IMyActivitiesItemClickedListener {
 
     private static final String TAG = "ACTIVITIES FRAGMENT";
 
-    private ActivitiesViewModel activitiesViewModel;
-    private FragmentActivitiesBinding binding;
+    private PatientActivitiesViewModel activitiesViewModel;
+    private FragmentCaregiverActivitiesBinding binding;
     private int userType;
     private Intent intent;
     private TextView firstTextView, secondTextView;
@@ -52,24 +43,25 @@ public class CActivitiesFragment extends Fragment implements ActivitiesAdapter.I
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        activitiesViewModel = new ViewModelProvider(this).get(ActivitiesViewModel.class);
+        activitiesViewModel = new ViewModelProvider(this).get(PatientActivitiesViewModel.class);
 
-        binding = FragmentActivitiesBinding.inflate(inflater, container, false);
+        binding = FragmentCaregiverActivitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         //activities = new ArrayList<Activity>();
         //myActivities = new ArrayList<Activity>();
-        firstTextView = binding.activityTextView1;
+        firstTextView = binding.sugActivitiesText;
         firstTextView.setText(R.string.myActivities);
-        secondTextView = binding.activityTextView2;
+        secondTextView = binding.textActivities;
         secondTextView.setText(R.string.Activities);
         activitiesAdapter = new ActivitiesAdapter(this);
         myActivitiesAdapter = new MyActivitiesAdapter(this);
-        rcvActivities = binding.activityRCV2;
+        rcvActivities = binding.rcvActivities;
         rcvActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvActivities.setAdapter(activitiesAdapter);
 
-        rcvMyActivities = binding.activityRCV1;
+        // TODO: This is probably not right
+        rcvMyActivities = binding.rcvSuggestedActivities;
         rcvMyActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvMyActivities.setAdapter(myActivitiesAdapter);
 

@@ -1,12 +1,9 @@
-package dk.au.mad21fall.activiboost.ui.shared.activities.patient;
+package dk.au.mad21fall.activiboost.ui.patient.activities;
 
 import static android.app.Activity.RESULT_OK;
-import static dk.au.mad21fall.activiboost.ui.shared.login.User.CAREGIVER;
-import static dk.au.mad21fall.activiboost.ui.shared.login.User.PATIENT;
 
 import android.content.Intent;
 import  android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,23 +23,22 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.Map;
 
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Activity;
-import dk.au.mad21fall.activiboost.ui.shared.activities.suggest.SuggestActivity;
-import dk.au.mad21fall.activiboost.ui.shared.activities.add.AddActivity;
-import dk.au.mad21fall.activiboost.databinding.FragmentActivitiesBinding;
+import dk.au.mad21fall.activiboost.databinding.FragmentPatientActivitiesBinding;
+import dk.au.mad21fall.activiboost.ui.patient.activities.suggest.SuggestActivity;
+import dk.au.mad21fall.activiboost.ui.shared.activities.ActivitiesAdapter;
+import dk.au.mad21fall.activiboost.ui.shared.activities.MyActivitiesAdapter;
 
-public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IActivitiesItemClickedListener, MyActivitiesAdapter.IMyActivitiesItemClickedListener {
+public class PatientActivitiesFragment extends Fragment implements ActivitiesAdapter.IActivitiesItemClickedListener, MyActivitiesAdapter.IMyActivitiesItemClickedListener {
 
     private static final String TAG = "ACTIVITIES FRAGMENT";
 
-    private ActivitiesViewModel activitiesViewModel;
-    private FragmentActivitiesBinding binding;
+    private PatientActivitiesViewModel activitiesViewModel;
+    private FragmentPatientActivitiesBinding binding;
     private int userType;
     private Intent intent;
     private TextView firstTextView, secondTextView;
@@ -57,9 +53,9 @@ public class ActivitiesFragment extends Fragment implements ActivitiesAdapter.IA
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        activitiesViewModel = new ViewModelProvider(this).get(ActivitiesViewModel.class);
+        activitiesViewModel = new ViewModelProvider(this).get(PatientActivitiesViewModel.class);
 
-        binding = FragmentActivitiesBinding.inflate(inflater, container, false);
+        binding = FragmentPatientActivitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         //activities = new ArrayList<Activity>();

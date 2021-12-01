@@ -14,10 +14,6 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
-import com.firebase.ui.auth.util.ExtraConstants;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -28,7 +24,8 @@ import android.widget.Button;
 import java.util.Arrays;
 import java.util.List;
 
-import dk.au.mad21fall.activiboost.MainActivity;
+import dk.au.mad21fall.activiboost.CaregiverMainActivity;
+import dk.au.mad21fall.activiboost.PatientMainActivity;
 import dk.au.mad21fall.activiboost.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -49,19 +46,17 @@ public class LoginActivity extends AppCompatActivity {
 
         btnPatient = findViewById(R.id.btnPatient);
         btnPatient.setOnClickListener(view -> {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, PatientMainActivity.class);
             intent.putExtra("user", PATIENT);
             launcher.launch(intent);
         });
 
         btnCaregiver = findViewById(R.id.btnCaregiver);
         btnCaregiver.setOnClickListener(view -> {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, CaregiverMainActivity.class);
             intent.putExtra("user", CAREGIVER);
             launcher.launch(intent);
         });
-
-
 }
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),

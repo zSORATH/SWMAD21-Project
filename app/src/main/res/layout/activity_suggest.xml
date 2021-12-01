@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:foregroundGravity="top"
-    tools:context=".ui.shared.activities.suggest.SuggestActivity">
+    tools:context=".ui.patient.activities.suggest.SuggestActivity">
 
     <Button
         android:id="@+id/suggestBtn"

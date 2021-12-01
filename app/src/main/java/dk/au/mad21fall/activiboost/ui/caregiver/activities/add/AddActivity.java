@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.ui.shared.activities.add;
+package dk.au.mad21fall.activiboost.ui.caregiver.activities.add;
 
 import androidx.appcompat.app.AppCompatActivity;
 
