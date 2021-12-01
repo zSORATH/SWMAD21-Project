@@ -143,6 +143,7 @@ public class Repository {
                                     Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
                                     Activity a = docg.toObject(Activity.class);
                                     if (a != null) {
+                                        a.setId(docg.getId());
                                         updatedActivities.add(a);
                                     }
                                 }
@@ -198,7 +199,7 @@ public class Repository {
 
     // Method from firebase: https://firebase.google.com/docs/firestore/manage-data/add-data#java_20
     public void updateActivity(String userid, Activity a){
-        DocumentReference docRef = fdb.collection("activities").document(a.getActivityName());
+        DocumentReference docRef = fdb.collection("activities").document(a.getId());
         docRef
                 .update("patients", a.getPatients())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

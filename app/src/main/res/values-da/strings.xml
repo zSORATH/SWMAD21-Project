@@ -30,6 +30,12 @@
     <string name="suggestActivityBtn">Foreslå aktivitet</string>
     <string name="activitySuggested">Aktivitet foreslået!</string>
     <string name="textEmpty">Du skal skrive noget i felterne.</string>
+    <string name="unsubscribe">Afmeld aktivitet</string>
+
+    <string name="participants">Deltagere: </string>
+    <string name="description">Beskrivelse: </string>
+    <string name="caregivers">Personale: </string>
+    <string name="time">Tid: </string>
 
 
 </resources>

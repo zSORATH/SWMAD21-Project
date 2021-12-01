@@ -10,11 +10,12 @@ import java.util.Map;
 
 public class Activity {
 
+    private String id;
     private String activityName;
     private Date time;
     // map guide from: javatpoint.com/java-map
-    private Map<String, Boolean> patients;
-    private Map<String, Boolean> caregivers;
+    private Map<String, String> patients;
+    private Map<String, String> caregivers;
     private String description;
 
 
@@ -25,11 +26,11 @@ public class Activity {
         this.description = description;
     }
 
-    public Activity(String activityName, String description, Date time){
+   /* public Activity(String activityName, String description, Date time){
         this.time = time;
         this.activityName = activityName;
         this.description = description;
-    }
+    }*/
 
     public String getActivityName() {
         return activityName;
@@ -47,11 +48,11 @@ public class Activity {
         this.time = time;
     }
 
-    public Map<String, Boolean> getPatients() {
+    public Map<String, String> getPatients() {
         return patients;
     }
 
-    public void setPatients(Map<String, Boolean> patients) {
+    public void setPatients(Map<String, String> patients) {
         this.patients = patients;
     }
 
@@ -63,11 +64,20 @@ public class Activity {
         this.description = description;
     }
 
-    public Map<String, Boolean> getCaregivers() {
+    public Map<String, String> getCaregivers() {
         return caregivers;
     }
 
-    public void setCaregivers(Map<String, Boolean> caregivers) {
+    public void setCaregivers(Map<String, String> caregivers) {
         this.caregivers = caregivers;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

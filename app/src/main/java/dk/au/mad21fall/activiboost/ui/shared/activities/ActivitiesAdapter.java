@@ -44,6 +44,7 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
     @Override
     public void onBindViewHolder(@NonNull ActivitiesAdapter.ActivitiesViewHolder viewHolder, int position) {
         viewHolder.activitytitle.setText(activitiesList.get(position).getActivityName());
+        viewHolder.activitytime.setText(activitiesList.get(position).getTime().toString());
 
     }
 
@@ -59,7 +60,7 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
     //Lavet ud fra PersonViewHolder i Lists and grids demoen
     public class ActivitiesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView activitytitle;
+        TextView activitytitle, activitytime;
         Button signUpBtn;
 
         ActivitiesAdapter.IActivitiesItemClickedListener activitiesListener;
@@ -68,6 +69,7 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
             super(itemView);
 
             activitytitle = itemView.findViewById(R.id.title_activity);
+            activitytime = itemView.findViewById(R.id.time_activity);
             signUpBtn = itemView.findViewById(R.id.signUpBtn);
 
             activitiesListener = activitiesItemClickedListener;

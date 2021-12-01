@@ -43,7 +43,6 @@ public class MyActivitiesAdapter extends  RecyclerView.Adapter<MyActivitiesAdapt
     public void onBindViewHolder(@NonNull MyActivitiesAdapter.MyActivitiesViewHolder viewHolder, int position) {
         viewHolder.activitytitle.setText(activitiesList.get(position).getActivityName());
         viewHolder.activitytime.setText(activitiesList.get(position).getTime().toString());
-        viewHolder.activtydetails.setText(activitiesList.get(position).getDescription());
 
     }
 
@@ -59,7 +58,7 @@ public class MyActivitiesAdapter extends  RecyclerView.Adapter<MyActivitiesAdapt
     //Lavet ud fra PersonViewHolder i Lists and grids demoen
     public class MyActivitiesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView activitytitle, activtydetails, activitytime;
+        TextView activitytitle, activitytime;
 
         MyActivitiesAdapter.IMyActivitiesItemClickedListener activitiesListener;
 
@@ -67,8 +66,7 @@ public class MyActivitiesAdapter extends  RecyclerView.Adapter<MyActivitiesAdapt
             super(itemView);
 
             activitytitle = itemView.findViewById(R.id.title_myactivity);
-            activtydetails = itemView.findViewById(R.id.time_myactivity);
-            activitytime = itemView.findViewById(R.id.description_myactivity);
+            activitytime = itemView.findViewById(R.id.time_myactivity);
 
             activitiesListener = activitiesItemClickedListener;
             itemView.setOnClickListener(this);
@@ -76,11 +74,11 @@ public class MyActivitiesAdapter extends  RecyclerView.Adapter<MyActivitiesAdapt
         }
         @Override
         public void onClick(View view) {
-            activitiesListener.onActivityClicked(getAdapterPosition());
+            activitiesListener.onMyActivityClicked(getAdapterPosition());
         }
     }
 
     public static interface IMyActivitiesItemClickedListener {
-        void onActivityClicked(int index);
+        void onMyActivityClicked(int index);
     }
 }

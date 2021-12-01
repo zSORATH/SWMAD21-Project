@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 import dk.au.mad21fall.activiboost.R;
@@ -46,8 +47,10 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
     private MyActivitiesAdapter myActivitiesAdapter;
     private RecyclerView rcvMyActivities, rcvActivities;
     private LiveData<ArrayList<Activity>> lactivities, lmyactivities;
+    private ArrayList<Activity> activities, myactivities;
     private Button suggestBtn;
     private String userId = "1234567899";
+    private String username = "John";
 
 
 
@@ -74,21 +77,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         rcvMyActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvMyActivities.setAdapter(myActivitiesAdapter);
 
-        lactivities = activitiesViewModel.getActivities(userId);
-        lactivities.observe(getActivity(), new Observer<ArrayList<Activity>>() {
-            @Override
-            public void onChanged(ArrayList<Activity> nactivities) {
-                activitiesAdapter.updateActivitiesList(nactivities);
-            }
-        });
-
-        lmyactivities = activitiesViewModel.getMyActivities(userId);
-        lmyactivities.observe(getActivity(), new Observer<ArrayList<Activity>>() {
-            @Override
-            public void onChanged(ArrayList<Activity> nactivities) {
-                myActivitiesAdapter.updateActivitiesList(nactivities);
-            }
-        });
+        getActivities();
 
         suggestBtn = binding.btnAddActivity;
         suggestBtn.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +91,26 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
 
         return root;
     }
+
+    private void getActivities(){
+        lactivities = activitiesViewModel.getActivities(userId);
+        lactivities.observe(getActivity(), new Observer<ArrayList<Activity>>() {
+            @Override
+            public void onChanged(ArrayList<Activity> nactivities) {
+                activitiesAdapter.updateActivitiesList(nactivities);
+                activities = nactivities;
+            }
+        });
+        lmyactivities = activitiesViewModel.getMyActivities(userId);
+        lmyactivities.observe(getActivity(), new Observer<ArrayList<Activity>>() {
+            @Override
+            public void onChanged(ArrayList<Activity> nactivities) {
+                myActivitiesAdapter.updateActivitiesList(nactivities);
+                myactivities = nactivities;
+            }
+        });
+    }
+
 
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -122,31 +131,71 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
 
     @Override
     public void onActivityClicked(int index) {
-       // ArrayList<Activity> al = activities;
-       // showDialogue(al.get(index));
+        ArrayList<Activity> al = activities;
+        showDialogue(al.get(index));
+    }
+
+    @Override
+    public void onMyActivityClicked(int index) {
+        ArrayList<Activity> al = myactivities;
+        showMyDialogue(al.get(index));
     }
 
     @Override
     public void addToActivity(Activity a){
-        Map<String, Boolean> patients = a.getPatients();
-        patients.put(userId,true);
+        Map<String, String> patients = a.getPatients();
+        patients.put(userId,username);
         a.setPatients(patients);
         activitiesViewModel.addUserToActivity(userId,a);
-
-
+        getActivities();
     }
 
     //show a dialogue
+    private void showMyDialogue(Activity a){
+        //create a dialogue popup - and show it
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setTitle(a.getActivityName())
+                .setMessage(getText(R.string.description) +" " + a.getDescription() + "\n\n" +
+                        getText(R.string.time) +" " + a.getTime() + "\n\n" +
+                        getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
+                        getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
+                .setNegativeButton(R.string.unsubscribe, (dialogInterface, i) -> {unsubscribeActivity(a); getActivities();});
+        builder.create().show();
+    }
+
     private void showDialogue(Activity a){
         //create a dialogue popup - and show it
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setTitle(a.getActivityName())
-                .setMessage("")
+                .setMessage(getText(R.string.description) +" " + a.getDescription() + "\n\n" +
+                        getText(R.string.time) +" " + a.getTime() + "\n\n" +
+                        getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
+                        getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
         builder.create().show();
     }
 
+    private void unsubscribeActivity(Activity a){
+        Map<String, String> patients = a.getPatients();
+        patients.remove(userId);
+        a.setPatients(patients);
+        activitiesViewModel.addUserToActivity(userId,a);
+    }
+
+    private String listOf(Collection<String> c){
+        String s = new String();
+        for (String name : c){
+            if(s.equals("")) {
+            s = name;
+            }
+            else {
+                s = s + ", " + name;
+            }
+        }
+        return s;
+    }
 
 
 }

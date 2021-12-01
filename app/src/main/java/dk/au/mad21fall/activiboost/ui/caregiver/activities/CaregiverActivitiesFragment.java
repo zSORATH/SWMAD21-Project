@@ -84,6 +84,12 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
     }
 
     @Override
+    public void onMyActivityClicked(int index) {
+        // ArrayList<Activity> al = activities;
+        // showDialogue(al.get(index));
+    }
+
+    @Override
     public void addToActivity(Activity a){
 
     }
