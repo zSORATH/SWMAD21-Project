@@ -16,7 +16,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/title_activity"
+            android:id="@+id/title_myactivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -26,34 +26,29 @@
             tools:text="title" />
 
         <TextView
-            android:id="@+id/participants_activity"
+            android:id="@+id/time_myactivity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            app:layout_constraintStart_toEndOf="@+id/title_activity"
-            app:layout_constraintTop_toTopOf="@+id/title_activity"
-            tools:text="paticipants" />
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/title_myactivity"
+            app:layout_constraintTop_toTopOf="@+id/title_myactivity"
+            tools:text="time" />
 
         <TextView
-            android:id="@+id/date_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_activity"
-            tools:text="date" />
-
-        <TextView
-            android:id="@+id/time_activity"
+            android:id="@+id/description_myactivity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/date_activity"
-            app:layout_constraintTop_toTopOf="@+id/date_activity"
-            tools:text="time" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_myactivity"
+            tools:text="description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

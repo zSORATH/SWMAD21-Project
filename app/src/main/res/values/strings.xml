@@ -25,5 +25,16 @@
     <string name="button_diary_cancel">Cancel</string>
     <string name="button_save">Save</string>
     />
+    <string name="activityDescription">Enter description the activity</string>
+    <string name="activityTitle">Enter title of activity</string>
+    <string name="suggestBtn">Suggest</string>
+    <string name="activityDate">Enter date of activity</string>
+    <string name="activityTime">Enter time of activity</string>
+    <string name="addBtn">Add</string>
+    <string name="TextSugActivities">Suggested activities</string>
+    <string name="suggestActivityBtn">Suggest activity</string>
+    <string name="activitySuggested">Activity suggested!</string>
+    <string name="textEmpty">You need to write something in the fields.</string>
+
 
 </resources>

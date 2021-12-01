@@ -1,22 +1,60 @@
 package dk.au.mad21fall.activiboost.ui.shared.activities.suggest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import dk.au.mad21fall.activiboost.R;
+import dk.au.mad21fall.activiboost.models.Activity;
+import dk.au.mad21fall.activiboost.ui.shared.activities.patient.ActivitiesViewModel;
 
 public class SuggestActivity extends AppCompatActivity {
 
-    private TextView textView;
+    private EditText title, description;
+    private Button suggestBtn, cancelBtn;
+    private SuggestViewModel suggestViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggest);
 
-        textView = findViewById(R.id.text_suggest);
-        textView.setText("This is suggest activity");
+        suggestBtn = findViewById(R.id.suggestBtn);
+        cancelBtn = findViewById(R.id.suggestCancelBtn);
+        title = findViewById(R.id.titleSuggestActivity);
+        description = findViewById(R.id.descriptionSuggestActivity);
+
+        suggestViewModel = new ViewModelProvider(this).get(SuggestViewModel.class);
+
+        suggestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String stitle = title.getText().toString();
+                String sdescription = description.getText().toString();
+                if(!stitle.equals("")){
+                suggestViewModel.suggestActivity(title.getText().toString(), description.getText().toString());
+                title.setText("");
+                description.setText("");
+                Toast.makeText(getApplicationContext(),getText(R.string.activitySuggested), Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),getText(R.string.textEmpty), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
     }
 }
