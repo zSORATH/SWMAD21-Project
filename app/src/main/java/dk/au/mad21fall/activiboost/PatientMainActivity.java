@@ -6,10 +6,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.auth.User;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.RecyclerView;
 
 import dk.au.mad21fall.activiboost.databinding.ActivityPatientMainBinding;
 import dk.au.mad21fall.activiboost.ui.caregiver.activities.CaregiverActivitiesFragment;
@@ -44,29 +47,31 @@ public class PatientMainActivity extends AppCompatActivity {
                 .build();
         navView = binding.navView;
 
-        getUser();
-
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        setUser();
     }
 
     // https://stackoverflow.com/questions/26939759/android-getintent-from-a-fragment
-    void getUser() {
+    void setUser() {
         api.getLocalWeather("aarhus", this);
 
         uid = (String) getIntent().getSerializableExtra("user");
+
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", uid);
 
         HomeFragment homeFragment = new HomeFragment();
-        CalendarFragment calendarFragment = new CalendarFragment();
+        /*CalendarFragment calendarFragment = new CalendarFragment();
         DiaryFragment diaryFragment = new DiaryFragment();
-        PatientActivitiesFragment patientActivitiesFragment = new PatientActivitiesFragment();
+        PatientActivitiesFragment patientActivitiesFragment = new PatientActivitiesFragment();/*
 
         homeFragment.setArguments(bundle);
-        calendarFragment.setArguments(bundle);
+        /*calendarFragment.setArguments(bundle);
         diaryFragment.setArguments(bundle);
-        patientActivitiesFragment.setArguments(bundle);
+        patientActivitiesFragment.setArguments(bundle);*/
+
     }
 }

@@ -3,6 +3,7 @@ package dk.au.mad21fall.activiboost.ui.shared.home;
 import static dk.au.mad21fall.activiboost.Constants.PATIENT;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import dk.au.mad21fall.activiboost.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
+    private static final String TAG = "HOME FRAGMENT";
+
     private HomeViewModel hmv;
     private FragmentHomeBinding binding;
     private String name;
@@ -30,7 +33,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        uid = getArguments().getString("user");
+        uid = (String) getActivity().getIntent().getSerializableExtra("user");
         hmv.setUid(uid);
 
         if (hmv.getUserType() == PATIENT) {
