@@ -34,6 +34,8 @@ import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.databinding.FragmentCaregiverActivitiesBinding;
 import dk.au.mad21fall.activiboost.databinding.FragmentCaregiverActivitiesBinding;
 import dk.au.mad21fall.activiboost.models.Activity;
+import dk.au.mad21fall.activiboost.models.Caregiver;
+import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.ui.caregiver.activities.add.AddActivity;
 import dk.au.mad21fall.activiboost.ui.patient.activities.PatientActivitiesViewModel;
 import dk.au.mad21fall.activiboost.ui.shared.activities.ActivitiesAdapter;
@@ -51,12 +53,10 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
     private RecyclerView rcvSugActivities, rcvActivities;
     private LiveData<ArrayList<Activity>> lactivities, lsugactivities;
     private ArrayList<Activity> activities, sugactivities;
-    private String userId = "LKP";
-    private String username = "Line";
-    private FloatingActionButton add;
+    private String userId;
+    private LiveData<Caregiver> caregiver;
+    private Button add;
     private Activity sa;
-
-
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,10 +65,10 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         binding = FragmentCaregiverActivitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        userId = (String) getActivity().getIntent().getSerializableExtra("user");
+
         add = binding.btnAdd;
 
-        //activities = new ArrayList<Activity>();
-        //myActivities = new ArrayList<Activity>();
         firstTextView = binding.sugActivitiesText;
         firstTextView.setText(R.string.sugActivities);
         secondTextView = binding.textActivities;
@@ -76,11 +76,12 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         activitiesAdapter = new ActivitiesAdapter(this);
         sugActivitiesAdapter = new MyActivitiesAdapter(this);
 
+        //Recyclerview for activities
         rcvActivities = binding.rcvActivities;
         rcvActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvActivities.setAdapter(activitiesAdapter);
 
-
+        //Recyclerview for suggested activities
         rcvSugActivities = binding.rcvSuggestedActivities;
         rcvSugActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvSugActivities.setAdapter(sugActivitiesAdapter);
@@ -92,6 +93,14 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddActivity.class);
                 launcher.launch(intent);
+            }
+        });
+
+        caregiver = activitiesViewModel.getCaregiver(userId);
+        caregiver.observe(getActivity(), new Observer<Caregiver>() {
+            @Override
+            public void onChanged(Caregiver caregiver) {
+
             }
         });
 
@@ -170,7 +179,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
     @Override
     public void addToActivity(Activity a){
         Map<String, String> caregivers = a.getCaregivers();
-        caregivers.put(userId,username);
+        caregivers.put(userId,caregiver.getValue().getName());
         a.setCaregivers(caregivers);
         activitiesViewModel.addUserToActivity(userId,a);
         getActivities();

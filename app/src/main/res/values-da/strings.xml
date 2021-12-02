@@ -48,6 +48,7 @@
     <string name="patient">Patient</string>
     <string name="caregiver">Personale</string>
     <string name="activityAdded">Activity added!</string>
+    <string name="addActivityBtn">Tilføj aktivitet</string>
 
 
 </resources>

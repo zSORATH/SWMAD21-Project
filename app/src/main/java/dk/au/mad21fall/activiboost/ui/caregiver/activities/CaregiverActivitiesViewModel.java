@@ -12,12 +12,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 import dk.au.mad21fall.activiboost.models.Activity;
+import dk.au.mad21fall.activiboost.models.Caregiver;
+import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.repository.Repository;
 
 public class CaregiverActivitiesViewModel extends AndroidViewModel {
         private Repository repository;
         private LiveData<ArrayList<Activity>> lSugActivities;
         private MutableLiveData<ArrayList<Activity>> lActivities;
+        private MutableLiveData<Caregiver> caregiver;
         private LiveData<ArrayList<Activity>> activities, sugactivities;
 
 
@@ -26,8 +29,14 @@ public class CaregiverActivitiesViewModel extends AndroidViewModel {
             repository = Repository.getInstance(getApplication());
             lSugActivities = repository.getSuggestedActivities();
             activities = repository.getActivities();
+        }
 
-
+        public LiveData<Caregiver> getCaregiver(String userId){
+            if(caregiver == null){
+                caregiver = new MutableLiveData<>();
+            }
+            caregiver.setValue(repository.findCaregiver(userId));
+            return caregiver;
         }
 
         public LiveData<ArrayList<Activity>> getActivities(String userId) {

@@ -53,6 +53,7 @@
     <string name="age">Age:</string>
     <string name="patient" >Patient</string>
     <string name="caregiver">Caregiver</string>
+    <string name="addActivityBtn">Add activity</string>
 
 
 </resources>
