@@ -18,7 +18,7 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="myActivities">Mine aktiviteter</string>
-    <string name="sugActivities">Forslåede aktiviteter</string>
+    <string name="sugActivities">Foreslåede aktiviteter</string>
     <string name="Activities">Aktiviteter</string>
     <string name="activityDescription">Beskrivelse af aktiviteten</string>
     <string name="activityTitle">Titlen på aktiviteten</string>

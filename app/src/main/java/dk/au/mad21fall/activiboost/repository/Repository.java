@@ -283,21 +283,22 @@ public class Repository {
         activity.put("patients", a.getPatients());
         activity.put("caregivers", a.getCaregivers());
 
-        fdb.collection(collectionName).document(a.getActivityName())
-                .set(activity)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        fdb.collection(collectionName)
+                .add(activity)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
+                        Log.w(TAG, "Error adding document", e);
                     }
                 });
     }
+
 
     public void deleteActivity(Activity a){
         fdb.collection("activitySuggestions").document(a.getId())

@@ -57,6 +57,7 @@ public class CaregiverActivitiesViewModel extends AndroidViewModel {
                 if(a.getTime().compareTo(today)>=0){
                     as.add(a);
                 }
+
             }
             lActivities.setValue(as);
         }

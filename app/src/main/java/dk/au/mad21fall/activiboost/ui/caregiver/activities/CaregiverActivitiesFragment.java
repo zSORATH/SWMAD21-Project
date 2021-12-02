@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResult;
@@ -21,6 +22,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,6 +53,8 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
     private ArrayList<Activity> activities, sugactivities;
     private String userId = "LKP";
     private String username = "Line";
+    private FloatingActionButton add;
+    private Activity sa;
 
 
 
@@ -59,6 +64,8 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
 
         binding = FragmentCaregiverActivitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        add = binding.btnAdd;
 
         //activities = new ArrayList<Activity>();
         //myActivities = new ArrayList<Activity>();
@@ -79,6 +86,14 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         rcvSugActivities.setAdapter(sugActivitiesAdapter);
 
         getActivities();
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddActivity.class);
+                launcher.launch(intent);
+            }
+        });
 
         return root;
     }
@@ -131,6 +146,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
     }
 
     private void openAddActivtiy(Activity a) {
+        sa = a;
         Intent intent = new Intent(getActivity(), AddActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("title", a.getActivityName());
@@ -194,6 +210,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
                     if (result.getResultCode() == RESULT_OK) {
                         Intent data = result.getData();
                         Bundle b = data.getExtras();
+                        deleteSugActivity(sa);
                     }
                 }
             });

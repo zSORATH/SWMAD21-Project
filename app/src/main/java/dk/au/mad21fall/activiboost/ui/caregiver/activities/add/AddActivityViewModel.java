@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import dk.au.mad21fall.activiboost.models.Activity;
 import dk.au.mad21fall.activiboost.repository.Repository;
@@ -17,6 +18,7 @@ public class AddActivityViewModel extends AndroidViewModel {
     private LiveData<ArrayList<Activity>> lSugActivities;
     private MutableLiveData<ArrayList<Activity>> lActivities;
     private LiveData<ArrayList<Activity>> activities, sugactivities;
+    private MutableLiveData<Date> date;
 
 
     public AddActivityViewModel(@NonNull Application app){
@@ -26,5 +28,16 @@ public class AddActivityViewModel extends AndroidViewModel {
 
     public void saveActivity(Activity a){
         repository.suggestActivity("activities", a);
+    }
+
+    public LiveData<Date> getDate(){
+       if(date == null){
+           date = new MutableLiveData<>();
+       }
+        return date;
+    }
+
+    public void setDate(Date d){
+        date.setValue(d);
     }
 }

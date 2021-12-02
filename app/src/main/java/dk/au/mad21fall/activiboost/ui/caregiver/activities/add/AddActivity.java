@@ -1,12 +1,14 @@
 package dk.au.mad21fall.activiboost.ui.caregiver.activities.add;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -16,6 +18,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Activity;
@@ -23,11 +28,13 @@ import dk.au.mad21fall.activiboost.models.Activity;
 public class AddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private EditText title, description;
-    private Button addBtn;
+    private Button addBtn, cancelBtn
+            ;
     private AddActivityViewModel addActivityViewModel;
     private String activitytitle, activitytime, activitydate, activitydesctiption;
     private Calendar mC;
-    private TextView date;
+    private TextView dateView;
+    private LiveData<Date> date;
 
     public AddActivity() {
     }
@@ -38,9 +45,10 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         setContentView(R.layout.activity_add);
 
         title = findViewById(R.id.addActivityTitle);
-        date = findViewById(R.id.addActivityDate);
+        dateView = findViewById(R.id.addActivityDate);
         description = findViewById(R.id.addActivityDescription);
         addBtn = findViewById(R.id.addActivityBtn);
+        cancelBtn = findViewById(R.id.cancelBtn);
         mC = Calendar.getInstance();
 
         addActivityViewModel = new ViewModelProvider(this).get(AddActivityViewModel.class);
@@ -49,23 +57,40 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         activitydesctiption = (String) getIntent().getSerializableExtra("description");
         updateUI();
 
+        date = addActivityViewModel.getDate();
+        date.observe(this, new Observer<Date>() {
+            @Override
+            public void onChanged(Date date) {
+                Date d = date;
+                dateView.setText(d.toString());
+            }
+        });
+
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveActivity();
                 Toast.makeText(getApplicationContext(), getText(R.string.activityAdded), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });
 
         //Help with date from: https://www.tutorialspoint.com/how-to-use-date-time-picker-in-android
-        date.setOnClickListener(new View.OnClickListener() {
+        dateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int year = mC.get(Calendar.YEAR);
+                int month = mC.get(Calendar.MONTH);
+                int day = mC.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AddActivity.this, AddActivity.this, year, month, day);
                 datePickerDialog.show();
             }
@@ -82,6 +107,11 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         Activity a = new Activity();
         a.setActivityName(title.getText().toString());
         a.setDescription(description.getText().toString());
+        a.setTime(date.getValue());
+        Map<String, String> caregivers = new HashMap<>();
+        a.setCaregivers(caregivers);
+        Map<String, String> patients = new HashMap<>();
+        a.setPatients(patients);
         addActivityViewModel.saveActivity(a);
     }
 
@@ -92,15 +122,16 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         mC.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         int hour = mC.get(Calendar.HOUR);
         int minute = mC.get(Calendar.MINUTE);
-        TimePickerDialog timePickerDialog = new TimePickerDialog(AddActivity.this, AddActivity.this, hour, minute, DateFormat.is24HourFormat(this));
+        TimePickerDialog timePickerDialog = new TimePickerDialog(AddActivity.this, AddActivity.this, hour, minute, true);
         timePickerDialog.show();
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        mC.set(Calendar.HOUR, hourOfDay);
+        mC.set(Calendar.HOUR_OF_DAY, hourOfDay);
         mC.set(Calendar.MINUTE, minute);
-        date.setText(mC.getTime().toString());
+        addActivityViewModel.setDate(mC.getTime());
+       // dateView.setText(date.toString());
 
 
 
