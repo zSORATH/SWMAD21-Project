@@ -27,6 +27,12 @@ public class HomeViewModel extends AndroidViewModel {
         super(app);
         repository = Repository.getInstance(getApplication());
 
+        // OBS: Her er det nok bedre at bruge firebase til at get uid istedet for med intent men
+        // vær opmærksom på at man ikke er logget ind med firebase hvis man bruger fast login knap
+        // uid.setValue(FirebaseAuth.getInstance().getUid());
+        // setUserType();
+
+
         mText = new MutableLiveData<>();
         mText.setValue("Logged in as ");
     }
@@ -43,6 +49,16 @@ public class HomeViewModel extends AndroidViewModel {
             setUserType(CAREGIVER);
         }
     }
+
+    /*
+    public void setUserType() {
+        if (getPatient(uid.getValue()) != null) {
+            setUserType(PATIENT);
+        } else {
+            setUserType(CAREGIVER);
+        }
+    }
+     */
 
     public String getUserType() {
         return userType;
