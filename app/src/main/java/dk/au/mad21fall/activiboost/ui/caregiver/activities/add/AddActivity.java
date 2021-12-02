@@ -15,13 +15,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Activity;
-import dk.au.mad21fall.activiboost.ui.patient.activities.PatientActivitiesViewModel;
 
 public class AddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -29,7 +26,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
     private Button addBtn;
     private AddActivityViewModel addActivityViewModel;
     private String activitytitle, activitytime, activitydate, activitydesctiption;
-    private Calendar mCalendar;
+    private Calendar mC;
     private TextView date;
 
     public AddActivity() {
@@ -44,7 +41,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         date = findViewById(R.id.addActivityDate);
         description = findViewById(R.id.addActivityDescription);
         addBtn = findViewById(R.id.addActivityBtn);
-        mCalendar = Calendar.getInstance();
+        mC = Calendar.getInstance();
 
         addActivityViewModel = new ViewModelProvider(this).get(AddActivityViewModel.class);
 
@@ -90,20 +87,20 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        mCalendar.set(Calendar.YEAR, year);
-        mCalendar.set(Calendar.MONTH, month);
-        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        int hour = mCalendar.get(Calendar.HOUR);
-        int minute = mCalendar.get(Calendar.MINUTE);
+        mC.set(Calendar.YEAR, year);
+        mC.set(Calendar.MONTH, month);
+        mC.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        int hour = mC.get(Calendar.HOUR);
+        int minute = mC.get(Calendar.MINUTE);
         TimePickerDialog timePickerDialog = new TimePickerDialog(AddActivity.this, AddActivity.this, hour, minute, DateFormat.is24HourFormat(this));
         timePickerDialog.show();
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        mCalendar.set(Calendar.HOUR, hourOfDay);
-        mCalendar.set(Calendar.MINUTE, minute);
-        date.setText(mCalendar.getTime().toString());
+        mC.set(Calendar.HOUR, hourOfDay);
+        mC.set(Calendar.MINUTE, minute);
+        date.setText(mC.getTime().toString());
 
 
 
