@@ -40,6 +40,7 @@ import dk.au.mad21fall.activiboost.PatientMainActivity;
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Caregiver;
 import dk.au.mad21fall.activiboost.models.Patient;
+import dk.au.mad21fall.activiboost.ui.shared.login.signup.SignUpActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -67,6 +68,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (result.getResultCode() == RESULT_OK) {
                         Intent data = result.getData();
                         Bundle b = data.getExtras();
+                        int j = b.getInt("int");
+                        if (j == 1){
+                            finish();
+                        }
                     }
                 }
             });
@@ -87,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(view -> {
-            openSignUp();
+            gotoSignUp();
         });
 
         btnPLogin = findViewById(R.id.btnLogin2);
@@ -159,35 +164,11 @@ public class LoginActivity extends AppCompatActivity {
         signInLauncher.launch(signInIntent);
     }
 
-    // https://stackoverflow.com/questions/4134117/edittext-on-a-popup-window
-    public void openSignUp() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-        alert.setTitle("Title");
-        alert.setMessage("Message");
-
-        // Set an EditText view to get user input
-        final EditText enterEmail = new EditText(this);
-        alert.setView(enterEmail);
-
-        final EditText enterPass = new EditText(this);
-        alert.setView(enterPass);
-
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-
-            }
-        });
-
-        alert.show();
+    public void gotoSignUp() {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        // Bundle bundle = new Bundle();
+        // bundle.putSerializable("user", "zX8be2WTWjUL04unsrAHqD4sBnG3");
+        // intent.putExtras(bundle);
+        launcher.launch(intent);
     }
-
 }

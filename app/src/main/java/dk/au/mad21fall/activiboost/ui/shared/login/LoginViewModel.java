@@ -20,14 +20,15 @@ import dk.au.mad21fall.activiboost.repository.Repository;
 public class LoginViewModel extends AndroidViewModel {
 
     private Repository repository;
-    public LiveData<ArrayList<Patient>> patients;
+    private MutableLiveData<String> email, password = new MutableLiveData<>();
+    // private LiveData<ArrayList<Patient>> patients;
     // private MutableLiveData<ArrayList<Caregiver>> caregivers;
 
     public LoginViewModel(@NonNull Application app) {
         super(app);
         repository = Repository.getInstance(getApplication());
 
-        patients = repository.getPatients();
+        // patients = repository.getPatients();
     }
 
     public Patient getPatient(String uid) {
