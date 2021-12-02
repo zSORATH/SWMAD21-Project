@@ -58,13 +58,13 @@ public class CaregiverMainActivity extends AppCompatActivity {
         bundle.putSerializable("user", uid);
 
         HomeFragment homeFragment = new HomeFragment();
-        CalendarFragment calendarFragment = new CalendarFragment();
+        /*CalendarFragment calendarFragment = new CalendarFragment();
         PatientsFragment patientsFragment = new PatientsFragment();
         CaregiverActivitiesFragment caregiverActivitiesFragment = new CaregiverActivitiesFragment();
 
         homeFragment.setArguments(bundle);
         calendarFragment.setArguments(bundle);
         patientsFragment.setArguments(bundle);
-        caregiverActivitiesFragment.setArguments(bundle);
+        caregiverActivitiesFragment.setArguments(bundle);*/
     }
 }

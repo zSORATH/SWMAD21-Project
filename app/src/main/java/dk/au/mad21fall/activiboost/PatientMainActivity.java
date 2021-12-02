@@ -54,6 +54,7 @@ public class PatientMainActivity extends AppCompatActivity {
         setUser();
     }
 
+    // TODO: Get intent in fragments correctly
     // https://stackoverflow.com/questions/26939759/android-getintent-from-a-fragment
     void setUser() {
         api.getLocalWeather("aarhus", this);

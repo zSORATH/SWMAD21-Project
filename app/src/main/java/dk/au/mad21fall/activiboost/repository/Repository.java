@@ -317,8 +317,10 @@ public class Repository {
 
         for (Patient p : _patients) {
             Log.d("TAG2", "Checking uid: " + uid + " with: " + p.getId());
-            if (p.getId().equals(uid)) {
-                return p;
+            if (p.getId() != null) {
+                if (p.getId().equals(uid)) {
+                    return p;
+                }
             }
         }
         return null;
@@ -330,8 +332,10 @@ public class Repository {
 
         for (Caregiver c : _caregivers) {
             Log.d("TAG2", "Checking uid: " + uid + " with: " + c.getId());
-            if (c.getId() == uid) {
-                return c;
+            if (c.getId() != null) {
+                if (c.getId().equals(uid)) {
+                    return c;
+                }
             }
         }
         return null;
