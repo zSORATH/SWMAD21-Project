@@ -43,6 +43,8 @@
     <string name="caregivers">Caregivers: </string>
     <string name="time">Time: </string>
     <string name="attendingBtn">Attending</string>
+    <string name="loginSignUp">Sign Up</string>
+    <string name="login">Login</string>
 
 
 </resources>

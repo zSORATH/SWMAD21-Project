@@ -7,6 +7,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -22,11 +23,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -42,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LOGIN ACTIVITY";
 
-    private Button btnLogin;
+    private Button btnLogin, btnSignUp, btnPLogin, btnCLogin;
     private LoginViewModel lvm;
 
     // Authentication: https://firebase.google.com/docs/auth/android/firebaseui?authuser=0#java
@@ -84,6 +87,29 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(view -> {
             createSignInIntent();
+        });
+
+        btnSignUp = findViewById(R.id.btnSignUp);
+        btnSignUp.setOnClickListener(view -> {
+            openSignUp();
+        });
+
+        btnPLogin = findViewById(R.id.btnLogin2);
+        btnPLogin.setOnClickListener(view -> {
+            Intent intent = new Intent(this, PatientMainActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", "aDzD01WbDXcWS4zcx5boZpsrzDl1");
+            intent.putExtras(bundle);
+            launcher.launch(intent);
+        });
+
+        btnCLogin = findViewById(R.id.btnLogin3);
+        btnCLogin.setOnClickListener(view -> {
+            Intent intent = new Intent(this, CaregiverMainActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("user", "zX8be2WTWjUL04unsrAHqD4sBnG3");
+            intent.putExtras(bundle);
+            launcher.launch(intent);
         });
     }
 
@@ -135,6 +161,37 @@ public class LoginActivity extends AppCompatActivity {
                 .setIsSmartLockEnabled(false)
                 .build();
         signInLauncher.launch(signInIntent);
+    }
+
+    // https://stackoverflow.com/questions/4134117/edittext-on-a-popup-window
+    public void openSignUp() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Title");
+        alert.setMessage("Message");
+
+        // Set an EditText view to get user input
+        final EditText enterEmail = new EditText(this);
+        alert.setView(enterEmail);
+
+        final EditText enterPass = new EditText(this);
+        alert.setView(enterPass);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+
+            }
+        });
+
+        alert.show();
     }
 
 }

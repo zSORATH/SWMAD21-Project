@@ -38,6 +38,8 @@
     <string name="caregivers">Personale: </string>
     <string name="time">Tid: </string>
     <string name="attendingBtn">Deltager</string>
+    <string name="loginSignUp">Sign Up</string>
+    <string name="login" />
 
 
 </resources>
