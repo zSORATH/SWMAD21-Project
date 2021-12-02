@@ -62,7 +62,7 @@ public class CaregiverActivitiesViewModel extends AndroidViewModel {
         }
 
         public void addUserToActivity(String userId, Activity a){
-            repository.updateCaregiverActivity(userId, a);
+            repository.updateActivity("", userId, a);
         }
 
         public void deleteSugActivity(Activity a){
