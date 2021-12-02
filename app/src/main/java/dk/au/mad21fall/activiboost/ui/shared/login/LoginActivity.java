@@ -40,6 +40,7 @@ import dk.au.mad21fall.activiboost.PatientMainActivity;
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Caregiver;
 import dk.au.mad21fall.activiboost.models.Patient;
+import dk.au.mad21fall.activiboost.ui.shared.login.signup.SignUpActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -64,10 +65,18 @@ public class LoginActivity extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
+                    Toast toast;
                     if (result.getResultCode() == RESULT_OK) {
-                        Intent data = result.getData();
-                        Bundle b = data.getExtras();
-                    }
+                        toast = Toast.makeText(getApplicationContext(),
+                                "User created!",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                    } /*else if (result.getResultCode() == RESULT_CANCELED) {
+                        toast = Toast.makeText(getApplicationContext(),
+                                "Sign up was cancelled",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                    } */ // Commented out because it also shows on crashes
                 }
             });
 
@@ -87,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSignUp.setOnClickListener(view -> {
-            openSignUp();
+            gotoSignUp();
         });
 
         btnPLogin = findViewById(R.id.btnLogin2);
@@ -139,7 +148,13 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Failed login
             Context context = getApplicationContext();
-            String text = response.getError().getMessage();
+            String text;
+            if (response == null) {
+                text = "Login cancelled";
+            }
+            else {
+                text = response.getError().getLocalizedMessage();
+            }
             Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
             toast.show();
         }
@@ -155,39 +170,13 @@ public class LoginActivity extends AppCompatActivity {
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 .setIsSmartLockEnabled(false)
+                .setTheme(R.style.Theme_ActiviBoost)
                 .build();
         signInLauncher.launch(signInIntent);
     }
 
-    // https://stackoverflow.com/questions/4134117/edittext-on-a-popup-window
-    public void openSignUp() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-        alert.setTitle("Title");
-        alert.setMessage("Message");
-
-        // Set an EditText view to get user input
-        final EditText enterEmail = new EditText(this);
-        alert.setView(enterEmail);
-
-        final EditText enterPass = new EditText(this);
-        alert.setView(enterPass);
-
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-
-            }
-        });
-
-        alert.show();
+    public void gotoSignUp() {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        launcher.launch(intent);
     }
-
 }

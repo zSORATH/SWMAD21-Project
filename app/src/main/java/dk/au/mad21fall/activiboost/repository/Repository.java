@@ -346,4 +346,37 @@ public class Repository {
         }
         return null;
     }
+
+    // Adapted from https://firebase.google.com/docs/firestore/manage-data/add-data#java
+    public void addPatient(Map<String, Object> patient) {
+        fdb.collection("patients").document(patient.get("id").toString())
+                .set(patient)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w(TAG, "Error writing document", e);
+                }
+        });
+    }
+
+    public void addCaregiver(Map<String, Object> caregiver) {
+        fdb.collection("caregivers").document(caregiver.get("id").toString())
+                .set(caregiver)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w(TAG, "Error writing document", e);
+            }
+        });
+    }
 }

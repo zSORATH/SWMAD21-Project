@@ -40,6 +40,13 @@
     <string name="attendingBtn">Deltager</string>
     <string name="loginSignUp">Sign Up</string>
     <string name="login" />
+    <string name="password">Password</string>
+    <string name="next">Next</string>
+    <string name="create_user">Create User</string>
+    <string name="name">Name:</string>
+    <string name="age">Age:</string>
+    <string name="patient">Patient</string>
+    <string name="caregiver">Personale</string>
     <string name="activityAdded">Activity added!</string>
 
 
