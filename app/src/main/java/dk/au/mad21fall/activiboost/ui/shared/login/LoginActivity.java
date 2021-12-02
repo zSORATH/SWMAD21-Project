@@ -148,7 +148,13 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             // Failed login
             Context context = getApplicationContext();
-            String text = response.getError().getMessage();
+            String text;
+            if (response == null) {
+                text = "Login cancelled";
+            }
+            else {
+                text = response.getError().getLocalizedMessage();
+            }
             Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
             toast.show();
         }
@@ -164,6 +170,7 @@ public class LoginActivity extends AppCompatActivity {
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 .setIsSmartLockEnabled(false)
+                .setTheme(R.style.Theme_ActiviBoost)
                 .build();
         signInLauncher.launch(signInIntent);
     }
