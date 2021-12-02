@@ -45,6 +45,7 @@
     <string name="attendingBtn">Attending</string>
     <string name="loginSignUp">Sign Up</string>
     <string name="login">Login</string>
+    <string name="activityAdded">Activity added!</string>
 
 
 </resources>

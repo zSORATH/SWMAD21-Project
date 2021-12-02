@@ -12,12 +12,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 import dk.au.mad21fall.activiboost.models.Activity;
+import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.repository.Repository;
 
 public class PatientActivitiesViewModel extends AndroidViewModel {
         private Repository repository;
         private MutableLiveData<ArrayList<Activity>> lMyActivities;
         private MutableLiveData<ArrayList<Activity>> lActivities;
+        private MutableLiveData<Patient> patient;
         private LiveData<ArrayList<Activity>> activities;
 
 
@@ -26,6 +28,14 @@ public class PatientActivitiesViewModel extends AndroidViewModel {
             repository = Repository.getInstance(getApplication());
             activities = repository.getActivities();
 
+        }
+
+        public LiveData<Patient> getUser(String userId){
+            if(patient == null){
+                patient = new MutableLiveData<Patient>();
+            }
+            patient.setValue(repository.findPatient(userId));
+            return patient;
         }
 
         public LiveData<ArrayList<Activity>> getActivities(String userId) {

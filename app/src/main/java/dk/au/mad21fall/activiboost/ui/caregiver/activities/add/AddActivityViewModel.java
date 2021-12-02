@@ -22,8 +22,6 @@ public class AddActivityViewModel extends AndroidViewModel {
     public AddActivityViewModel(@NonNull Application app){
         super(app);
         repository = Repository.getInstance(getApplication());
-
-
     }
 
     public void saveActivity(Activity a){

@@ -40,6 +40,7 @@
     <string name="attendingBtn">Deltager</string>
     <string name="loginSignUp">Sign Up</string>
     <string name="login" />
+    <string name="activityAdded">Activity added!</string>
 
 
 </resources>

@@ -1,5 +1,7 @@
 package dk.au.mad21fall.activiboost.ui.caregiver.activities;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -20,10 +26,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+import dk.au.mad21fall.activiboost.PatientMainActivity;
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.databinding.FragmentCaregiverActivitiesBinding;
 import dk.au.mad21fall.activiboost.databinding.FragmentCaregiverActivitiesBinding;
 import dk.au.mad21fall.activiboost.models.Activity;
+import dk.au.mad21fall.activiboost.ui.caregiver.activities.add.AddActivity;
 import dk.au.mad21fall.activiboost.ui.patient.activities.PatientActivitiesViewModel;
 import dk.au.mad21fall.activiboost.ui.shared.activities.ActivitiesAdapter;
 import dk.au.mad21fall.activiboost.ui.shared.activities.MyActivitiesAdapter;
@@ -117,9 +125,18 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription())
-                .setPositiveButton(R.string.addBtn, (dialogInterface, i) -> {})
+                .setPositiveButton(R.string.addBtn, (dialogInterface, i) -> {openAddActivtiy(a);})
                 .setNegativeButton(R.string.deleteBtn, (dialogInterface, i) -> {deleteSugActivity(a);});
         builder.create().show();
+    }
+
+    private void openAddActivtiy(Activity a) {
+        Intent intent = new Intent(getActivity(), AddActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("title", a.getActivityName());
+        bundle.putSerializable("description", a.getDescription());
+        intent.putExtras(bundle);
+        launcher.launch(intent);
     }
 
     private void showDialogue(Activity a){
@@ -129,7 +146,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
                         getText(R.string.time) +" " + a.getTime() + "\n\n" +
                         getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
                         getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
-                .setPositiveButton(R.string.addBtn, (dialogInterface, i) -> {addToActivity(a);})
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
         builder.create().show();
     }
@@ -169,6 +186,16 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         activitiesViewModel.deleteSugActivity(a);
     }
 
-
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        Bundle b = data.getExtras();
+                    }
+                }
+            });
 
 }

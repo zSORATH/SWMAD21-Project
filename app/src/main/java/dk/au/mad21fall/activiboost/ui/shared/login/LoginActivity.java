@@ -67,10 +67,6 @@ public class LoginActivity extends AppCompatActivity {
                     if (result.getResultCode() == RESULT_OK) {
                         Intent data = result.getData();
                         Bundle b = data.getExtras();
-                        int j = b.getInt("int");
-                        if (j == 1){
-                            finish();
-                        }
                     }
                 }
             });

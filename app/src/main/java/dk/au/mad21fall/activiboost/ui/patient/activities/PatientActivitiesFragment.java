@@ -30,6 +30,7 @@ import java.util.Map;
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Activity;
 import dk.au.mad21fall.activiboost.databinding.FragmentPatientActivitiesBinding;
+import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.ui.patient.activities.suggest.SuggestActivity;
 import dk.au.mad21fall.activiboost.ui.shared.activities.ActivitiesAdapter;
 import dk.au.mad21fall.activiboost.ui.shared.activities.MyActivitiesAdapter;
@@ -47,10 +48,10 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
     private MyActivitiesAdapter myActivitiesAdapter;
     private RecyclerView rcvMyActivities, rcvActivities;
     private LiveData<ArrayList<Activity>> lactivities, lmyactivities;
+    private LiveData<Patient> patient;
     private ArrayList<Activity> activities, myactivities;
     private Button suggestBtn;
-    private String userId = "1234567899";
-    private String username = "John";
+    private String userId;
 
 
 
@@ -60,6 +61,8 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
 
         binding = FragmentPatientActivitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        userId = (String) getActivity().getIntent().getSerializableExtra("user");
 
         //activities = new ArrayList<Activity>();
         //myActivities = new ArrayList<Activity>();
@@ -88,6 +91,13 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
             }
         });
 
+        patient = activitiesViewModel.getUser(userId);
+        patient.observe(getActivity(), new Observer<Patient>() {
+            @Override
+            public void onChanged(Patient patient) {
+
+            }
+        });
 
         return root;
     }
@@ -144,7 +154,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
     @Override
     public void addToActivity(Activity a){
         Map<String, String> patients = a.getPatients();
-        patients.put(userId,username);
+        patients.put(patient.getValue().getId(),patient.getValue().getName());
         a.setPatients(patients);
         activitiesViewModel.addUserToActivity(userId,a);
         getActivities();

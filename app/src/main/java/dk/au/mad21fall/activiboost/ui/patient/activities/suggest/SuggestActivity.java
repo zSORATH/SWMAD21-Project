@@ -41,6 +41,7 @@ public class SuggestActivity extends AppCompatActivity {
                 title.setText("");
                 description.setText("");
                 Toast.makeText(getApplicationContext(),getText(R.string.activitySuggested), Toast.LENGTH_SHORT).show();
+                finish();
                 }
                 else {
                     Toast.makeText(getApplicationContext(),getText(R.string.textEmpty), Toast.LENGTH_SHORT).show();
