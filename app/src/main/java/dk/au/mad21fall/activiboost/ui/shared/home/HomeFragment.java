@@ -1,5 +1,7 @@
 package dk.au.mad21fall.activiboost.ui.shared.home;
 
+import static dk.au.mad21fall.activiboost.Constants.PATIENT;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,22 +18,31 @@ import dk.au.mad21fall.activiboost.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private HomeViewModel hmv;
     private FragmentHomeBinding binding;
+    private String name;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
+        hmv =
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        hmv.setUid(getActivity().getIntent().getStringExtra("user"));
+
+        if (hmv.getUserType() == PATIENT) {
+            name = hmv.getPatient(hmv.getUid()).getName();
+        } else {
+            name = hmv.getCaregiver(hmv.getUid()).getName();
+        }
+
         final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        hmv.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                textView.setText(s + name);
             }
         });
         return root;

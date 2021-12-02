@@ -1,14 +1,18 @@
 package dk.au.mad21fall.activiboost.repository;
 
 import android.app.Application;
+import android.graphics.PathEffect;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.firebase.database.annotations.Nullable;
 import com.google.firebase.firestore.DocumentReference;
@@ -25,6 +29,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import dk.au.mad21fall.activiboost.models.Caregiver;
 import dk.au.mad21fall.activiboost.models.Diary;
 import dk.au.mad21fall.activiboost.database.DiaryDatabase;
 import dk.au.mad21fall.activiboost.models.Activity;
@@ -34,13 +39,14 @@ import dk.au.mad21fall.activiboost.models.Patient;
 // And the "Room Demo Asynch" code provided in L5.
 public class Repository {
 
-    private static final String TAG = "Getting document:";
+    private static final String TAG = "Getting document:", TAG2 = "IN REPOSITORY";
     private FirebaseFirestore fdb;
     private DiaryDatabase db;               //database
     private ExecutorService executor;       //for asynch processing
     private LiveData<List<Diary>> diaries;    //livedata
     private static Repository instance;     //for Singleton pattern
     private MutableLiveData<ArrayList<Patient>> patients;
+    private MutableLiveData<ArrayList<Caregiver>> caregivers;
     private MutableLiveData<ArrayList<Patient>> activitypatients;
     private MutableLiveData<ArrayList<Activity>> activities;
     private MutableLiveData<ArrayList<Activity>> suggestedactivities;
@@ -60,6 +66,7 @@ public class Repository {
         executor = Executors.newSingleThreadExecutor();                //executor for background processing
         diaries = db.diaryDAO().getAll();                             //get LiveData reference to all entries
         loadData("patients", "p");
+        loadData("caregivers", "c");
         loadData("activities", "a");
         loadData("activitySuggestions", "s");
         loadActivityPaticipants("p");
@@ -67,6 +74,10 @@ public class Repository {
 
     public MutableLiveData<ArrayList<Patient>> getPatients() {
         return patients;
+    }
+
+    public MutableLiveData<ArrayList<Caregiver>> getCaregivers() {
+        return caregivers;
     }
 
     public LiveData<List<Diary>> getDiaries() {
@@ -140,6 +151,20 @@ public class Repository {
                                     patients = new MutableLiveData<ArrayList<Patient>>();
                                 }
                                 patients.setValue(updatedPatients);
+                            }
+                            if(type.equals("c")) {
+                                ArrayList<Caregiver> updatedCaregivers = new ArrayList<>();
+                                for (DocumentSnapshot docg : valueg.getDocuments()) {
+                                    Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
+                                    Caregiver c = docg.toObject(Caregiver.class);
+                                    if (c != null) {
+                                        updatedCaregivers.add(c);
+                                    }
+                                }
+                                if (caregivers == null) {
+                                    caregivers = new MutableLiveData<ArrayList<Caregiver>>();
+                                }
+                                caregivers.setValue(updatedCaregivers);
                             }
                             if(type.equals("a")){
                                 ArrayList<Activity> updatedActivities = new ArrayList<>();
@@ -284,5 +309,31 @@ public class Repository {
                         Log.w(TAG, "Error deleting document", e);
                     }
                 });
+    }
+
+    // https://stackoverflow.com/questions/53332471/checking-if-a-document-exists-in-a-firestore-collection/53335711
+    public Patient findPatient(String uid) {
+        ArrayList<Patient> _patients = patients.getValue();
+
+        for (Patient p : _patients) {
+            Log.d("TAG2", "Checking uid: " + uid + " with: " + p.getId());
+            if (p.getId().equals(uid)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    // https://stackoverflow.com/questions/53332471/checking-if-a-document-exists-in-a-firestore-collection/53335711
+    public Caregiver findCaregiver(String uid) {
+        ArrayList<Caregiver> _caregivers = caregivers.getValue();
+
+        for (Caregiver c : _caregivers) {
+            Log.d("TAG2", "Checking uid: " + uid + " with: " + c.getId());
+            if (c.getId() == uid) {
+                return c;
+            }
+        }
+        return null;
     }
 }

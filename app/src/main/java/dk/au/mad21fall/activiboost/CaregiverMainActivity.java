@@ -12,13 +12,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import dk.au.mad21fall.activiboost.databinding.ActivityCaregiverMainBinding;
 import dk.au.mad21fall.activiboost.ui.caregiver.activities.CaregiverActivitiesFragment;
+import dk.au.mad21fall.activiboost.ui.patient.activities.PatientActivitiesFragment;
 import dk.au.mad21fall.activiboost.weatherApi.WeatherApi;
 
 public class CaregiverMainActivity extends AppCompatActivity {
 
     private static final String TAG = "CAREGIVER MAIN ACTIVITY";
 
-    public int userType;
+    public String uid;
     private ActivityCaregiverMainBinding binding;
     private AppBarConfiguration appBarConfiguration;
     private NavController navController;
@@ -38,7 +39,7 @@ public class CaregiverMainActivity extends AppCompatActivity {
                 .build();
         navView = binding.navView;
 
-        setUserType();
+        getUser();
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -46,12 +47,14 @@ public class CaregiverMainActivity extends AppCompatActivity {
     }
 
     // https://stackoverflow.com/questions/26939759/android-getintent-from-a-fragment
-    void setUserType() {
+    void getUser() {
         api.getLocalWeather("aarhus", this);
-        CaregiverActivitiesFragment activitiesFragment = new CaregiverActivitiesFragment();
-        userType = getIntent().getIntExtra("user", userType);
+
+        PatientActivitiesFragment activitiesFragment = new PatientActivitiesFragment();
+
+        uid = (String) getIntent().getSerializableExtra("user");
         Bundle bundle = new Bundle();
-        bundle.putInt("user", userType);
+        bundle.putSerializable("user", uid);
         activitiesFragment.setArguments(bundle);
     }
 }

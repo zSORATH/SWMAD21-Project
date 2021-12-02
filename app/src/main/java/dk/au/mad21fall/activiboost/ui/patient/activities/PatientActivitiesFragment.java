@@ -40,7 +40,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
 
     private PatientActivitiesViewModel activitiesViewModel;
     private FragmentPatientActivitiesBinding binding;
-    private int userType;
+    private String uid;
     private Intent intent;
     private TextView firstTextView, secondTextView;
     private ActivitiesAdapter activitiesAdapter;

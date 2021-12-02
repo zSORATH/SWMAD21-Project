@@ -3,6 +3,7 @@ package dk.au.mad21fall.activiboost;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.auth.User;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -18,7 +19,7 @@ public class PatientMainActivity extends AppCompatActivity {
 
     private static final String TAG = "PATIENT MAIN ACTIVITY";
 
-    public int userType;
+    private String uid;
     private ActivityPatientMainBinding binding;
     private AppBarConfiguration appBarConfiguration;
     private NavController navController;
@@ -34,16 +35,11 @@ public class PatientMainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_calendar, R.id.navigation_diary,
-                R.id.navigation_patients, R.id.navigation_activities)
+                R.id.navigation_home, R.id.navigation_calendar, R.id.navigation_diary, R.id.navigation_activities)
                 .build();
         navView = binding.navView;
 
-        setUserType();
-
-        if (navView.getMenu().findItem(R.id.navigation_patients) != null) {
-            navView.getMenu().removeItem(R.id.navigation_patients);
-        }
+        getUser();
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -51,12 +47,14 @@ public class PatientMainActivity extends AppCompatActivity {
     }
 
     // https://stackoverflow.com/questions/26939759/android-getintent-from-a-fragment
-    void setUserType() {
+    void getUser() {
         api.getLocalWeather("aarhus", this);
+
         PatientActivitiesFragment activitiesFragment = new PatientActivitiesFragment();
-        userType = getIntent().getIntExtra("user", userType);
+
+        uid = (String) getIntent().getSerializableExtra("user");
         Bundle bundle = new Bundle();
-        bundle.putInt("user", userType);
+        bundle.putSerializable("user", uid);
         activitiesFragment.setArguments(bundle);
     }
 }
