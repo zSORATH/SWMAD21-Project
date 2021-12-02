@@ -45,13 +45,11 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == RESULT_OK) {
-                        Intent data = result.getData();
-                        Bundle b = data.getExtras();
-                        int j = b.getInt("int");
-                        if (j == 1){
-                            finish();
-                        }
+                        setResult(RESULT_OK);
+                    } else {
+                        setResult(RESULT_CANCELED);
                     }
+                    finish();
                 }
             });
 
@@ -69,6 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         btnCancel = findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(view -> {
+            setResult(RESULT_CANCELED);
             finish();
         });
 

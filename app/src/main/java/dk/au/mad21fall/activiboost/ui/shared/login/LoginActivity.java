@@ -65,14 +65,18 @@ public class LoginActivity extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
+                    Toast toast;
                     if (result.getResultCode() == RESULT_OK) {
-                        Intent data = result.getData();
-                        Bundle b = data.getExtras();
-                        int j = b.getInt("int");
-                        if (j == 1){
-                            finish();
-                        }
-                    }
+                        toast = Toast.makeText(getApplicationContext(),
+                                "User created!",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                    } /*else if (result.getResultCode() == RESULT_CANCELED) {
+                        toast = Toast.makeText(getApplicationContext(),
+                                "Sign up was cancelled",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                    } */ // Commented out because it also shows on crashes
                 }
             });
 
@@ -166,9 +170,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void gotoSignUp() {
         Intent intent = new Intent(this, SignUpActivity.class);
-        // Bundle bundle = new Bundle();
-        // bundle.putSerializable("user", "zX8be2WTWjUL04unsrAHqD4sBnG3");
-        // intent.putExtras(bundle);
         launcher.launch(intent);
     }
 }

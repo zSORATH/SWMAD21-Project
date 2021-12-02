@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +21,8 @@ import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.ui.shared.login.signup.SignUpViewModel;
 
 public class SignUpDetailsActivity extends AppCompatActivity {
+
+    private static final String TAG = "SIGN UP DETAILS";
 
     private SignUpDetailsViewModel sdvm;
     private EditText txtName, txtAge;
@@ -52,19 +55,22 @@ public class SignUpDetailsActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(view -> {
             sdvm.deleteUser();
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "Sign up was cancelled",
-                    Toast.LENGTH_SHORT);
-            toast.show();
+            setResult(RESULT_CANCELED);
             finish();
         });
 
         btnCreate = findViewById(R.id.btnCreate);
         btnCreate.setOnClickListener(view -> {
             if (userType.equals(PATIENT)) {
-                tryCreatePatient();
+                if (tryCreatePatient()) {
+                    setResult(RESULT_OK);
+                    finish();
+                }
             } else if (userType.equals(CAREGIVER)) {
-                tryCreateCaregiver();
+                if (tryCreateCaregiver()) {
+                    setResult(RESULT_OK);
+                    finish();
+                }
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(),
                         "Please choose either patient or caregiver",
@@ -74,21 +80,27 @@ public class SignUpDetailsActivity extends AppCompatActivity {
         });
     }
 
-    public void tryCreatePatient() {
+    public boolean tryCreatePatient() {
         String name = sdvm.getName(txtName.getText().toString()).getValue();
         String age = sdvm.getAge(txtAge.getText().toString()).getValue();
 
         if (isNameAndAgeValid(name, age)) {
             sdvm.createPatient(name, age);
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public void tryCreateCaregiver() {
+    public boolean tryCreateCaregiver() {
         String name = sdvm.getName(txtName.getText().toString()).getValue();
         String age = sdvm.getAge(txtAge.getText().toString()).getValue();
 
         if (isNameAndAgeValid(name, age)) {
             sdvm.createCaregiver(name, age);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -115,6 +127,7 @@ public class SignUpDetailsActivity extends AppCompatActivity {
                 }
                 break;
         }
+        Log.d(TAG, "Usertype is " + userType);
     }
 
     public boolean isNameAndAgeValid(String name, String age) {

@@ -11,6 +11,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.auth.User;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import dk.au.mad21fall.activiboost.repository.Repository;
 
 public class SignUpDetailsViewModel extends AndroidViewModel {
@@ -53,10 +56,24 @@ public class SignUpDetailsViewModel extends AndroidViewModel {
     }
 
     public void createPatient(String name, String age) {
+        Map<String, Object> patient = new HashMap<>();
+        int ageInt = Integer.parseInt(age);
 
+        patient.put("age", ageInt);
+        patient.put("id", user.getUid());
+        patient.put("name", name);
+
+        repository.addPatient(patient);
     }
 
     public void createCaregiver(String name, String age) {
+        Map<String, Object> caregiver = new HashMap<>();
+        int ageInt = Integer.parseInt(age);
 
+        caregiver.put("age", ageInt);
+        caregiver.put("id", user.getUid());
+        caregiver.put("name", name);
+
+        repository.addCaregiver(caregiver);
     }
 }
