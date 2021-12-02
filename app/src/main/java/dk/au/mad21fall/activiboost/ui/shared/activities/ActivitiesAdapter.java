@@ -45,6 +45,16 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
     public void onBindViewHolder(@NonNull ActivitiesAdapter.ActivitiesViewHolder viewHolder, int position) {
         viewHolder.activitytitle.setText(activitiesList.get(position).getActivityName());
         viewHolder.activitytime.setText(activitiesList.get(position).getTime().toString());
+        if(activitiesList.get(position).getUserInActivity()){
+            viewHolder.signUpBtn.setText(R.string.attendingBtn);
+            viewHolder.signUpBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewHolder.alreadySignedUp();
+                }
+            });
+        }
+
 
     }
 
@@ -84,6 +94,10 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
             });
 
         }
+        private void alreadySignedUp(){
+                    activitiesListener.unsubscribeActivity(activitiesList.get(getAdapterPosition()));
+        }
+
         @Override
         public void onClick(View view) {
             activitiesListener.onActivityClicked(getAdapterPosition());
@@ -93,5 +107,6 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
     public static interface IActivitiesItemClickedListener {
         void onActivityClicked(int index);
         void addToActivity(Activity activity);
+        void unsubscribeActivity(Activity activity);
     }
 }

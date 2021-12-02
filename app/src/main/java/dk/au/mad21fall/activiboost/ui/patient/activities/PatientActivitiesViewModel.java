@@ -63,7 +63,7 @@ public class PatientActivitiesViewModel extends AndroidViewModel {
         }
 
         public void addUserToActivity(String userId, Activity a){
-            repository.updateActivity(userId, a);
+            repository.updatePatientsActivity(userId, a);
         }
 
 }

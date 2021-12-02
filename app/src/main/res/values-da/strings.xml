@@ -26,6 +26,7 @@
     <string name="activityDate">Dato for aktivitet</string>
     <string name="activityTime">Tidspunkt for aktivitet</string>
     <string name="addBtn">Tilføj</string>
+    <string name="deleteBtn">Slet</string>
     <string name="TextSugActivities">Foreslåede aktiviteter</string>
     <string name="suggestActivityBtn">Foreslå aktivitet</string>
     <string name="activitySuggested">Aktivitet foreslået!</string>
@@ -36,6 +37,7 @@
     <string name="description">Beskrivelse: </string>
     <string name="caregivers">Personale: </string>
     <string name="time">Tid: </string>
+    <string name="attendingBtn">Deltager</string>
 
 
 </resources>

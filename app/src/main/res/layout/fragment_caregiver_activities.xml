@@ -15,7 +15,7 @@
         android:clickable="true"
         android:focusable="auto"
         android:src="@drawable/ic_add"
-        app:backgroundTint="#B2FF59"
+        app:backgroundTint="@color/greyColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

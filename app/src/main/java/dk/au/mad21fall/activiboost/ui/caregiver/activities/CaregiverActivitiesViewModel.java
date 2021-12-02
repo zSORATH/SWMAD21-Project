@@ -16,15 +16,17 @@ import dk.au.mad21fall.activiboost.repository.Repository;
 
 public class CaregiverActivitiesViewModel extends AndroidViewModel {
         private Repository repository;
-        private MutableLiveData<ArrayList<Activity>> lMyActivities;
+        private LiveData<ArrayList<Activity>> lSugActivities;
         private MutableLiveData<ArrayList<Activity>> lActivities;
-        private LiveData<ArrayList<Activity>> activities;
+        private LiveData<ArrayList<Activity>> activities, sugactivities;
 
 
         public CaregiverActivitiesViewModel(@NonNull Application app){
             super(app);
             repository = Repository.getInstance(getApplication());
+            lSugActivities = repository.getSuggestedActivities();
             activities = repository.getActivities();
+
 
         }
 
@@ -33,37 +35,38 @@ public class CaregiverActivitiesViewModel extends AndroidViewModel {
             return lActivities;
         }
 
-        public LiveData<ArrayList<Activity>> getMyActivities(String userId) {
-            sortList(activities, userId);
-            return lMyActivities;
+        public LiveData<ArrayList<Activity>> getSugActivities(String userId) {
+            if(lSugActivities == null){
+                lSugActivities = new MutableLiveData<ArrayList<Activity>>();
+            }
+            return lSugActivities;
         }
 
         private void sortList(LiveData<ArrayList<Activity>> al, String userId){
-            if(lMyActivities == null){
-                lMyActivities = new MutableLiveData<ArrayList<Activity>>();
-            }
             if(lActivities == null){
                 lActivities = new MutableLiveData<ArrayList<Activity>>();
             }
-            ArrayList<Activity> myas = new ArrayList<>();
             ArrayList<Activity> as = new ArrayList<>();
-            //
+            //https://alvinalexander.com/java/java-today-get-todays-date-now/
             Date today = Calendar.getInstance().getTime();
             //compare dates from: https://www.guru99.com/java-date.html
             for(Activity a : activities.getValue()){
-                if(a.getPatients().containsKey(userId) && a.getTime().compareTo(today)>=0){
-                    myas.add(a);
+                if(a.getCaregivers().containsKey(userId)){
+                    a.setUserInActivity(true);
                 }
-                if(!a.getPatients().containsKey(userId) && a.getTime().compareTo(today)>=0){
+                if(a.getTime().compareTo(today)>=0){
                     as.add(a);
                 }
             }
-            lMyActivities.setValue(myas);
             lActivities.setValue(as);
         }
 
         public void addUserToActivity(String userId, Activity a){
-            repository.updateActivity(userId, a);
+            repository.updateCaregiverActivity(userId, a);
+        }
+
+        public void deleteSugActivity(Activity a){
+            repository.deleteActivity(a);
         }
 
 }

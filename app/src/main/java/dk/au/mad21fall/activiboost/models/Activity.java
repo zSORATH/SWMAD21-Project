@@ -17,6 +17,7 @@ public class Activity {
     private Map<String, String> patients;
     private Map<String, String> caregivers;
     private String description;
+    private Boolean userInActivity = false;
 
 
     public Activity(){}
@@ -80,4 +81,11 @@ public class Activity {
         this.id = id;
     }
 
+    public Boolean getUserInActivity() {
+        return userInActivity;
+    }
+
+    public void setUserInActivity(Boolean userInActivity) {
+        this.userInActivity = userInActivity;
+    }
 }
