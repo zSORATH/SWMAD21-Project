@@ -2,6 +2,8 @@ package dk.au.mad21fall.activiboost.ui.patient.diary;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,22 +18,31 @@ import dk.au.mad21fall.activiboost.models.Diary;
 import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.repository.Repository;
 
-public class DiaryViewModel extends ViewModel {
+public class DiaryViewModel extends AndroidViewModel {
 
     private Repository repository;
 
     private LiveData<List<Diary>> diaries;
 
-    public DiaryViewModel() {
-    }
+    ListenableFuture<Diary> future;
 
-    public void CreateRepository(Application app){
-        repository = Repository.getInstance(app);  //get Repository singleton
+    //TODO: FJERN?
+    Diary diary;
+
+    public DiaryViewModel(@NonNull Application app) {
+        super(app);
+        repository = Repository.getInstance(getApplication());
         diaries = repository.getDiaries();
+
     }
 
     public LiveData<List<Diary>> GetDiaryLiveData(){
         return diaries;
+    }
+
+    //TODO: MÅSKE VIRKER DEN HER SLET IKKE...
+    public ListenableFuture<Diary> GetListenableFutureDiary(){
+        return future;
     }
 
     public Diary getDiary(int index){
@@ -40,6 +51,18 @@ public class DiaryViewModel extends ViewModel {
 
     public void addDiary(String content, int rating, String date){
         repository.addDiaryAsynch(content, rating, date);
+    }
+
+    public void updateDiary(Diary diary){
+        repository.updateDiaryAsynch(diary);
+
+        try {
+            diary = future.get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public Boolean isStored(String date){

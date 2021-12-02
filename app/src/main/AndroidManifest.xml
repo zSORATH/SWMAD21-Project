@@ -25,6 +25,9 @@
             android:name=".CaregiverMainActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.patient.diary.DiaryEditActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.shared.login.LoginActivity"
             android:exported="true"
             android:label="@string/app_name">

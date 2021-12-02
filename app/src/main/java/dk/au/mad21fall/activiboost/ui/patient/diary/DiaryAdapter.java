@@ -65,7 +65,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
         if (rating == SmileyRating.Type.GREAT.getRating()) {
             return R.drawable.ic_great;
         }
-        return 0;
+        return android.R.color.transparent;
     }
 
     @Override

@@ -2,6 +2,8 @@ package dk.au.mad21fall.activiboost.ui.patient.diary;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModel;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -11,17 +13,20 @@ import java.util.concurrent.ExecutionException;
 import dk.au.mad21fall.activiboost.models.Diary;
 import dk.au.mad21fall.activiboost.repository.Repository;
 
-public class DiaryEditViewModel extends ViewModel {
+public class DiaryEditViewModel extends AndroidViewModel {
 
     private Repository repository;
     ListenableFuture<Diary> future;
 
     Diary diary;
 
-    public void CreateEditRepository(Application app, String date){
-        repository = Repository.getInstance(app);  //get Repository singleton
-        future = repository.findDiaryAsynch(date);
+    public DiaryEditViewModel(@NonNull Application app) {
+        super(app);
+        repository = Repository.getInstance(getApplication());
+    }
 
+    public Diary getDiary(String date){
+        future = repository.findDiaryAsynch(date);
         try {
             diary = future.get();
         } catch (ExecutionException e) {
@@ -29,9 +34,6 @@ public class DiaryEditViewModel extends ViewModel {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public Diary getDiary(String date){
         return diary;
     }
 
