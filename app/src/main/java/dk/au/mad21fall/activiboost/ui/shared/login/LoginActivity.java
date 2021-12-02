@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
-                .setIsSmartLockEnabled(false)
+                .setIsSmartLockEnabled(true)
                 .build();
         signInLauncher.launch(signInIntent);
     }

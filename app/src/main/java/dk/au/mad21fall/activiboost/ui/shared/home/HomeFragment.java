@@ -21,21 +21,22 @@ public class HomeFragment extends Fragment {
     private HomeViewModel hmv;
     private FragmentHomeBinding binding;
     private String name;
+    private String uid;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        hmv =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        hmv = new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        hmv.setUid(getActivity().getIntent().getStringExtra("user"));
+        uid = getArguments().getString("user");
+        hmv.setUid(uid);
 
         if (hmv.getUserType() == PATIENT) {
-            name = hmv.getPatient(hmv.getUid()).getName();
+            name = hmv.getPatient(uid).getName();
         } else {
-            name = hmv.getCaregiver(hmv.getUid()).getName();
+            name = hmv.getCaregiver(uid).getName();
         }
 
         final TextView textView = binding.textHome;

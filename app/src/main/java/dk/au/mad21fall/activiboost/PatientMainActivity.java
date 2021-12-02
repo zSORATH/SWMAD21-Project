@@ -12,7 +12,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import dk.au.mad21fall.activiboost.databinding.ActivityPatientMainBinding;
+import dk.au.mad21fall.activiboost.ui.caregiver.activities.CaregiverActivitiesFragment;
+import dk.au.mad21fall.activiboost.ui.caregiver.patients.PatientsFragment;
 import dk.au.mad21fall.activiboost.ui.patient.activities.PatientActivitiesFragment;
+import dk.au.mad21fall.activiboost.ui.patient.diary.DiaryFragment;
+import dk.au.mad21fall.activiboost.ui.shared.calendar.CalendarFragment;
+import dk.au.mad21fall.activiboost.ui.shared.home.HomeFragment;
 import dk.au.mad21fall.activiboost.weatherApi.WeatherApi;
 
 public class PatientMainActivity extends AppCompatActivity {
@@ -50,11 +55,18 @@ public class PatientMainActivity extends AppCompatActivity {
     void getUser() {
         api.getLocalWeather("aarhus", this);
 
-        PatientActivitiesFragment activitiesFragment = new PatientActivitiesFragment();
-
         uid = (String) getIntent().getSerializableExtra("user");
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", uid);
-        activitiesFragment.setArguments(bundle);
+
+        HomeFragment homeFragment = new HomeFragment();
+        CalendarFragment calendarFragment = new CalendarFragment();
+        DiaryFragment diaryFragment = new DiaryFragment();
+        PatientActivitiesFragment patientActivitiesFragment = new PatientActivitiesFragment();
+
+        homeFragment.setArguments(bundle);
+        calendarFragment.setArguments(bundle);
+        diaryFragment.setArguments(bundle);
+        patientActivitiesFragment.setArguments(bundle);
     }
 }
