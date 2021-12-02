@@ -18,7 +18,7 @@ public class Diary {
     // constructor
     public Diary(String content, int rating, String date) {
         this.content = content;
-        this.rating = -1;
+        this.rating = rating;
         this.date = date;
     }
 

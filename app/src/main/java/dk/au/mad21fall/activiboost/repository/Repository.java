@@ -84,6 +84,11 @@ public class Repository {
         return diaries;
     }
 
+    //TODO: TEST
+    public ListenableFuture<Diary> getDiaryAsynch(String date){
+        return db.diaryDAO().findDiary(date);
+    }
+
     //update Diary in database
     public void updateDiaryAsynch(Diary diary){
 

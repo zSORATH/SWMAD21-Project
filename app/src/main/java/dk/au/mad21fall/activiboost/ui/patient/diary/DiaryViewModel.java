@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import dk.au.mad21fall.activiboost.models.Diary;
-import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.repository.Repository;
 
 public class DiaryViewModel extends AndroidViewModel {
@@ -33,16 +32,10 @@ public class DiaryViewModel extends AndroidViewModel {
         super(app);
         repository = Repository.getInstance(getApplication());
         diaries = repository.getDiaries();
-
     }
 
     public LiveData<List<Diary>> GetDiaryLiveData(){
         return diaries;
-    }
-
-    //TODO: MÅSKE VIRKER DEN HER SLET IKKE...
-    public ListenableFuture<Diary> GetListenableFutureDiary(){
-        return future;
     }
 
     public Diary getDiary(int index){
@@ -54,7 +47,8 @@ public class DiaryViewModel extends AndroidViewModel {
     }
 
     public void updateDiary(Diary diary){
-        repository.updateDiaryAsynch(diary);
+        //repository.updateDiaryAsynch(diary);
+        future = repository.getDiaryAsynch(diary.getDate());
 
         try {
             diary = future.get();

@@ -66,18 +66,6 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
             diaryViewModel = new ViewModelProvider(this).get(DiaryViewModel.class);
         }
 
-        // This is from the "Room Demo Asynch" code provided in L5 in this course.
-        ListenableFuture<Diary> DiaryResult = diaryViewModel.GetListenableFutureDiary();
-        DiaryResult.addListener(() -> {
-            try {
-                diary = DiaryResult.get();
-                updateUI();
-            }
-            catch (Exception e) {
-                Log.d("DiaryFragment", "Error getting result");
-            }
-        }, ContextCompat.getMainExecutor(getContext()));
-
         // Updating the movies in the app upon any change
         diaryViewModel.GetDiaryLiveData().observe(getViewLifecycleOwner(), new Observer<List<Diary>>() {
             @Override
@@ -94,6 +82,7 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
         return root;
     }
 
+
     // This is from a post that Kasper made on Discord back in september
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),   //default contract
@@ -101,12 +90,11 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
                 @Override
                 public void onActivityResult(ActivityResult result) {   //result contains result code and data
                     if (result.getResultCode() == RESULT_OK) {
-                        diaryViewModel.updateDiary(diary);
+                        //diaryViewModel.updateDiary(diary);
                         //updateUI();
                     }
                 }
             });
-
     private void updateUI() {
 
         //TODO:

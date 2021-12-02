@@ -55,6 +55,7 @@ public class DiaryEditActivity extends AppCompatActivity {
 
         diary_edit_date = findViewById(R.id.diary_edit_date);
         diary_edit_textfield = findViewById(R.id.diary_edit_textfeld);
+        diary_edit_textfield.setText(diary.getContent());
 
         // Smiley rating is inspired by https://github.com/sujithkanna/SmileyRating
         smiley_rating = findViewById(R.id.smiley_rating);
@@ -94,12 +95,13 @@ public class DiaryEditActivity extends AppCompatActivity {
         });
     }
 
+
     private void cancel() {
         finish();
     }
 
     private void saveChanges() {
-        diary.setRating(rating);
+        //diary.setRating(rating);
         diary.setContent(diary_edit_textfield.getText().toString());
         diaryEditViewModel.setDiary(diary);
         setResult(RESULT_OK);
