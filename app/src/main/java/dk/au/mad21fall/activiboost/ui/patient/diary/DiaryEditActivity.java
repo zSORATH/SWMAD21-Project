@@ -3,6 +3,7 @@ package dk.au.mad21fall.activiboost.ui.patient.diary;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.hsalf.smilerating.SmileRating;
 import com.hsalf.smileyrating.SmileyRating;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import dk.au.mad21fall.activiboost.Constants;
 import dk.au.mad21fall.activiboost.R;
@@ -59,7 +63,15 @@ public class DiaryEditActivity extends AppCompatActivity {
 
         // Smiley rating is inspired by https://github.com/sujithkanna/SmileyRating
         smiley_rating = findViewById(R.id.smiley_rating);
-        smiley_rating.setRating(diary.getRating());
+
+        // To set the rating, a delay is added. Otherwise it will be stuck on lowest rating.
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                smiley_rating.setRating(diary.getRating(), true);
+            }
+        }, 100);
+
 
         smiley_rating.setSmileySelectedListener(new SmileyRating.OnSmileySelectedListener() {
             @Override
