@@ -76,7 +76,7 @@
 
     <EditText
         android:id="@+id/txtAge"
-        android:layout_width="0dp"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -84,27 +84,19 @@
         android:inputType="number"
         android:maxLength="3"
         android:maxLines="1"
-        app:layout_constraintEnd_toEndOf="@+id/txtName"
         app:layout_constraintStart_toStartOf="@+id/txtName"
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
-    <CheckBox
-        android:id="@+id/checkPatient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/patient"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAge" />
-
-    <CheckBox
-        android:id="@+id/checkCaregiver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="72dp"
-        android:text="@string/caregiver"
+    <Spinner
+        android:id="@+id/spinnerUserType"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
+        android:entries="@array/user_types"
+        app:layout_constraintBottom_toBottomOf="@+id/txtAge"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAge" />
+        app:layout_constraintStart_toEndOf="@+id/txtAge"
+        app:layout_constraintTop_toTopOf="@+id/txtAge" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

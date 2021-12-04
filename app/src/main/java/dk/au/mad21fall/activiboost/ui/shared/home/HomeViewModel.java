@@ -76,7 +76,5 @@ public class HomeViewModel extends AndroidViewModel {
         return repository.findCaregiver(uid);
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
+    public void setUserType(String userType) { this.userType = userType; }
 }

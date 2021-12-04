@@ -299,7 +299,6 @@ public class Repository {
                 });
     }
 
-
     public void deleteActivity(Activity a){
         fdb.collection("activitySuggestions").document(a.getId())
                 .delete()
@@ -322,7 +321,7 @@ public class Repository {
         ArrayList<Patient> _patients = patients.getValue();
 
         for (Patient p : _patients) {
-            Log.d("TAG2", "Checking uid: " + uid + " with: " + p.getId());
+            Log.d(TAG2, "Checking uid: " + uid + " with: " + p.getId());
             if (p.getId() != null) {
                 if (p.getId().equals(uid)) {
                     return p;
@@ -332,12 +331,26 @@ public class Repository {
         return null;
     }
 
+    public boolean patientExists(String uid) {
+        ArrayList<Patient> _patients = patients.getValue();
+
+        for (Patient p : _patients) {
+            Log.d(TAG2, "Checking uid: " + uid + " with: " + p.getId());
+            if (p.getId() != null) {
+                if (p.getId().equals(uid)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // https://stackoverflow.com/questions/53332471/checking-if-a-document-exists-in-a-firestore-collection/53335711
     public Caregiver findCaregiver(String uid) {
         ArrayList<Caregiver> _caregivers = caregivers.getValue();
 
         for (Caregiver c : _caregivers) {
-            Log.d("TAG2", "Checking uid: " + uid + " with: " + c.getId());
+            Log.d(TAG2, "Checking uid: " + uid + " with: " + c.getId());
             if (c.getId() != null) {
                 if (c.getId().equals(uid)) {
                     return c;
@@ -346,6 +359,22 @@ public class Repository {
         }
         return null;
     }
+
+    public boolean caregiverExists(String uid) {
+        ArrayList<Caregiver> _caregivers = caregivers.getValue();
+
+        for (Caregiver c : _caregivers) {
+            Log.d(TAG2, "Checking uid: " + uid + " with: " + c.getId());
+            if (c.getId() != null) {
+                if (c.getId().equals(uid)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
 
     // Adapted from https://firebase.google.com/docs/firestore/manage-data/add-data#java
     public void addPatient(Map<String, Object> patient) {

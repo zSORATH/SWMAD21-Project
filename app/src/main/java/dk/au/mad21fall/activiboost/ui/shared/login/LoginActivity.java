@@ -118,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    // Authentication: https://firebase.google.com/docs/auth/android/firebaseui?authuser=0#java
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
@@ -160,6 +161,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // Authentication: https://firebase.google.com/docs/auth/android/firebaseui?authuser=0#java
     public void createSignInIntent() {
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(

@@ -6,28 +6,33 @@ import static dk.au.mad21fall.activiboost.Constants.PATIENT;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.Scanner;
 
 import dk.au.mad21fall.activiboost.R;
+import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.ui.shared.login.signup.SignUpViewModel;
 
-public class SignUpDetailsActivity extends AppCompatActivity {
+public class SignUpDetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "SIGN UP DETAILS";
 
     private SignUpDetailsViewModel sdvm;
     private EditText txtName, txtAge;
     private Button btnCancel, btnCreate;
-    private CheckBox checkPatient, checkCaregiver;
+    private Spinner spinnerUserType;
     private String userType;
 
     @Override
@@ -42,15 +47,14 @@ public class SignUpDetailsActivity extends AppCompatActivity {
         txtName = findViewById(R.id.txtName);
         txtAge = findViewById(R.id.txtAge);
 
-        checkPatient = findViewById(R.id.checkPatient);
-        checkPatient.setOnClickListener(view -> {
-            onCheckBoxClicked(view);
-        });
+        // Adapted from: https://developer.android.com/guide/topics/ui/controls/spinner#java
+        spinnerUserType = findViewById(R.id.spinnerUserType);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.user_types, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUserType.setAdapter(adapter);
 
-        checkCaregiver = findViewById(R.id.checkCaregiver);
-        checkCaregiver.setOnClickListener(view -> {
-            onCheckBoxClicked(view);
-        });
+        spinnerUserType.setOnItemSelectedListener(this);
 
         btnCancel = findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(view -> {
@@ -104,32 +108,6 @@ public class SignUpDetailsActivity extends AppCompatActivity {
         }
     }
 
-    // Apapted from https://developer.android.com/guide/topics/ui/controls/checkbox#java
-    public void onCheckBoxClicked(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-        switch(view.getId()) {
-            case R.id.checkPatient:
-                if (checked) {
-                    if (userType == CAREGIVER) { userType = null; }
-                    else { userType = PATIENT; }
-                } else {
-                    if (userType == PATIENT) { userType = null; }
-                    else { userType = CAREGIVER; }
-                }
-                break;
-            case R.id.checkCaregiver:
-                if (checked) {
-                    if (userType == PATIENT) { userType = null; }
-                    else { userType = CAREGIVER; }
-                } else {
-                    if (userType == CAREGIVER) { userType = null; }
-                    else { userType = PATIENT; }
-                }
-                break;
-        }
-        Log.d(TAG, "Usertype is " + userType);
-    }
-
     public boolean isNameAndAgeValid(String name, String age) {
         Toast toast;
         if (name == null || age == null || name.equals("") || age.equals("")) {
@@ -155,5 +133,20 @@ public class SignUpDetailsActivity extends AppCompatActivity {
         if(!sc.hasNextInt(radix)) return false;
         sc.nextInt(radix);
         return !sc.hasNext();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if (adapterView.getItemAtPosition(i) == "Patient") {
+            userType = PATIENT;
+        } else {
+            userType = CAREGIVER;
+        }
+        Log.d(TAG, "User type: " + userType);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        userType = null;
     }
 }
