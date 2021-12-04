@@ -55,6 +55,8 @@
     <string name="caregiver">Caregiver</string>
     <string name="addActivityBtn">Add activity</string>
     <string name="back">Back</string>
+    <string name="my_calendar">My calendar</string>
+    <string name="upcoming_activities">Upcoming activities:</string>
 
 
 </resources>
