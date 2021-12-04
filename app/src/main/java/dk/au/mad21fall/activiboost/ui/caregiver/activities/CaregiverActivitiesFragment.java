@@ -151,6 +151,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription())
                 .setPositiveButton(R.string.addBtn, (dialogInterface, i) -> {openAddActivtiy(a);})
+                .setNeutralButton(R.string.back, (dialogInterface, i) -> {})
                 .setNegativeButton(R.string.deleteBtn, (dialogInterface, i) -> {deleteSugActivity(a);});
         builder.create().show();
     }

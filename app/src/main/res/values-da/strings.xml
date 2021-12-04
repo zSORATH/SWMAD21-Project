@@ -49,6 +49,7 @@
     <string name="caregiver">Personale</string>
     <string name="activityAdded">Aktivitet tilføjet!</string>
     <string name="addActivityBtn">Tilføj aktivitet</string>
+    <string name="back">Tilbage</string>
 
 
 </resources>

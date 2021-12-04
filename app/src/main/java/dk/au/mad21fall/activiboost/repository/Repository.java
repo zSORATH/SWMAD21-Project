@@ -206,9 +206,16 @@ public class Repository {
 
     // Method from firebase: https://firebase.google.com/docs/firestore/manage-data/add-data#java_20
     public void updateActivity(String type, Activity a){
+        Map<String, String> c = new HashMap<>();
+        if (type.equals("caregivers")){
+            c = a.getCaregivers();
+        }
+        if(type.equals("patients")){
+            c = a.getPatients();
+        }
         DocumentReference docRef = fdb.collection("activities").document(a.getId());
         docRef
-                .update(type, a.getPatients())
+                .update(type, c)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
