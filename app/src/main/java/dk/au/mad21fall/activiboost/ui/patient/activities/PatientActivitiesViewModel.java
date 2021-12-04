@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,7 +29,9 @@ public class PatientActivitiesViewModel extends AndroidViewModel {
             repository = Repository.getInstance(getApplication());
             activities = repository.getActivities();
 
+
         }
+
 
         public LiveData<Patient> getUser(String userId){
             if(patient == null){
@@ -60,6 +63,7 @@ public class PatientActivitiesViewModel extends AndroidViewModel {
             //
             Date today = Calendar.getInstance().getTime();
             //compare dates from: https://www.guru99.com/java-date.html
+            // for in map: https://www.geeksforgeeks.org/iterate-map-java/
             for(Activity a : activities.getValue()){
                 if(a.getPatients().containsKey(userId) && a.getTime().compareTo(today)>=0){
                     myas.add(a);
@@ -72,8 +76,8 @@ public class PatientActivitiesViewModel extends AndroidViewModel {
             lActivities.setValue(as);
         }
 
-        public void addUserToActivity(String userId, Activity a){
-            repository.updatePatientsActivity(userId, a);
+        public void addUserToActivity(Activity a){
+            repository.updateActivity("patients", a);
         }
 
 }

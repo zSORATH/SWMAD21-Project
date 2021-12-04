@@ -147,6 +147,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
     //show a dialogue
     private void showMyDialogue(Activity a){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setIcon(R.drawable.ic_activities)
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription())
                 .setPositiveButton(R.string.addBtn, (dialogInterface, i) -> {openAddActivtiy(a);})
@@ -166,13 +167,13 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
 
     private void showDialogue(Activity a){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setIcon(R.drawable.ic_activities)
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription() + "\n\n" +
                         getText(R.string.time) +" " + a.getTime() + "\n\n" +
                         getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
                         getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
-                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
-                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {});
         builder.create().show();
     }
 
@@ -181,7 +182,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         Map<String, String> caregivers = a.getCaregivers();
         caregivers.put(userId,caregiver.getValue().getName());
         a.setCaregivers(caregivers);
-        activitiesViewModel.addUserToActivity(userId,a);
+        activitiesViewModel.addUserToActivity(a);
         getActivities();
     }
 
@@ -190,7 +191,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         Map<String, String> caregivers = a.getCaregivers();
         caregivers.remove(userId);
         a.setCaregivers(caregivers);
-        activitiesViewModel.addUserToActivity(userId,a);
+        activitiesViewModel.addUserToActivity(a);
         getActivities();
     }
 
@@ -219,7 +220,9 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
                     if (result.getResultCode() == RESULT_OK) {
                         Intent data = result.getData();
                         Bundle b = data.getExtras();
-                        deleteSugActivity(sa);
+                        if(sa!=null) {
+                            deleteSugActivity(sa);
+                        }
                     }
                 }
             });

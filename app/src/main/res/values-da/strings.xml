@@ -5,18 +5,18 @@
     <string name="title_calendar">Calendar</string>
     <string name="title_diary">Diary</string>
     <string name="title_patients">Patients</string>
-    <string name="title_activities">Activities</string>
-    <string name="title_suggest">Suggest an activity</string>
-    <string name="title_add">Add activities</string>
+    <string name="title_activities">Aktiviteter</string>
+    <string name="title_suggest">Foreslå aktivitet</string>
+    <string name="title_add">Tilføj aktivitet</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nameTxt">participants</string>
     <string name="insuranceTxt">time</string>
     <string name="diary_date">00-00-0000</string>
     <string name="diary_entry">Diary entry</string>
     <string name="button_add_diary">Add New Diary</string>
-    <string name="activitySignupBtn">Sign up</string>
+    <string name="activitySignupBtn">Tilmeld</string>
     <string name="ok">Ok</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Annuller</string>
     <string name="myActivities">Mine aktiviteter</string>
     <string name="sugActivities">Foreslåede aktiviteter</string>
     <string name="Activities">Aktiviteter</string>
@@ -38,7 +38,7 @@
     <string name="caregivers">Personale: </string>
     <string name="time">Tid: </string>
     <string name="attendingBtn">Deltager</string>
-    <string name="loginSignUp">Sign Up</string>
+    <string name="loginSignUp">Tilmeld</string>
     <string name="login" />
     <string name="password">Password</string>
     <string name="next">Next</string>
@@ -47,7 +47,7 @@
     <string name="age">Age:</string>
     <string name="patient">Patient</string>
     <string name="caregiver">Personale</string>
-    <string name="activityAdded">Activity added!</string>
+    <string name="activityAdded">Aktivitet tilføjet!</string>
     <string name="addActivityBtn">Tilføj aktivitet</string>
 
 

@@ -9,7 +9,6 @@ import java.util.Map;
 @Entity
 public class Patient {
 
-    @PrimaryKey(autoGenerate = true)
     private int pid;
 
     private String name;

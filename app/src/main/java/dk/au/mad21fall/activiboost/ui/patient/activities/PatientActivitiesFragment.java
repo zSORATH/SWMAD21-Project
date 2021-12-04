@@ -41,7 +41,6 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
 
     private PatientActivitiesViewModel activitiesViewModel;
     private FragmentPatientActivitiesBinding binding;
-    private String uid;
     private Intent intent;
     private TextView firstTextView, secondTextView;
     private ActivitiesAdapter activitiesAdapter;
@@ -64,8 +63,6 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
 
         userId = (String) getActivity().getIntent().getSerializableExtra("user");
 
-        //activities = new ArrayList<Activity>();
-        //myActivities = new ArrayList<Activity>();
         firstTextView = binding.activityTextView1;
         firstTextView.setText(R.string.myActivities);
         secondTextView = binding.activityTextView2;
@@ -156,7 +153,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         Map<String, String> patients = a.getPatients();
         patients.put(patient.getValue().getId(),patient.getValue().getName());
         a.setPatients(patients);
-        activitiesViewModel.addUserToActivity(userId,a);
+        activitiesViewModel.addUserToActivity(a);
         getActivities();
     }
 
@@ -164,6 +161,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
     private void showMyDialogue(Activity a){
         //create a dialogue popup - and show it
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setIcon(R.drawable.ic_activities)
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription() + "\n\n" +
                         getText(R.string.time) +" " + a.getTime() + "\n\n" +
@@ -177,6 +175,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
     private void showDialogue(Activity a){
         //create a dialogue popup - and show it
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setIcon(R.drawable.ic_activities)
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription() + "\n\n" +
                         getText(R.string.time) +" " + a.getTime() + "\n\n" +
@@ -192,7 +191,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         Map<String, String> patients = a.getPatients();
         patients.remove(userId);
         a.setPatients(patients);
-        activitiesViewModel.addUserToActivity(userId,a);
+        activitiesViewModel.addUserToActivity(a);
         getActivities();
     }
 

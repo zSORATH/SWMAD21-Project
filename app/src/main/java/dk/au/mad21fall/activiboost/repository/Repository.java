@@ -68,9 +68,7 @@ public class Repository {
         loadData("patients", "p");
         loadData("caregivers", "c");
         loadData("activities", "a");
-        loadData("activitySuggestions", "s");
-        loadActivityPaticipants("p");
-    }
+        loadData("activitySuggestions", "s"); }
 
     public MutableLiveData<ArrayList<Patient>> getPatients() {
         return patients;
@@ -206,37 +204,11 @@ public class Repository {
                 });
     }
 
-    // method from: https://firebase.google.com/docs/firestore/query-data/listen
-    private void loadActivityPaticipants(String type){
-        fdb.collection("activities").document("000001").collection("activitypatients")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot valueg, @Nullable FirebaseFirestoreException error) {
-                        if(valueg != null && !valueg.isEmpty()){
-                            if(type.equals("p")) {
-                                ArrayList<Patient> updatedPatients = new ArrayList<>();
-                                for (DocumentSnapshot docg : valueg.getDocuments()) {
-                                    Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
-                                    Patient p = docg.toObject(Patient.class);
-                                    if (p != null) {
-                                        updatedPatients.add(p);
-                                    }
-                                }
-                                if (activitypatients == null) {
-                                    activitypatients = new MutableLiveData<ArrayList<Patient>>();
-                                }
-                                activitypatients.setValue(updatedPatients);
-                            }
-                        }
-            }
-        });
-    }
-
     // Method from firebase: https://firebase.google.com/docs/firestore/manage-data/add-data#java_20
-    public void updatePatientsActivity(String userid, Activity a){
+    public void updateActivity(String type, Activity a){
         DocumentReference docRef = fdb.collection("activities").document(a.getId());
         docRef
-                .update("patients", a.getPatients())
+                .update(type, a.getPatients())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -249,30 +221,8 @@ public class Repository {
                         Log.w(TAG, "Error updating document", e);
                     }
                 });
-
-
     }
 
-    // Method from firebase: https://firebase.google.com/docs/firestore/manage-data/add-data#java_20
-    public void updateCaregiverActivity(String userid, Activity a){
-        DocumentReference docRef = fdb.collection("activities").document(a.getId());
-        docRef
-                .update("caregivers", a.getCaregivers())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully updated!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error updating document", e);
-                    }
-                });
-
-
-    }
 
     // Method from firebase: https://firebase.google.com/docs/firestore/manage-data/add-data#java_20
     public void suggestActivity(String collectionName, Activity a){

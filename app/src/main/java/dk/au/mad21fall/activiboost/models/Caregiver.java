@@ -4,7 +4,6 @@ import androidx.room.PrimaryKey;
 
 public class Caregiver {
 
-    @PrimaryKey(autoGenerate = true)
     private int cid;
 
     private String name;
