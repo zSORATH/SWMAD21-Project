@@ -5,10 +5,13 @@ import static android.app.Activity.RESULT_OK;
 import android.content.Intent;
 import  android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +56,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
     private ArrayList<Activity> activities, myactivities;
     private Button suggestBtn;
     private String userId;
+    private EditText searchString;
 
 
 
@@ -65,6 +69,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
 
         userId = (String) getActivity().getIntent().getSerializableExtra("user");
 
+       searchString = binding.editTextSearch;
         firstTextView = binding.activityTextView1;
         firstTextView.setText(R.string.myActivities);
         secondTextView = binding.activityTextView2;
@@ -80,6 +85,23 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         rcvMyActivities.setAdapter(myActivitiesAdapter);
 
         getActivities();
+
+        searchString.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                activitiesAdapter.updateActivitiesList(activitiesViewModel.getActivitiesForString(userId, s.toString()).getValue(), "p");
+            }
+        });
 
         suggestBtn = binding.btnAddActivity;
         suggestBtn.setOnClickListener(new View.OnClickListener() {
