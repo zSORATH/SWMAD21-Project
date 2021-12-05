@@ -20,7 +20,17 @@
         <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_patient_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_diary.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Pernille/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/patientitem.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout-land/activity_login.xml" value="0.18033509700176367" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout-land/activity_suggest.xml" value="0.18033509700176367" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout-sw600dp/activity_login.xml" value="0.11153846153846154" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout-sw600dp/activity_suggest.xml" value="0.11153846153846154" />
         <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_caregiver_main.xml" value="0.23981481481481481" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_login.xml" value="0.23981481481481481" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_sign_up_details.xml" value="0.15760869565217392" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activity_suggest.xml" value="0.15760869565217392" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/activitypatientitem.xml" value="0.15760869565217392" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/diaryitem.xml" value="0.23981481481481481" />
+        <entry key="..\:/Users/jonas/AndroidStudioProjects/SWMAD21-Project/app/src/main/res/layout/fragment_calendar.xml" value="0.23981481481481481" />
       </map>
     </option>
   </component>

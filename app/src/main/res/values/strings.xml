@@ -79,4 +79,10 @@
     <string name="no_upcoming_activities">You have no upcoming activies.</string>
     <string name="user_created">User succesfully created!</string>
     <string name="login_cancelled">Login cancelled</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="fill_in_email_password">Please fill both email and password</string>
+    <string name="pass_min_length">Password should be at least 6 characters</string>
+    <string name="fill_in_name_age">Please fill both name and age</string>
+    <string name="whole_number_age">Please enter age as a whole number</string>
+    <string name="login_failed">Login failed</string>
 </resources>

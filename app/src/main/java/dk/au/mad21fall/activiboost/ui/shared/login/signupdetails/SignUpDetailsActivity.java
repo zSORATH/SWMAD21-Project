@@ -43,7 +43,7 @@ public class SignUpDetailsActivity extends AppCompatActivity implements AdapterV
 
         sdvm = new ViewModelProvider(this).get(SignUpDetailsViewModel.class);
 
-        getSupportActionBar().setTitle("Sign up");
+        getSupportActionBar().setTitle(getText(R.string.sign_up));
 
         txtName = findViewById(R.id.txtName);
         txtAge = findViewById(R.id.txtAge);
@@ -59,8 +59,6 @@ public class SignUpDetailsActivity extends AppCompatActivity implements AdapterV
 
         btnCancel = findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(view -> {
-            // TODO: Delete also when click back button in nav bar
-            sdvm.deleteUser();
             setResult(RESULT_CANCELED);
             finish();
         });
@@ -111,13 +109,13 @@ public class SignUpDetailsActivity extends AppCompatActivity implements AdapterV
         Toast toast;
         if (name == null || age == null || name.equals("") || age.equals("")) {
             toast = Toast.makeText(getApplicationContext(),
-                    "Please fill both name and age",
+                    getText(R.string.fill_in_name_age),
                     Toast.LENGTH_SHORT);
             toast.show();
             return false;
         } else if (!isInteger(age, 10)) {
             toast = Toast.makeText(getApplicationContext(),
-                    "Please enter age as a whole number",
+                    getText(R.string.whole_number_age),
                     Toast.LENGTH_SHORT);
             toast.show();
             return false;

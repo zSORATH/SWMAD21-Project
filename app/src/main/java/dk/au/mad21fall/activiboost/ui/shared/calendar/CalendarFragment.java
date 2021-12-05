@@ -187,7 +187,7 @@ public class CalendarFragment extends Fragment {
                         + getText(R.string.time) + " " + timeOfDay + "\n"
                         + getText(R.string.at_location) + ": " + closestActivity.getPlace();
             } else {
-                text += R.string.no_upcoming_activities;
+                text += getText(R.string.no_upcoming_activities);
             }
         } else {
             lblUpcoming.setText("");
