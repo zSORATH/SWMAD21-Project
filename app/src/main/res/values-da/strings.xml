@@ -32,7 +32,6 @@
     <string name="activitySuggested">Aktivitet foreslået!</string>
     <string name="textEmpty">Du skal skrive noget i felterne.</string>
     <string name="unsubscribe">Afmeld aktivitet</string>
-
     <string name="participants">Deltagere: </string>
     <string name="description">Beskrivelse: </string>
     <string name="caregivers">Personale: </string>
@@ -74,6 +73,9 @@
     <string name="deleteActivity">Slet aktivitet</string>
     <string name="name_">Navn:</string>
     <string name="age_">år</string>
-
-
+    <string name="activity">"Activity: "</string>
+    <string name="acitvity_today">You have an activity happening today!</string>
+    <string name="at_location">At location</string>
+    <string name="acitvity_upcoming">You have an activity you are attending in</string>
+    <string name="days">days</string>
 </resources>

@@ -2,6 +2,8 @@ package dk.au.mad21fall.activiboost.ui.shared.calendar;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+import static dk.au.mad21fall.activiboost.Constants.PATIENT;
+
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -48,8 +50,6 @@ public class CalendarFragment extends Fragment {
     private String userType;
     private ArrayList<Activity> activities = new ArrayList<>();
     private MutableLiveData<ArrayList<Activity>> lActivities = new MutableLiveData<>();
-    private List<Diary> diaries;
-    private LiveData<List<Diary>> lDiaries;
     private ArrayList<Activity> curActivities = new ArrayList<>();
 
     private CalendarViewModel cvm;
@@ -93,7 +93,7 @@ public class CalendarFragment extends Fragment {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setIcon(R.drawable.ic_activities)
                             .setTitle(date.toString())
-                            .setMessage("Activity: " + curActivities.get(0).getActivityName()
+                            .setMessage(R.string.activity + curActivities.get(0).getActivityName()
                                     + "\nDescription: " + curActivities.get(0).getDescription());
 
                     AlertDialog alert = builder.create();
@@ -134,55 +134,41 @@ public class CalendarFragment extends Fragment {
         long dateDiff = cvm.getDateDiff(today, closest);
         Log.d(TAG, "Day difference of today and closest activity: " + dateDiff);
 
-        String text;
+        String text = "";
         String timeOfDay;
         String minutes;
 
         cal.setTime(closest);
 
-        if (dateDiff == 0) {
-            minutes = "" + cal.get(Calendar.MINUTE);
-            if (minutes.length() < 2) {
-                minutes += "0";
+        if (userType == PATIENT) {
+            if (dateDiff == 0) {
+                minutes = "" + cal.get(Calendar.MINUTE);
+                if (minutes.length() < 2) {
+                    minutes += "0";
+                }
+                timeOfDay = "" + cal.get(Calendar.HOUR_OF_DAY) + "." + minutes;
+                text += R.string.acitvity_today + "\n"
+                        + closestActivity.getActivityName() + "\n"
+                        + getText(R.string.time) + " " + timeOfDay + "\n"
+                        + getText(R.string.at_location) + ": " + closestActivity.getPlace();
+            } else if (dateDiff > 0 && dateDiff < 1000) {
+                minutes = "" + cal.get(Calendar.MINUTE);
+                if (minutes.length() < 2) {
+                    minutes += "0";
+                }
+                timeOfDay = "" + cal.get(Calendar.HOUR_OF_DAY) + "." + minutes;
+                text += getText(R.string.acitvity_upcoming) + " " + dateDiff + " " + getText(R.string.days) + ":\n\n"
+                        + closestActivity.getActivityName() + "\n"
+                        + getText(R.string.time) + " " + timeOfDay + "\n"
+                        + getText(R.string.at_location) + ": " + closestActivity.getPlace();
+            } else {
+                text += "You have no upcoming activities you are attending.";
             }
-            timeOfDay = "" + cal.get(Calendar.HOUR_OF_DAY) + "." + minutes;
-            text = "You have an activity happening today!\n\n\"" + closestActivity.getActivityName() + "\" at " + timeOfDay + " o'clock.";
-        } else if (dateDiff > 0 && dateDiff < 1000) {
-            minutes = "" + cal.get(Calendar.MINUTE);
-            if (minutes.length() < 2) {
-                minutes += "0";
-            }
-            timeOfDay = "" + cal.get(Calendar.HOUR_OF_DAY) + "." + minutes;
-            text = "You are attending an activity in " + dateDiff + " days:\n\n\"" + closestActivity.getActivityName() + "\" at " + timeOfDay + " o'clock.";
         } else {
-            text = "You have no upcoming activities you are attending.";
+
         }
 
         txtUpcoming.setText(text);
-
-        // TODO: Figure out if we can add diaries to the calendar with Pernille
-        /*
-        lDiaries = cvm.getDiaries();
-        diaries = lDiaries.getValue();
-
-        for (Diary d : diaries) {
-            try {
-                cal.setTime(stringToDate(d.getDate()));
-            } catch (Exception e) {
-                Log.d(TAG, e.getLocalizedMessage());
-            }
-            calendarView.markDate(
-                    new DateData(cal.get(Calendar.YEAR), (cal.get(Calendar.MONTH)+1), cal.get(Calendar.DATE))
-                            .setMarkStyle(new MarkStyle(MarkStyle.DOT, Color.BLUE))
-            );
-        }
-         */
-    }
-
-    public static Date stringToDate(String string) throws Exception {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
-        Date date = formatter.parse(string);
-        return date;
     }
 
     @Override
@@ -190,38 +176,5 @@ public class CalendarFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-    /*
-    private boolean hasActivity(Date date) {
-        String _date, _aDate;
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        String year = "" + cal.get(Calendar.YEAR);
-        String month = "" + cal.get(Calendar.MONTH);
-        String day = "" + cal.get(Calendar.DAY_OF_MONTH);
-        if (month.equals("0")) {
-            month = "12";
-            year = "" + (cal.get(Calendar.YEAR) - 1);
-        }
-        _date = year + month + day;
-
-        for (Activity a : activities) {
-            cal.setTime(a.getTime());
-            _aDate = "" + cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH)+1) + cal.get(Calendar.DAY_OF_MONTH);
-            if (_date.equals(_aDate)) {
-                Log.d(TAG, "Activity found: " + a.getActivityName());
-                curActivity = a;
-                return true;
-            }
-        }
-        return false;
-    } */
-
-    /*
-    public static long getDifferenceDays(Date d1, Date d2) {
-        long diff = d2.getTime() - d1.getTime();
-        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-    }
-    */
 }
 

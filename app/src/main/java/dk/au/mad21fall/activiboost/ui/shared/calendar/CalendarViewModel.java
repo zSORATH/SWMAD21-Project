@@ -36,8 +36,6 @@ public class CalendarViewModel extends AndroidViewModel {
     private LiveData<ArrayList<Activity>> activities;
     private LiveData<List<Diary>> diaries;
     private MutableLiveData<ArrayList<Activity>> lActivities;
-    private MutableLiveData<Patient> patient;
-    private MutableLiveData<Caregiver> caregiver;
     private Calendar cal = Calendar.getInstance();
 
     public CalendarViewModel(@NonNull Application app) {
@@ -45,22 +43,6 @@ public class CalendarViewModel extends AndroidViewModel {
         repository = Repository.getInstance(getApplication());
         activities = repository.getActivities();
         diaries = repository.getDiaries();
-    }
-
-    public LiveData<Patient> getPatient(String uid){
-        if(patient == null){
-            patient = new MutableLiveData<Patient>();
-        }
-        patient.setValue(repository.findPatient(uid));
-        return patient;
-    }
-
-    public LiveData<Caregiver> getCaregiver(String uid){
-        if(caregiver == null){
-            caregiver = new MutableLiveData<Caregiver>();
-        }
-        caregiver.setValue(repository.findCaregiver(uid));
-        return caregiver;
     }
 
     public MutableLiveData<ArrayList<Activity>> getActivities(String uid) {
@@ -139,12 +121,5 @@ public class CalendarViewModel extends AndroidViewModel {
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
-    }
-
-    public LiveData<List<Diary>> getDiaries() {
-        if (diaries == null) {
-            diaries = new MutableLiveData<List<Diary>>();
-        }
-        return diaries;
     }
 }
