@@ -44,28 +44,5 @@ public class PatientMainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         Log.d(TAG, "Nav bar height: " + navView.getHeight());
-
-        setUser();
-    }
-
-    // TODO: Get intent in fragments correctly
-    // https://stackoverflow.com/questions/26939759/android-getintent-from-a-fragment
-    void setUser() {
-
-        uid = (String) getIntent().getSerializableExtra("user");
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("user", uid);
-
-        HomeFragment homeFragment = new HomeFragment();
-        /*CalendarFragment calendarFragment = new CalendarFragment();
-        DiaryFragment diaryFragment = new DiaryFragment();
-        PatientActivitiesFragment patientActivitiesFragment = new PatientActivitiesFragment();/*
-
-        homeFragment.setArguments(bundle);
-        /*calendarFragment.setArguments(bundle);
-        diaryFragment.setArguments(bundle);
-        patientActivitiesFragment.setArguments(bundle);*/
-
     }
 }

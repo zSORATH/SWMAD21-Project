@@ -37,6 +37,7 @@ import dk.au.mad21fall.activiboost.models.Activity;
 import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.services.NotificationsService;
 
+
 // This is inspired by "Code Demo / walkthrough : using Room (and SharedPreferences)" from lecture 4
 // And the "Room Demo Asynch" code provided in L5.
 public class Repository {
@@ -281,7 +282,7 @@ public class Repository {
         ArrayList<Patient> _patients = patients.getValue();
 
         for (Patient p : _patients) {
-            Log.d(TAG2, "Checking uid: " + uid + " with: " + p.getId());
+            Log.d(TAG2, "Checking patient uid: " + uid + " with: " + p.getId());
             if (p.getId() != null) {
                 if (p.getId().equals(uid)) {
                     return p;
@@ -295,7 +296,7 @@ public class Repository {
         ArrayList<Patient> _patients = patients.getValue();
 
         for (Patient p : _patients) {
-            Log.d(TAG2, "Checking uid: " + uid + " with: " + p.getId());
+            Log.d(TAG2, "Checking patient uid: " + uid + " with: " + p.getId());
             if (p.getId() != null) {
                 if (p.getId().equals(uid)) {
                     return true;
@@ -310,7 +311,7 @@ public class Repository {
         ArrayList<Caregiver> _caregivers = caregivers.getValue();
 
         for (Caregiver c : _caregivers) {
-            Log.d(TAG2, "Checking uid: " + uid + " with: " + c.getId());
+            Log.d(TAG2, "Checking caregiver uid: " + uid + " with: " + c.getId());
             if (c.getId() != null) {
                 if (c.getId().equals(uid)) {
                     return c;
@@ -324,7 +325,7 @@ public class Repository {
         ArrayList<Caregiver> _caregivers = caregivers.getValue();
 
         for (Caregiver c : _caregivers) {
-            Log.d(TAG2, "Checking uid: " + uid + " with: " + c.getId());
+            Log.d(TAG2, "Checking caregiver uid: " + uid + " with: " + c.getId());
             if (c.getId() != null) {
                 if (c.getId().equals(uid)) {
                     return true;
@@ -365,6 +366,11 @@ public class Repository {
                 Log.w(TAG, "Error writing document", e);
             }
         });
+    }
+
+    public void loadUsers() {
+        loadData("patients", "p");
+        loadData("caregivers", "c");
     }
 
     public void startNotificationService() {

@@ -5,10 +5,13 @@ import static android.app.Activity.RESULT_OK;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +62,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
     private LiveData<Caregiver> caregiver;
     private Button add;
     private Activity sa;
+    private EditText searchString;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         userId = (String) getActivity().getIntent().getSerializableExtra("user");
 
         add = binding.btnAdd;
+        searchString = binding.editTextCSearch;
 
         firstTextView = binding.sugActivitiesText;
         firstTextView.setText(R.string.sugActivities);
@@ -90,6 +95,24 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         rcvSugActivities.setAdapter(sugActivitiesAdapter);
 
         getActivities();
+
+        searchString.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                activitiesAdapter.updateActivitiesList(activitiesViewModel.getActivitiesForString(userId, s.toString()).getValue(), "p");
+            }
+        });
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override

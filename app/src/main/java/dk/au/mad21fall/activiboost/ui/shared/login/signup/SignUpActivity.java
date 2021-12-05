@@ -1,5 +1,7 @@
 package dk.au.mad21fall.activiboost.ui.shared.login.signup;
 
+import static dk.au.mad21fall.activiboost.Constants.SIGN_UP_CANCELED;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -25,6 +27,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.annotations.Nullable;
 
 import dk.au.mad21fall.activiboost.R;
@@ -47,7 +50,12 @@ public class SignUpActivity extends AppCompatActivity {
                     if (result.getResultCode() == RESULT_OK) {
                         setResult(RESULT_OK);
                     } else {
-                        setResult(RESULT_CANCELED);
+                        svm.deleteUser();
+                        Intent i = new Intent();
+                        Bundle b = new Bundle();
+                        b.putInt("from", SIGN_UP_CANCELED);
+                        i.putExtras(b);
+                        setResult(RESULT_CANCELED, i);
                     }
                     finish();
                 }
@@ -60,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         svm = new ViewModelProvider(this).get(SignUpViewModel.class);
 
-        getSupportActionBar().setTitle("Sign up");
+        getSupportActionBar().setTitle(getText(R.string.sign_up));
 
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPass);
@@ -85,12 +93,12 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (email == null || password == null || email.equals("") || password.equals("")) {
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "Please fill both email and password",
+                    getText(R.string.fill_in_email_password),
                     Toast.LENGTH_SHORT);
             toast.show();
         } else if (password.length() < 6) {
             Toast toast = Toast.makeText(getApplicationContext(),
-                    "Password should be at least 6 characters",
+                    getText(R.string.pass_min_length),
                     Toast.LENGTH_SHORT);
             toast.show();
         } else {

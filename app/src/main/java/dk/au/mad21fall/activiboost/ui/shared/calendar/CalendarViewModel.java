@@ -113,7 +113,6 @@ public class CalendarViewModel extends AndroidViewModel {
         LocalDate lDate1 = convertToLocalDateViaInstant(date1);
         LocalDate lDate2 = convertToLocalDateViaInstant(date2);
         return ChronoUnit.DAYS.between(lDate1, lDate2);
-
     }
 
     //From: https://www.baeldung.com/java-date-to-localdate-and-localdatetime

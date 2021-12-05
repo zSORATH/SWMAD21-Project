@@ -87,4 +87,5 @@
     <string name="x_activities_today">"Antal aktiviter i din kalender i dag: "</string>
     <string name="trythis">Har du set denne aktivitet?</string>
     <string name="suggestions">Jeg giver dig forslag til aktiviteter</string>
+    <string name="search">Indtast søgning</string>
 </resources>

@@ -51,10 +51,6 @@ public class SignUpDetailsViewModel extends AndroidViewModel {
         return age;
     }
 
-    public void deleteUser() {
-        user.delete();
-    }
-
     public void createPatient(String name, String age) {
         Map<String, Object> patient = new HashMap<>();
         int ageInt = Integer.parseInt(age);
