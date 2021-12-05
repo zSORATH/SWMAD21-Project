@@ -55,12 +55,15 @@
     <string name="diary_text_date">Dato</string>
     <string name="diary_edit_textfield_hint">Skriv dine noter her...</string>
     <string name="button_delete_diary">Slet</string>
-    <string name="button_diary_cancel">Annuler</string>
+    <string name="button_diary_cancel">Annuller</string>
     <string name="button_save">Gem</string>
-    <string name="place">Place</string>
-    <string name="add_activity_place">Enter place of the activity</string>
-    <string name="activityPlace">Place of activity</string>
-    <string name="cancelActivity">Cancel activity</string>
+    <string name="place">Sted: </string>
+    <string name="add_activity_place">Tilføj sted for aktiviteten </string>
+    <string name="activityPlace">Sted for aktivitet*</string>
+    <string name="cancelActivity">Aflys activity</string>
+    <string name="fillOut">Du skal udfylde de påkrævede felter</string>
+    <string name="caregiverUnsubscribed">You have unsubscribed from the activity</string>
+    <string name="caregiverAdded">You are now attending the activity</string>
 
 
 </resources>

@@ -70,11 +70,16 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!title.equals("") && !place.equals("") && !date.equals("")){
                 saveActivity();
                 Toast.makeText(getApplicationContext(), getText(R.string.activityAdded), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), getText(R.string.fillOut), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

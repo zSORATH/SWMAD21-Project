@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -155,6 +156,8 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         a.setPatients(patients);
         activitiesViewModel.addUserToActivity(a);
         getActivities();
+        Toast.makeText(getActivity(), getText(R.string.caregiverAdded), Toast.LENGTH_SHORT).show();
+
     }
 
     //show a dialogue
@@ -195,6 +198,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         a.setPatients(patients);
         activitiesViewModel.addUserToActivity(a);
         getActivities();
+        Toast.makeText(getActivity(), getText(R.string.caregiverUnsubscribed), Toast.LENGTH_SHORT).show();
     }
 
     private String listOf(Collection<String> c){
