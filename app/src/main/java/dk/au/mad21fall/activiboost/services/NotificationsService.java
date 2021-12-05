@@ -50,7 +50,6 @@ public class NotificationsService extends LifecycleService {
     public int onStartCommand(Intent intent, int flag, int startUid){
         super.onStartCommand(intent, flag, startUid);
 
-
         Application app = getApplication();
         repo = Repository.getInstance(app);
         repo.getActivities().observe(this, (Observer<List<Activity>>) _activities -> activities = _activities);
