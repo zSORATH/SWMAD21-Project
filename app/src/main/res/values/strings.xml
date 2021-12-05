@@ -42,7 +42,7 @@
     <string name="description">Description: </string>
     <string name="caregivers">Caregivers: </string>
     <string name="time">Time: </string>
-    <string name="attendingBtn">Attending</string>
+    <string name="attendingBtn">Unsubscribe</string>
     <string name="loginSignUp">Sign Up</string>
     <string name="login">Login</string>
     <string name="activityAdded">Activity added!</string>

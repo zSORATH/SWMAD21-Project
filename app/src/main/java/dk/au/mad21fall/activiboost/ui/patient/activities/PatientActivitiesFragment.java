@@ -181,7 +181,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
                         getText(R.string.time) +" " + a.getTime() + "\n\n" +
                         getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
                         getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
-                .setPositiveButton(R.string.addBtn, (dialogInterface, i) -> {addToActivity(a);})
+                .setPositiveButton(R.string.activitySignupBtn, (dialogInterface, i) -> {addToActivity(a);})
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
         builder.create().show();
     }
