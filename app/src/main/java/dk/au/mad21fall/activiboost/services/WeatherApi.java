@@ -32,7 +32,7 @@ public class WeatherApi {
 
     public WeatherApi(Context context, FragmentActivity activity, FusedLocationProviderClient fusedLocationProvided) {
         getLocalWeather(context,activity,fusedLocationProvided);
-        Log.e(TAG, "Called weatherAPI");
+        Log.d(TAG, "Called weatherAPI");
     }
 
     public void getLocalWeather(Context context, FragmentActivity activity, FusedLocationProviderClient fusedLocationProvided){

@@ -30,4 +30,12 @@ public class MainSM {
     private int grnd_level;
 
 
+    // City name
+    public void setTemp(double temp) {
+        this.temp = temp;
+    }
+    public double getTemp() {
+        return temp;
+    }
+
 }

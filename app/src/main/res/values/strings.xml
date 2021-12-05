@@ -35,7 +35,7 @@
     <string name="suggestActivityBtn">Suggest activity</string>
     <string name="activitySuggested">Activity suggested!</string>
     <string name="textEmpty">You need to write something in the fields.</string>
-    <string name="unsubscribe">Delete activity</string>
+    <string name="unsubscribe">Unsubscribe</string>
     <string name="participants">Participants: </string>
     <string name="description">Description: </string>
     <string name="caregivers">Caregivers: </string>
@@ -85,4 +85,7 @@
     <string name="fill_in_name_age">Please fill both name and age</string>
     <string name="whole_number_age">Please enter age as a whole number</string>
     <string name="login_failed">Login failed</string>
+    <!--    Home Fragment -->
+    <string name="loading">Loading data. Please hold on!</string>
+    <string name="weather_head">Your location\'s current weather</string>
 </resources>

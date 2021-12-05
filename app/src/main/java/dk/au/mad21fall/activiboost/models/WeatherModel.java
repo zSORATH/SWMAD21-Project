@@ -23,6 +23,7 @@ public class WeatherModel {
     @SerializedName("weather")
     @Expose
     private List<WeatherSM> weatherSM;
+    //private WeatherSM weatherSM;
     @SerializedName("base")
     @Expose
     private String base;
@@ -70,6 +71,23 @@ public class WeatherModel {
     }
     public String getName() {
         return name;
+    }
+
+
+    // WeatherSM
+    public void setWeatherSM(List<WeatherSM> weatherSM) {
+        this.weatherSM = weatherSM;
+    }
+    public List<WeatherSM> getWeatherSM() {
+        return weatherSM;
+    }
+
+    // MainSM
+    public void setMainSM(MainSM mainSM) {
+        this.mainSM = mainSM;
+    }
+    public MainSM getMainSM() {
+        return mainSM;
     }
 
 }

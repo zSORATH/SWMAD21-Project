@@ -71,7 +71,7 @@
     <string name="caregiverAdded">Du er nu tilmeldt aktiviteten</string>
     <string name="sureDelete">Sikker på du vil slette?</string>
     <string name="deleteActivity">Slet aktivitet</string>
-    <string name="activity">"AktivitetÆ "</string>
+    <string name="activity">"Aktivitet: "</string>
     <string name="acitvity_today">Du har en aktivitet i dag!</string>
     <string name="at_location">På lokation</string>
     <string name="acitvity_upcoming">"Du har en aktivitet du er tilmeldt om "</string>
@@ -86,4 +86,6 @@
     <string name="fill_in_name_age">Fyld både navn og alder ud</string>
     <string name="whole_number_age">Skriv alder som et helt tal</string>
     <string name="login_failed">Log ind fejlede</string>
+    <string name="loading">Henter data. Vent venligst!</string>
+    <string name="weather_head">Vejret lige nu</string>
 </resources>

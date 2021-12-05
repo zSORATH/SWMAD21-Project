@@ -88,4 +88,8 @@ dependencies {
 
     // Guava
     implementation 'androidx.room:room-guava:2.3.0'
+
+    //Glide for weather
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }
