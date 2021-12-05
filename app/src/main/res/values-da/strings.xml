@@ -82,4 +82,6 @@
     <string name="login_cancelled">Login cancelled</string>
     <string name="loading">Henter data. Vent venligst!</string>
     <string name="weather_head">Vejret lige nu</string>
+    <string name="home_activities">Dine aktiviteter i dag</string>
+    <string name="no_activities_today">Du har ingen aktiviteter i dag</string>
 </resources>

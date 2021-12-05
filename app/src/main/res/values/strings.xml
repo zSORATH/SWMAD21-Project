@@ -82,5 +82,8 @@
 <!--    Home Fragment -->
     <string name="loading">Loading data. Please hold on!</string>
     <string name="weather_head">Your location\'s current weather</string>
+    <string name="home_activities">Today\'s acivities:</string>
+    <string name="no_activities_today">You have no activities today.</string>
+
 
 </resources>
