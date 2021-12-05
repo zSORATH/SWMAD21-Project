@@ -174,10 +174,17 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription() + "\n\n" +
                         getText(R.string.time) +" " + a.getTime() + "\n\n" +
+                        getText(R.string.place) +" " + a.getPlace() + "\n\n" +
                         getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
                         getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
-                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {});
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
+                .setNegativeButton(R.string.cancelActivity, (dialogInterface, i) -> {cancelActivity(a);});
         builder.create().show();
+    }
+
+    private void cancelActivity(Activity a) {
+        activitiesViewModel.cancelActivity(a);
+        getActivities();
     }
 
     @Override

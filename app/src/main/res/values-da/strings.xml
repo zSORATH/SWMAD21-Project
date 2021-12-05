@@ -57,6 +57,10 @@
     <string name="button_delete_diary">Slet</string>
     <string name="button_diary_cancel">Annuler</string>
     <string name="button_save">Gem</string>
+    <string name="place">Place</string>
+    <string name="add_activity_place">Enter place of the activity</string>
+    <string name="activityPlace">Place of activity</string>
+    <string name="cancelActivity">Cancel activity</string>
 
 
 </resources>

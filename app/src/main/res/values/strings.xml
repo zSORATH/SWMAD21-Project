@@ -57,6 +57,10 @@
     <string name="back">Back</string>
     <string name="my_calendar">My calendar</string>
     <string name="upcoming_activities">Upcoming activities:</string>
+    <string name="place">Place</string>
+    <string name="add_activity_place">Enter place of the activity</string>
+    <string name="activityPlace">Place of activity</string>
+    <string name="cancelActivity">Cancel activity</string>
 
 
 </resources>

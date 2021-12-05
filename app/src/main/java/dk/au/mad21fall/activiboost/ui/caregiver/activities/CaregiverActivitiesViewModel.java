@@ -78,7 +78,10 @@ public class CaregiverActivitiesViewModel extends AndroidViewModel {
         }
 
         public void deleteSugActivity(Activity a){
-            repository.deleteActivity(a);
+            repository.deleteActivity("activitySuggestions", a);
         }
 
+        public void cancelActivity(Activity a) {
+            repository.deleteActivity("activities", a);
+        }
 }
