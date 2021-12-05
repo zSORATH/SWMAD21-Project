@@ -65,6 +65,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         binding = FragmentCaregiverActivitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // Get the userid from signed ind user
         userId = (String) getActivity().getIntent().getSerializableExtra("user");
 
         add = binding.btnAdd;
@@ -76,7 +77,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         activitiesAdapter = new ActivitiesAdapter(this);
         sugActivitiesAdapter = new MyActivitiesAdapter(this);
 
-        //Recyclerview for activities
+        //Recyclerview for activities - inspiration from Tracker demoh
         rcvActivities = binding.rcvActivities;
         rcvActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvActivities.setAdapter(activitiesAdapter);
@@ -144,7 +145,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         showMyDialogue(al.get(index));
     }
 
-    //show a dialogue
+    //Show dialogue - inspiration from Lists and grid demo
     private void showMyDialogue(Activity a){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setIcon(R.drawable.ic_activities)
@@ -166,6 +167,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         launcher.launch(intent);
     }
 
+    //Show dialogue - inspiration from Lists and grid demo
     private void showDialogue(Activity a){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setIcon(R.drawable.ic_activities)
