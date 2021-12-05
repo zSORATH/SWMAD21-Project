@@ -3,14 +3,12 @@ package dk.au.mad21fall.activiboost.ui.caregiver.patients;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Patient;
@@ -41,7 +39,6 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.Patien
 
     @Override
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
-        // Using glide inspired from the "Demo: Rick and Morty Gallery with Volley and Glide" from L6 in this course
         holder.patient_name.setText(R.string.name_+" "+patientList.get(position).getName()+",");
         holder.patient_age.setText(Integer.toString(patientList.get(position).getAge())+" "+R.string.age_);
     }

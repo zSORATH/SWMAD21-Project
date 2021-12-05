@@ -24,7 +24,7 @@
     <string name="button_delete_diary">Delete</string>
     <string name="button_diary_cancel">Cancel</string>
     <string name="button_save">Save</string>
-    />
+
     <string name="activityDescription">Enter description the activity</string>
     <string name="activityTitle">Enter title of activity*</string>
     <string name="suggestBtn">Suggest</string>

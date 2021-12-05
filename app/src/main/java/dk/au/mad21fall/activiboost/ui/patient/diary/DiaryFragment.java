@@ -2,15 +2,12 @@ package dk.au.mad21fall.activiboost.ui.patient.diary;
 
 import static android.app.Activity.RESULT_OK;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -18,16 +15,11 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.common.util.concurrent.ListenableFuture;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -101,18 +93,13 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
                 @Override
                 public void onActivityResult(ActivityResult result) {   //result contains result code and data
                     if (result.getResultCode() == RESULT_OK) {
-                        //diaryViewModel.updateDiary(diary);
-                        //updateUI();
+
                     }
                 }
             });
-    private void updateUI() {
-
-        //TODO:
-    }
 
 
-    //TODO: LAV STRINGS SÅ DET KAN VÆRE PÅ FLERE SPROG
+
     private void addDiary() {
         //Getting the date is inspired from https://stackoverflow.com/questions/8654990/how-can-i-get-current-date-in-android
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());

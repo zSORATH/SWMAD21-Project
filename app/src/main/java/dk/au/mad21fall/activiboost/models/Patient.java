@@ -3,7 +3,6 @@ package dk.au.mad21fall.activiboost.models;
 
 public class Patient {
 
-
     private String name;
     private int age;
     private String id;

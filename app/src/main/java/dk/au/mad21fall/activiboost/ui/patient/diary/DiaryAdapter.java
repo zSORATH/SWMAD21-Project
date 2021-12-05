@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hsalf.smileyrating.SmileyRating;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
