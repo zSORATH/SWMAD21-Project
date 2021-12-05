@@ -6,7 +6,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -39,7 +38,7 @@ public class NotificationsService extends LifecycleService {
     ExecutorService executorService;
     boolean started = false;
 
-    public NotificationsService(){};
+    public NotificationsService(){}
 
     @Override
     public void onCreate(){
@@ -54,22 +53,16 @@ public class NotificationsService extends LifecycleService {
 
         Application app = getApplication();
         repo = Repository.getInstance(app);
-        repo.getActivities().observe(this, new Observer<List<Activity>>() {
-            @Override
-            public void onChanged(List<Activity> _activities) {
-                activities = _activities;
-            }
-        });
+        repo.getActivities().observe(this, (Observer<List<Activity>>) _activities -> activities = _activities);
 
-        if(Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("ServiceID", "Notification Service", NotificationManager.IMPORTANCE_LOW);
-            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(channel);
-        }
+        Log.e(TAG, "Checking build versions");
+        NotificationChannel channel = new NotificationChannel("ServiceID", "Notification Service", NotificationManager.IMPORTANCE_LOW);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(channel);
 
         Notification notification = new NotificationCompat.Builder(this, "ServiceID")
                 .setContentTitle("ActiviBoost")
-                .setContentText("I'll give you suggestions to activities")
+                .setContentText(getResources().getString(R.string.suggestions))
                 .setSmallIcon(R.drawable.custom_icon_foreground)
 
                 .build();
@@ -97,27 +90,24 @@ public class NotificationsService extends LifecycleService {
             executorService = Executors.newSingleThreadExecutor();
         }
 
-        executorService.submit(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Log.d(TAG,"Sending a activity suggestion in notification.");
+        executorService.submit(() -> {
+            try {
 
-                    Thread.sleep(60000); //Show every minute
+                Thread.sleep(600); //Show every minute
 
-                    Activity activity = activities.get(randomActivity.nextInt(activities.size()));
-                    Notification notification = new NotificationCompat.Builder(application.getApplicationContext(), "ServiceID")
-                            .setContentTitle(activity.getActivityName())
-                            .setContentText(activity.getDescription())
-                            .setSmallIcon(R.drawable.custom_icon_foreground)
-                            .build();
-                }
-                catch (InterruptedException e){
-                    Log.e(TAG, "Exception.", e);
-                }
-                if(started){
-                    giveSuggestions();
-                }
+                Activity activity = activities.get(randomActivity.nextInt(activities.size()));
+                Log.e(TAG,"sending suggestion");
+                Notification notification = new NotificationCompat.Builder(application.getApplicationContext(), "ServiceID")
+                        .setContentTitle(getResources().getString(R.string.trythis))
+                        .setContentText(activity.getActivityName())
+                        .setSmallIcon(R.drawable.custom_icon_foreground)
+                        .build();
+            }
+            catch (InterruptedException e){
+                Log.e(TAG, "Exception.", e);
+            }
+            if(started){
+                giveSuggestions();
             }
         });
     }

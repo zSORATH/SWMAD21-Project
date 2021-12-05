@@ -84,6 +84,13 @@
     <string name="weather_head">Your location\'s current weather</string>
     <string name="home_activities">Today\'s acivities:</string>
     <string name="no_activities_today">You have no activities today.</string>
+    <string name="x_activities_today">Number of activities today: </string>
+
+<!--Notifications-->
+    <string name="trythis">Checkout this activity! </string>
+    <string name="suggestions">I\' give you suggestions </string>
+
+
 
 
 </resources>

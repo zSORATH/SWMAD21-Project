@@ -84,4 +84,7 @@
     <string name="weather_head">Vejret lige nu</string>
     <string name="home_activities">Dine aktiviteter i dag</string>
     <string name="no_activities_today">Du har ingen aktiviteter i dag</string>
+    <string name="x_activities_today">"Antal aktiviter i din kalender i dag: "</string>
+    <string name="trythis">Har du set denne aktivitet?</string>
+    <string name="suggestions">Jeg giver dig forslag til aktiviteter</string>
 </resources>

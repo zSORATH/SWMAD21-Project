@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
+import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Caregiver;
 import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.repository.Repository;
@@ -18,6 +18,7 @@ import dk.au.mad21fall.activiboost.repository.Repository;
 public class HomeViewModel extends AndroidViewModel {
 
     private MutableLiveData<String> mText;
+    private MutableLiveData<Integer> noAcitivities;
     private Repository repository;
     private MutableLiveData<String> uid = new MutableLiveData<String>();
     private String userType;
@@ -27,14 +28,12 @@ public class HomeViewModel extends AndroidViewModel {
         super(app);
         repository = Repository.getInstance(getApplication());
 
-        // OBS: Her er det nok bedre at bruge firebase til at get uid istedet for med intent men
-        // vær opmærksom på at man ikke er logget ind med firebase hvis man bruger fast login knap
-        // uid.setValue(FirebaseAuth.getInstance().getUid());
-        // setUserType();
+        repository.startNotificationService();
 
 
         mText = new MutableLiveData<>();
         mText.setValue("Logged in as ");
+
     }
 
     public LiveData<String> getText() {

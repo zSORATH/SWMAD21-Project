@@ -81,10 +81,13 @@ public class HomeFragment extends Fragment {
                 },1000);
             }  else {
                 weather = api.getWeather(context,activity,fusedLocationClient);
+                new Handler().postDelayed(() -> {
+                    Log.e(TAG, "Received weather: "+ weather.getName());
+                },500);
 
-                Log.e(TAG, "Received weather: "+ weather.getName());
+
             }
-        }, 1000);
+        }, 1200);
 
     }
 
@@ -101,15 +104,11 @@ public class HomeFragment extends Fragment {
 
         lActivities = cvm.getActivities(uid);
 
+        txtNoActivities = binding.textNoActivities;
         boolean dateHasActivity = cvm.dateHasActivity(date);
         if (dateHasActivity){
             activities = cvm.getActivitiesOnDate(date);
-            haAdapter = new HomeActivityAdapter();
-            rcvActivities = binding.rcvTodaysActivities;
-            rcvActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
-            rcvActivities.setAdapter(haAdapter);
-
-
+            txtNoActivities.setText(R.string.no_activities_today + activities.size());
             Log.e(TAG, "Got some activities!");
 
         } else {
@@ -168,13 +167,14 @@ public class HomeFragment extends Fragment {
 
         txtName = binding.textUserName;
         hmv.getText().observe(getViewLifecycleOwner(), s -> txtName.setText(s + name));
+
         txtCity = binding.textCity;
         txtCity.setText(weather.getName());
         txtWeatherType = binding.textWeatherType;
         txtWeatherType.setText(weatherSM.get(0).getMain());
         txtTemp = binding.textTemperatue;
-        String temperature = String.format("%.2f",(weather.getMainSM().getTemp()/100));
-        txtTemp.setText(""+temperature+ "\u2103");
+        String temperature = (String.format("%.2f",(weather.getMainSM().getTemp()/100))+ "\u2103");
+        txtTemp.setText(temperature);
     }
 
     @Override

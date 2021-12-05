@@ -28,7 +28,6 @@ public class LoginViewModel extends AndroidViewModel {
         super(app);
         repository = Repository.getInstance(getApplication());
 
-        repository.startNotificationService();
         // patients = repository.getPatients();
     }
 
