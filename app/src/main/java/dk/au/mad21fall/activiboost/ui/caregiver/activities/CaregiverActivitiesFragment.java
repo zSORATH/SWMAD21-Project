@@ -75,6 +75,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         userId = (String) getActivity().getIntent().getSerializableExtra("user");
 
         add = binding.btnAdd;
+        searchString = binding.editTextCSearch;
 
         firstTextView = binding.sugActivitiesText;
         firstTextView.setText(R.string.sugActivities);
