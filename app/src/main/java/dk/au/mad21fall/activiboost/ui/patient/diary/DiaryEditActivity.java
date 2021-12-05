@@ -58,6 +58,8 @@ public class DiaryEditActivity extends AppCompatActivity {
     private void setupUI() {
 
         diary_edit_date = findViewById(R.id.diary_edit_date);
+        diary_edit_date.setText(date);
+
         diary_edit_textfield = findViewById(R.id.diary_edit_textfeld);
         diary_edit_textfield.setText(diary.getContent());
 
