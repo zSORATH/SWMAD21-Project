@@ -71,8 +71,6 @@
     <string name="caregiverAdded">Du er nu tilmeldt aktiviteten</string>
     <string name="sureDelete">Sikker på du vil slette?</string>
     <string name="deleteActivity">Slet aktivitet</string>
-    <string name="name_">Navn:</string>
-    <string name="age_">år</string>
     <string name="activity">"Activity: "</string>
     <string name="acitvity_today">You have an activity happening today!</string>
     <string name="at_location">At location</string>

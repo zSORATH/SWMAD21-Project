@@ -70,8 +70,6 @@
     <string name="diary_dublicate_warning">You already added a diary for today.</string>
     <string name="sureDelete">Sure you want to delete?</string>
     <string name="deleteActivity">Delete activity</string>
-    <string name="name_">Name:</string>
-    <string name="age_">years</string>
     <string name="activity">"Activity: "</string>
     <string name="acitvity_today">You have an activity happening today!</string>
     <string name="at_location">At location</string>

@@ -42,8 +42,8 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.Patien
 
     @Override
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
-        holder.patient_name.setText(context.getText(R.string.name_) +" "+patientList.get(position).getName()+",");
-        holder.patient_age.setText(Integer.toString(patientList.get(position).getAge())+" "+R.string.age_);
+        holder.patient_name.setText(patientList.get(position).getName()+",");
+        holder.patient_age.setText(Integer.toString(patientList.get(position).getAge())+" "+context.getText(R.string.years));
     }
 
     @Override
