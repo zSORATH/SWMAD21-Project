@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import dk.au.mad21fall.activiboost.models.Activity;
@@ -72,6 +74,18 @@ public class PatientActivitiesViewModel extends AndroidViewModel {
                     as.add(a);
                 }
             }
+            //Sort list by date: https://stackoverflow.com/questions/5927109/sort-objects-in-arraylist-by-date?fbclid=IwAR0yDCv8PzWKIWuoiiGNrtA2OZo0byOTQaCsIUyYnspop8pAWjsN7rw2jOM
+            Collections.sort(as, new Comparator<Activity>() {
+                public int compare(Activity a1, Activity a2) {
+                    return a1.getTime().compareTo(a2.getTime());
+                }
+            });
+            //Sort list by date: https://stackoverflow.com/questions/5927109/sort-objects-in-arraylist-by-date?fbclid=IwAR0yDCv8PzWKIWuoiiGNrtA2OZo0byOTQaCsIUyYnspop8pAWjsN7rw2jOM
+            Collections.sort(myas, new Comparator<Activity>() {
+                public int compare(Activity a1, Activity a2) {
+                    return a1.getTime().compareTo(a2.getTime());
+                }
+            });
             lMyActivities.setValue(myas);
             lActivities.setValue(as);
         }
