@@ -1,6 +1,7 @@
 package dk.au.mad21fall.activiboost.repository;
 
 import android.app.Application;
+import android.content.Intent;
 import android.graphics.PathEffect;
 import android.util.Log;
 
@@ -34,6 +35,7 @@ import dk.au.mad21fall.activiboost.models.Diary;
 import dk.au.mad21fall.activiboost.database.DiaryDatabase;
 import dk.au.mad21fall.activiboost.models.Activity;
 import dk.au.mad21fall.activiboost.models.Patient;
+import dk.au.mad21fall.activiboost.services.NotificationsService;
 
 // This is inspired by "Code Demo / walkthrough : using Room (and SharedPreferences)" from lecture 4
 // And the "Room Demo Asynch" code provided in L5.
@@ -50,6 +52,8 @@ public class Repository {
     private MutableLiveData<ArrayList<Patient>> activitypatients;
     private MutableLiveData<ArrayList<Activity>> activities;
     private MutableLiveData<ArrayList<Activity>> suggestedactivities;
+
+    private Application currentApp;
 
     //Singleton pattern to make sure there is only one instance of the Repository in use
     public static Repository getInstance(Application app){
@@ -68,7 +72,10 @@ public class Repository {
         loadData("patients", "p");
         loadData("caregivers", "c");
         loadData("activities", "a");
-        loadData("activitySuggestions", "s"); }
+        loadData("activitySuggestions", "s");
+
+        currentApp = app; // Used for notification;
+    }
 
     public MutableLiveData<ArrayList<Patient>> getPatients() {
         return patients;
@@ -358,5 +365,11 @@ public class Repository {
                 Log.w(TAG, "Error writing document", e);
             }
         });
+    }
+
+    public void startNotificationService() {
+        Intent startNotificationService = new Intent(currentApp.getApplicationContext(), NotificationsService.class);
+        currentApp.getApplicationContext().startService(startNotificationService);
+        Log.e(TAG2, "Started Notifications.");
     }
 }
