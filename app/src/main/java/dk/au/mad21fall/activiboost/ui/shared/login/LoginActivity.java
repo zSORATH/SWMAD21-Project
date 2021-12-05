@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                 R.string.user_created,
                                 Toast.LENGTH_SHORT);
                         toast.show();
-                    } else if (from == SIGN_UP_CANCELED) {
+                    } else if (from == SIGN_UP_CANCELED) { // only show this Toast if signup is canceled
                         toast = Toast.makeText(getApplicationContext(),
                                 "Sign up was cancelled",
                                 Toast.LENGTH_SHORT);
