@@ -66,15 +66,15 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
 
         //TODO: DELETE
         // dummy diaries to show how the app works
-        diaryViewModel.addDiary("",-1, "20-11-2021");
-        diaryViewModel.addDiary("",-1, "27-11-2021");
-        diaryViewModel.addDiary("",-1, "28-11-2021");
-        diaryViewModel.addDiary("",-1, "29-11-2021");
-        diaryViewModel.addDiary("",-1, "30-11-2021");
-        diaryViewModel.addDiary("",-1, "01-12-2021");
-        diaryViewModel.addDiary("",-1, "02-12-2021");
-        diaryViewModel.addDiary("",-1, "03-12-2021");
-        diaryViewModel.addDiary("",-1, "04-12-2021");
+        //diaryViewModel.addDiary("",-1, "20-11-2021");
+        //diaryViewModel.addDiary("",-1, "27-11-2021");
+        //diaryViewModel.addDiary("",-1, "28-11-2021");
+        //diaryViewModel.addDiary("",-1, "29-11-2021");
+        //diaryViewModel.addDiary("",-1, "30-11-2021");
+        //diaryViewModel.addDiary("",-1, "01-12-2021");
+        //diaryViewModel.addDiary("",-1, "02-12-2021");
+        //diaryViewModel.addDiary("",-1, "03-12-2021");
+        //diaryViewModel.addDiary("",-1, "04-12-2021");
 
 
         button_add_diary = root.findViewById(R.id.button_add_diary);
