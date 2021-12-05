@@ -64,6 +64,12 @@
     <string name="fillOut">You need fill out all required fields</string>
     <string name="caregiverUnsubscribed">You have unsubscribed from the activity</string>
     <string name="caregiverAdded">You are now attending the activity</string>
+    <string name="years">years</string>
+    <string name="delete_diary">Delete Diary</string>
+    <string name="delete_verification">Are you sure you want to delete this diary entry?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="diary_dublicate_warning">You already added a diary for today.</string>
 
 
 </resources>

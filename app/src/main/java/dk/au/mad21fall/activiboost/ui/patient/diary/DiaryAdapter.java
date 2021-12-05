@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hsalf.smileyrating.SmileyRating;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dk.au.mad21fall.activiboost.R;
@@ -35,6 +36,9 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
 
     public void updateDiaryList(List<Diary> lists){
         diaryList = lists;
+        //to make new items appear at the top of the recyclerview
+        //inspired by https://stackoverflow.com/questions/32003402/add-items-to-top-of-recyclerview/48864224
+        Collections.reverse(diaryList);
         notifyDataSetChanged();
     }
 

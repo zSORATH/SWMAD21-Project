@@ -42,9 +42,8 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.Patien
     @Override
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
         // Using glide inspired from the "Demo: Rick and Morty Gallery with Volley and Glide" from L6 in this course
-        holder.patient_name.setText(patientList.get(position).getName());
-        holder.patient_age.setText(Integer.toString(patientList.get(position).getAge()));
-        holder.patient_id.setText("id: "+patientList.get(position).getId());
+        holder.patient_name.setText(R.string.name+" "+patientList.get(position).getName()+",");
+        holder.patient_age.setText(Integer.toString(patientList.get(position).getAge())+" "+R.string.years);
     }
 
     @Override
@@ -61,7 +60,7 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.Patien
 
         TextView patient_name;
         TextView patient_age;
-        TextView patient_id;
+
 
         //constructor
         public PatientViewHolder(@NonNull View itemView) {
@@ -69,7 +68,6 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.Patien
 
             patient_name = itemView.findViewById(R.id.patient_name);
             patient_age = itemView.findViewById(R.id.patient_age);
-            patient_id = itemView.findViewById(R.id.patient_id);
         }
     }
 

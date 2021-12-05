@@ -113,6 +113,7 @@ public class DiaryEditActivity extends AppCompatActivity {
     }
 
     private void saveChanges() {
+        //rating is set when the user selects a smiley, so no need to do it again here
         //diary.setRating(rating);
         diary.setContent(diary_edit_textfield.getText().toString());
         diaryEditViewModel.setDiary(diary);
@@ -120,14 +121,14 @@ public class DiaryEditActivity extends AppCompatActivity {
         finish();
     }
 
-    //TODO: LAV STRINGS TIL DENNE PROMT SÅ DER KAN VÆRE FLERE SPROG
+
     private void delete() {
         // Promt is inspired by https://stackoverflow.com/questions/2257963/how-to-show-a-dialog-to-confirm-that-the-user-wishes-to-exit-an-android-activity
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Delete Diary")
-                .setMessage("Are you sure you want to delete this diary entry?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                .setTitle(R.string.delete_diary)
+                .setMessage(R.string.delete_verification)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -136,7 +137,7 @@ public class DiaryEditActivity extends AppCompatActivity {
                     }
 
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(R.string.no, null)
                 .show();
     }
 }

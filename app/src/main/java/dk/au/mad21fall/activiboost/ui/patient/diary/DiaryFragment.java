@@ -48,8 +48,6 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
     private DiaryViewModel diaryViewModel;
     private FragmentDiaryBinding binding;
 
-    Diary diary;
-
     Button button_add_diary;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,6 +71,19 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
                 adapter.updateDiaryList(diaries);
             }
         });
+
+        //TODO: DELETE
+        // dummy diaries to show how the app works
+        diaryViewModel.addDiary("",-1, "20-11-2021");
+        diaryViewModel.addDiary("",-1, "27-11-2021");
+        diaryViewModel.addDiary("",-1, "28-11-2021");
+        diaryViewModel.addDiary("",-1, "29-11-2021");
+        diaryViewModel.addDiary("",-1, "30-11-2021");
+        diaryViewModel.addDiary("",-1, "01-12-2021");
+        diaryViewModel.addDiary("",-1, "02-12-2021");
+        diaryViewModel.addDiary("",-1, "03-12-2021");
+        diaryViewModel.addDiary("",-1, "04-12-2021");
+
 
         button_add_diary = root.findViewById(R.id.button_add_diary);
         button_add_diary.setOnClickListener(view -> {
@@ -100,13 +111,14 @@ public class DiaryFragment extends Fragment implements DiaryAdapter.IDiaryItemCl
         //TODO:
     }
 
+
     //TODO: LAV STRINGS SÅ DET KAN VÆRE PÅ FLERE SPROG
     private void addDiary() {
         //Getting the date is inspired from https://stackoverflow.com/questions/8654990/how-can-i-get-current-date-in-android
         String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
         if(diaryViewModel.isStored(currentDate)) {
-            Toast.makeText(getActivity(), "You already added a diary for today.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.diary_dublicate_warning, Toast.LENGTH_SHORT).show();
             return;
         }
         diaryViewModel.addDiary("",-1, currentDate);
