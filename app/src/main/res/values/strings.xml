@@ -35,7 +35,7 @@
     <string name="suggestActivityBtn">Suggest activity</string>
     <string name="activitySuggested">Activity suggested!</string>
     <string name="textEmpty">You need to write something in the fields.</string>
-    <string name="unsubscribe">Delete activity</string>
+    <string name="unsubscribe">Unsubscribe</string>
     <string name="participants">Participants: </string>
     <string name="description">Description: </string>
     <string name="caregivers">Caregivers: </string>
