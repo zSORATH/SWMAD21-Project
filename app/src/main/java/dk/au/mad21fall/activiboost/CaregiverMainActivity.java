@@ -37,19 +37,8 @@ public class CaregiverMainActivity extends AppCompatActivity {
                 .build();
         navView = binding.navView;
 
-        setUser();
-
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-    }
-
-    // https://stackoverflow.com/questions/26939759/android-getintent-from-a-fragment
-    void setUser() {
-
-
-        uid = (String) getIntent().getSerializableExtra("user");
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("user", uid);
     }
 }

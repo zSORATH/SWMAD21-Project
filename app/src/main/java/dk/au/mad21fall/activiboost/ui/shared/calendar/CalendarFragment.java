@@ -97,10 +97,19 @@ public class CalendarFragment extends Fragment {
                     String text = "";
 
                     for (Activity a : curActivities) {
-                        text +=  a.getTime() + "\n"
-                                + getText(R.string.activity) + a.getActivityName() + "\n"
+                        cal.setTime(a.getTime());
+                        String minutes = "" + cal.get(Calendar.MINUTE);
+                        if (minutes.length() < 2) {
+                            minutes = minutes + "0";
+                        }
+                        String hours = "" + cal.get(Calendar.HOUR_OF_DAY);
+                        if (hours.length() < 2) {
+                            hours = "0" + hours;
+                        }
+                        String timeOfDay = hours + ":" + minutes;
+                        text += a.getActivityName() + ", " + timeOfDay + "\n"
                                 + getText(R.string.description) + " " + a.getDescription() + "\n"
-                                + getText(R.string.at_location) + ": " + a.getPlace();
+                                + getText(R.string.place) + " " + a.getPlace();
                         if (curActivities.get(curActivities.size()-1) != a) {
                             text += "\n\n";
                         }
@@ -112,8 +121,8 @@ public class CalendarFragment extends Fragment {
                     }
 
                     String title = "" + getText(R.string.activities_for)
-                            + cal.get(Calendar.DAY_OF_MONTH) + "-"
-                            + month + "-"
+                            + cal.get(Calendar.DAY_OF_MONTH) + "/"
+                            + month + "/"
                             + cal.get(Calendar.YEAR);
 
                     builder.setIcon(R.drawable.ic_activities)
@@ -169,10 +178,14 @@ public class CalendarFragment extends Fragment {
             if (dateDiff == 0) {
                 minutes = "" + cal.get(Calendar.MINUTE);
                 if (minutes.length() < 2) {
-                    minutes += "0";
+                    minutes = "0" + minutes;
                 }
-                timeOfDay = "" + cal.get(Calendar.HOUR_OF_DAY) + "." + minutes;
-                text += R.string.acitvity_today + "\n"
+                String hours = "" + cal.get(Calendar.HOUR_OF_DAY);
+                if (hours.length() < 2) {
+                    hours = "0" + hours;
+                }
+                timeOfDay = hours + ":" + minutes;
+                text += getText(R.string.acitvity_today) + "\n"
                         + closestActivity.getActivityName() + "\n"
                         + getText(R.string.time) + " " + timeOfDay + "\n"
                         + getText(R.string.at_location) + ": " + closestActivity.getPlace();
@@ -181,15 +194,16 @@ public class CalendarFragment extends Fragment {
                 if (minutes.length() < 2) {
                     minutes += "0";
                 }
-                timeOfDay = "" + cal.get(Calendar.HOUR_OF_DAY) + "." + minutes;
+                timeOfDay = "" + cal.get(Calendar.HOUR_OF_DAY) + ":" + minutes;
                 text += getText(R.string.acitvity_upcoming) + " " + dateDiff + " " + getText(R.string.days) + ":\n\n"
                         + closestActivity.getActivityName() + "\n"
                         + getText(R.string.time) + " " + timeOfDay + "\n"
-                        + getText(R.string.at_location) + ": " + closestActivity.getPlace();
+                        + getText(R.string.place) + " " + closestActivity.getPlace();
             } else {
-                text += R.string.no_upcoming_activities;
+                text += getText(R.string.no_upcoming_activities);
             }
         } else {
+            // Caretaker doesn't see the upcoming activity widget
             lblUpcoming.setText("");
             text = "";
         }

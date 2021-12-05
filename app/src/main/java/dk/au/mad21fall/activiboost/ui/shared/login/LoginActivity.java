@@ -1,35 +1,26 @@
 package dk.au.mad21fall.activiboost.ui.shared.login;
 
-import static dk.au.mad21fall.activiboost.Constants.CAREGIVER;
-import static dk.au.mad21fall.activiboost.Constants.PATIENT;
+import static dk.au.mad21fall.activiboost.Constants.SIGN_UP_CANCELED;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
-import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Arrays;
@@ -38,8 +29,6 @@ import java.util.List;
 import dk.au.mad21fall.activiboost.CaregiverMainActivity;
 import dk.au.mad21fall.activiboost.PatientMainActivity;
 import dk.au.mad21fall.activiboost.R;
-import dk.au.mad21fall.activiboost.models.Caregiver;
-import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.ui.shared.login.signup.SignUpActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -66,17 +55,19 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     Toast toast;
+                    lvm.reinstateUsers();
+                    int from = getIntent().getIntExtra("from", -1);
                     if (result.getResultCode() == RESULT_OK) {
                         toast = Toast.makeText(getApplicationContext(),
                                 R.string.user_created,
                                 Toast.LENGTH_SHORT);
                         toast.show();
-                    } /*else if (result.getResultCode() == RESULT_CANCELED) {
+                    } else if (from == SIGN_UP_CANCELED) { // only show this Toast if signup is canceled
                         toast = Toast.makeText(getApplicationContext(),
                                 "Sign up was cancelled",
                                 Toast.LENGTH_SHORT);
                         toast.show();
-                    } */ // Commented out because it also shows on crashes
+                    }
                 }
             });
 
@@ -105,7 +96,6 @@ public class LoginActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putSerializable("user", "aDzD01WbDXcWS4zcx5boZpsrzDl1");
             intent.putExtras(bundle);
-
             launcher.launch(intent);
         });
 
@@ -122,44 +112,41 @@ public class LoginActivity extends AppCompatActivity {
     // Authentication: https://firebase.google.com/docs/auth/android/firebaseui?authuser=0#java
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
+        Context context = getApplicationContext();
+        String text = "";
         if (result.getResultCode() == RESULT_OK) {
             // Successfully signed in
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            Patient patient = lvm.getPatient(user.getUid());
-            Caregiver caregiver = lvm.getCaregiver(user.getUid());
-            if (patient != null) {
+
+            if (lvm.patientExists(user.getUid())) {
                 Log.d(TAG, "Patient login.");
                 Intent intent = new Intent(this, PatientMainActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("user", patient.getId());
+                bundle.putSerializable("user", user.getUid());
                 intent.putExtras(bundle);
                 launcher.launch(intent);
             } else
-            if (caregiver != null) {
+            if (lvm.caregiverExists(user.getUid())) {
                 Log.d(TAG, "Caregiver login.");
                 Intent intent = new Intent(this, CaregiverMainActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("user", caregiver.getId());
+                bundle.putSerializable("user", user.getUid());
                 intent.putExtras(bundle);
                 launcher.launch(intent);
             } else {
-                Context context = getApplicationContext();
-                Toast toast = Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT);
-                toast.show();
+                text = getText(R.string.login_failed).toString();
             }
         } else {
             // Failed login
-            Context context = getApplicationContext();
-            String text;
             if (response == null) {
-                text = getText(R.string.login_cancelled).toString();
+                text = getText(R.string.login_failed).toString();
             }
             else {
                 text = response.getError().getLocalizedMessage();
             }
-            Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.show();
         }
+        Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     // Authentication: https://firebase.google.com/docs/auth/android/firebaseui?authuser=0#java

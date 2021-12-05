@@ -9,7 +9,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="128dp"
         android:layout_height="64dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="256dp"
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,9 +19,10 @@
         android:id="@+id/btnLogin2"
         android:layout_width="128dp"
         android:layout_height="64dp"
-        android:text="C FAST LOGIN"
+        android:layout_marginTop="16dp"
+        android:text="P FAST LOGIN"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,20 +30,21 @@
         android:id="@+id/btnLogin3"
         android:layout_width="128dp"
         android:layout_height="64dp"
-        android:layout_marginTop="100dp"
-        android:text="P FAST LOGIN"
+        android:text="C FAST LOGIN"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin2" />
 
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="128dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="272dp"
+        android:layout_marginBottom="268dp"
         android:text="@string/loginSignUp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
