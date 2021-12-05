@@ -5,6 +5,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import static dk.au.mad21fall.activiboost.Constants.PATIENT;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,8 +57,8 @@ public class CalendarFragment extends Fragment {
     private FragmentCalendarBinding binding;
     private MCalendarView calendarView;
     private TextView txtUpcoming;
+    private TextView lblUpcoming;
 
-    // TODO: Localize text
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         cvm = new ViewModelProvider(this).get(CalendarViewModel.class);
@@ -67,6 +68,7 @@ public class CalendarFragment extends Fragment {
 
         calendarView = binding.calendar;
         txtUpcoming = binding.txtUpcoming;
+        lblUpcoming = binding.lblUpcoming;
 
         uid = (String) getActivity().getIntent().getSerializableExtra("user");
         userType = cvm.getUserType(uid);
@@ -95,19 +97,29 @@ public class CalendarFragment extends Fragment {
                     String text = "";
 
                     for (Activity a : curActivities) {
-                        text += getText(R.string.activity) + a.getActivityName() + "\n"
+                        text +=  a.getTime() + "\n"
+                                + getText(R.string.activity) + a.getActivityName() + "\n"
                                 + getText(R.string.description) + " " + a.getDescription() + "\n"
-                                + getText(R.string.time) + " " + a.getTime() + "\n\n";
+                                + getText(R.string.at_location) + ": " + a.getPlace();
+                        if (curActivities.get(curActivities.size()-1) != a) {
+                            text += "\n\n";
+                        }
+                    }
+
+                    int month = cal.get(Calendar.MONTH)+1;
+                    if (month == 0) {
+                        month = 12;
                     }
 
                     String title = "" + getText(R.string.activities_for)
                             + cal.get(Calendar.DAY_OF_MONTH) + "-"
-                            + cal.get(Calendar.MONTH) + "-"
+                            + month + "-"
                             + cal.get(Calendar.YEAR);
 
                     builder.setIcon(R.drawable.ic_activities)
                             .setTitle(title)
-                            .setMessage(text);
+                            .setMessage(text)
+                            .setNeutralButton(R.string.back, (dialogInterface, i) -> {});
 
                     AlertDialog alert = builder.create();
                     alert.show();
@@ -175,10 +187,11 @@ public class CalendarFragment extends Fragment {
                         + getText(R.string.time) + " " + timeOfDay + "\n"
                         + getText(R.string.at_location) + ": " + closestActivity.getPlace();
             } else {
-                text += "You have no upcoming activities you are attending.";
+                text += R.string.no_upcoming_activities;
             }
         } else {
-
+            lblUpcoming.setText("");
+            text = "";
         }
 
         txtUpcoming.setText(text);
