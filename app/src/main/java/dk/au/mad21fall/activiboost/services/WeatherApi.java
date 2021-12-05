@@ -1,4 +1,4 @@
-package dk.au.mad21fall.activiboost.weatherApi;
+package dk.au.mad21fall.activiboost.services;
 
 import android.app.Application;
 import android.content.Context;
@@ -26,15 +26,11 @@ public class WeatherApi {
     RequestQueue queue;
     String API_KEY = "e07d416ac8563e8c545e92ad7be56a77";
 
-    public void testUrl(String city){
-        String url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+API_KEY;
-        Log.d("TAG2", "Calling url: " + url);
-    }
 
-    public void getLocalWeather(String city, Context context){
+    public void getLocalWeather(String location, Context context){
 
-        String url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+API_KEY;
-        Log.d(TAG, "Calling url 2: " + url);
+        String url = "https://api.openweathermap.org/data/2.5/weather?"+location+"&appid="+API_KEY;
+        Log.d(TAG, "Coordinates: " + location);
         if (queue == null)
         {
             queue = Volley.newRequestQueue(context);
@@ -47,15 +43,10 @@ public class WeatherApi {
                         Log.d(TAG, "onResponse: " + response);
                         parseJson(response);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "That did not work!", error);
-            }
-        });
-        Log.e(TAG, "StringRequest: "+stringRequest);
+                }, error -> Log.e(TAG, "That did not work!", error));
+        Log.d(TAG, "StringRequest: "+stringRequest);
         queue.add(stringRequest);
-    };
+    }
 
     private void parseJson(String json) {
         Gson gson = new GsonBuilder().create();

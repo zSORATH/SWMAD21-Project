@@ -11,12 +11,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import dk.au.mad21fall.activiboost.databinding.ActivityCaregiverMainBinding;
-import dk.au.mad21fall.activiboost.ui.caregiver.activities.CaregiverActivitiesFragment;
-import dk.au.mad21fall.activiboost.ui.caregiver.patients.PatientsFragment;
-import dk.au.mad21fall.activiboost.ui.patient.activities.PatientActivitiesFragment;
-import dk.au.mad21fall.activiboost.ui.shared.calendar.CalendarFragment;
-import dk.au.mad21fall.activiboost.ui.shared.home.HomeFragment;
-import dk.au.mad21fall.activiboost.weatherApi.WeatherApi;
+import dk.au.mad21fall.activiboost.services.WeatherApi;
 
 public class CaregiverMainActivity extends AppCompatActivity {
 
@@ -28,7 +23,7 @@ public class CaregiverMainActivity extends AppCompatActivity {
     private NavController navController;
     private BottomNavigationView navView;
 
-    WeatherApi api = new WeatherApi();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +46,7 @@ public class CaregiverMainActivity extends AppCompatActivity {
 
     // https://stackoverflow.com/questions/26939759/android-getintent-from-a-fragment
     void setUser() {
-        api.getLocalWeather("aarhus", this);
+
 
         uid = (String) getIntent().getSerializableExtra("user");
         Bundle bundle = new Bundle();
