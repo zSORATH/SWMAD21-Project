@@ -1,8 +1,6 @@
 package dk.au.mad21fall.activiboost.models;
 
 
-
-
 public class Patient {
 
 

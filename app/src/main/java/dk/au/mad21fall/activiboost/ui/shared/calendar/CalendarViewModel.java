@@ -12,7 +12,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +38,7 @@ public class CalendarViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<Activity>> lActivities;
     private MutableLiveData<Patient> patient;
     private MutableLiveData<Caregiver> caregiver;
+    private Calendar cal = Calendar.getInstance();
 
     public CalendarViewModel(@NonNull Application app) {
         super(app);
@@ -59,7 +64,7 @@ public class CalendarViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<ArrayList<Activity>> getActivities(String uid) {
-        if(lActivities == null){
+        if (lActivities == null) {
             lActivities = new MutableLiveData<ArrayList<Activity>>();
         }
         ArrayList<Activity> as = new ArrayList<>();
@@ -91,6 +96,49 @@ public class CalendarViewModel extends AndroidViewModel {
             Log.d(TAG, "Couldn't find matching uid in database.");
             return null;
         }
+    }
+
+    public ArrayList<Activity> getActivitiesOnDate(Date date) {
+        if (lActivities == null) {
+            lActivities = new MutableLiveData<ArrayList<Activity>>();
+        }
+        ArrayList<Activity> as = new ArrayList<>();
+
+        for (Activity a : lActivities.getValue()) {
+            if (getDateDiff(a.getTime(), date) == 0) {
+                as.add(a);
+            }
+        }
+        return as;
+    }
+
+    public boolean dateHasActivity(Date date) {
+        if (lActivities == null) {
+            return false;
+        }
+
+        for (Activity a : lActivities.getValue()) {
+            Log.d(TAG, "Date difference: " + getDateDiff(date, a.getTime()));
+            if (getDateDiff(date, a.getTime()) == 0) {
+                Log.d(TAG, "Activity found: " + a.getActivityName());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public long getDateDiff(Date date1, Date date2) {
+        LocalDate lDate1 = convertToLocalDateViaInstant(date1);
+        LocalDate lDate2 = convertToLocalDateViaInstant(date2);
+        return ChronoUnit.DAYS.between(lDate1, lDate2);
+
+    }
+
+    //From: https://www.baeldung.com/java-date-to-localdate-and-localdatetime
+    public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 
     public LiveData<List<Diary>> getDiaries() {

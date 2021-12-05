@@ -4,25 +4,16 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.firestore.auth.User;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.RecyclerView;
 
 import dk.au.mad21fall.activiboost.databinding.ActivityPatientMainBinding;
-import dk.au.mad21fall.activiboost.ui.caregiver.activities.CaregiverActivitiesFragment;
-import dk.au.mad21fall.activiboost.ui.caregiver.patients.PatientsFragment;
-import dk.au.mad21fall.activiboost.ui.patient.activities.PatientActivitiesFragment;
-import dk.au.mad21fall.activiboost.ui.patient.diary.DiaryFragment;
-import dk.au.mad21fall.activiboost.ui.shared.calendar.CalendarFragment;
 import dk.au.mad21fall.activiboost.ui.shared.home.HomeFragment;
-import dk.au.mad21fall.activiboost.weatherApi.WeatherApi;
+import dk.au.mad21fall.activiboost.services.WeatherApi;
 
 public class PatientMainActivity extends AppCompatActivity {
 
@@ -34,7 +25,7 @@ public class PatientMainActivity extends AppCompatActivity {
     private NavController navController;
     private BottomNavigationView navView;
 
-    WeatherApi api = new WeatherApi();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +51,6 @@ public class PatientMainActivity extends AppCompatActivity {
     // TODO: Get intent in fragments correctly
     // https://stackoverflow.com/questions/26939759/android-getintent-from-a-fragment
     void setUser() {
-        api.getLocalWeather("aarhus", this);
 
         uid = (String) getIntent().getSerializableExtra("user");
 

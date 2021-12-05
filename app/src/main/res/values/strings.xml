@@ -70,6 +70,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="diary_dublicate_warning">You already added a diary for today.</string>
+    <string name="sureDelete">Sure you want to delete?</string>
+    <string name="deleteActivity">Delete activity</string>
 
 
 </resources>

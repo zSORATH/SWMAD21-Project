@@ -39,7 +39,7 @@
     <string name="time">Tid: </string>
     <string name="attendingBtn">Deltager</string>
     <string name="loginSignUp">Tilmeld</string>
-    <string name="login" />
+    <string name="login" >Login</string>
     <string name="password">Password</string>
     <string name="next">Next</string>
     <string name="create_user">Create User</string>
@@ -70,6 +70,8 @@
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="diary_dublicate_warning">Du har allerede tilføjet en dagbog i dag.</string>
+    <string name="sureDelete">Sure you want to delete?</string>
+    <string name="deleteActivity">Delete activity</string>
 
 
 </resources>

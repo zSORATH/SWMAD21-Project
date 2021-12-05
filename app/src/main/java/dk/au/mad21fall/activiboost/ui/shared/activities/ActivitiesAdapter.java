@@ -18,6 +18,7 @@ import dk.au.mad21fall.activiboost.models.Activity;
 public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.ActivitiesViewHolder>{
 
     private ArrayList<Activity> activitiesList;
+    private String listenerType;
     private ActivitiesAdapter.IActivitiesItemClickedListener activitiesListener;
 
 
@@ -25,8 +26,9 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
         this.activitiesListener = activitiesListener;
     }
 
-    public void updateActivitiesList(ArrayList<Activity> lists){
+    public void updateActivitiesList(ArrayList<Activity> lists, String type){
         activitiesList = lists;
+        listenerType = type;
         notifyDataSetChanged();
     }
 
@@ -39,23 +41,41 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
         v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activitypatientitem, parent, false);
         ActivitiesAdapter.ActivitiesViewHolder avh = new ActivitiesAdapter.ActivitiesViewHolder(v, activitiesListener);
         return avh;
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ActivitiesAdapter.ActivitiesViewHolder viewHolder, int position) {
         viewHolder.activitytitle.setText(activitiesList.get(position).getActivityName());
         viewHolder.activitytime.setText(activitiesList.get(position).getTime().toString());
-        if(activitiesList.get(position).getUserInActivity()){
-            viewHolder.signUpBtn.setText(R.string.attendingBtn);
+        if (listenerType.equals("c")) {
+            if (activitiesList.get(position).getUserInActivity() == true) {
+                viewHolder.signUpBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewHolder.alreadySignedUp();
+                        viewHolder.signUpBtn.setText(R.string.activitySignupBtn);
+                    }
+                });
+            }
+            if (activitiesList.get(position).getUserInActivity() == false) {
+                viewHolder.signUpBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewHolder.signUp();
+                        viewHolder.signUpBtn.setText(R.string.attendingBtn);
+                    }
+                });
+            }
+        }
+        if (listenerType.equals("p")){
             viewHolder.signUpBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    viewHolder.alreadySignedUp();
+                    viewHolder.signUp();
                 }
             });
         }
-
-
     }
 
     @Override
@@ -85,17 +105,12 @@ public class ActivitiesAdapter extends  RecyclerView.Adapter<ActivitiesAdapter.A
             activitiesListener = activitiesItemClickedListener;
             itemView.setOnClickListener(this);
 
-            //set click listener specifically for the invite button
-            signUpBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    activitiesListener.addToActivity(activitiesList.get(getAdapterPosition()));
-                }
-            });
-
         }
         private void alreadySignedUp(){
                     activitiesListener.unsubscribeActivity(activitiesList.get(getAdapterPosition()));
+        }
+        private void signUp(){
+            activitiesListener.addToActivity(activitiesList.get(getAdapterPosition()));
         }
 
         @Override

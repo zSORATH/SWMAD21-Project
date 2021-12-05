@@ -50,7 +50,7 @@ public class CalendarFragment extends Fragment {
     private MutableLiveData<ArrayList<Activity>> lActivities = new MutableLiveData<>();
     private List<Diary> diaries;
     private LiveData<List<Diary>> lDiaries;
-    private Activity curActivity;
+    private ArrayList<Activity> curActivities = new ArrayList<>();
 
     private CalendarViewModel cvm;
     private FragmentCalendarBinding binding;
@@ -77,19 +77,24 @@ public class CalendarFragment extends Fragment {
 
         calendarView.setOnDateClickListener(new OnDateClickListener() {
             @Override
-            public void onDateClick(View view, DateData date) {
+            public void onDateClick(View view, DateData dateData) {
                 Calendar cal = Calendar.getInstance();
-                cal.set(Calendar.YEAR, date.getYear());
-                cal.set(Calendar.MONTH, date.getMonth());
-                cal.set(Calendar.DAY_OF_MONTH, date.getDay());
-                Date _date = cal.getTime();
+                cal.set(Calendar.YEAR, dateData.getYear());
+                cal.set(Calendar.MONTH, dateData.getMonth()-1);
+                cal.set(Calendar.DAY_OF_MONTH, dateData.getDay());
+                Date date = cal.getTime();
 
-                if (hasActivity(_date)) {
+                Log.d(TAG, "Date clicked: " + date + " with activity: " + cvm.dateHasActivity(date));
+
+                boolean dateHasActivity = cvm.dateHasActivity(date);
+
+                if (dateHasActivity) {
+                    curActivities = cvm.getActivitiesOnDate(date);
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setIcon(R.drawable.ic_activities)
-                            .setTitle(_date.toString())
-                            .setMessage("Activity: " + curActivity.getActivityName()
-                                    + "\nDescription: " + curActivity.getDescription());
+                            .setTitle(date.toString())
+                            .setMessage("Activity: " + curActivities.get(0).getActivityName()
+                                    + "\nDescription: " + curActivities.get(0).getDescription());
 
                     AlertDialog alert = builder.create();
                     alert.show();
@@ -100,38 +105,6 @@ public class CalendarFragment extends Fragment {
         return root;
     }
 
-    private boolean hasActivity(Date date) {
-        String _date, _aDate;
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        String year = "" + cal.get(Calendar.YEAR);
-        String month = "" + cal.get(Calendar.MONTH);
-        String day = "" + cal.get(Calendar.DAY_OF_MONTH);
-        if (month.equals("0")) {
-            month = "12";
-            year = "" + (cal.get(Calendar.YEAR) - 1);
-        }
-        _date = year + month + day;
-
-        for (Activity a : activities) {
-            cal.setTime(a.getTime());
-            _aDate = "" + cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH)+1) + cal.get(Calendar.DAY_OF_MONTH);
-            if (_date.equals(_aDate)) {
-                Log.d(TAG, "Activity found: " + a.getActivityName());
-                curActivity = a;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /*
-    public static long getDifferenceDays(Date d1, Date d2) {
-        long diff = d2.getTime() - d1.getTime();
-        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-    }
-     */
-
     private void setCalendarView() {
         lActivities = cvm.getActivities(uid);
         activities = lActivities.getValue();
@@ -139,7 +112,7 @@ public class CalendarFragment extends Fragment {
         Calendar cal = Calendar.getInstance();
 
         Date today = cal.getTime();
-        cal.set(Calendar.YEAR, 2050); // arbitrarily late date
+        cal.set(Calendar.YEAR, 2121); // arbitrarily late date
         Date closest = cal.getTime();
         Activity closestActivity = new Activity();
 
@@ -158,16 +131,14 @@ public class CalendarFragment extends Fragment {
             }
         }
 
-        cal.setTime(closest);
-        LocalDate closestDate = LocalDate.of(cal.get(Calendar.YEAR), (cal.get(Calendar.MONTH) + 1), cal.get(Calendar.DAY_OF_MONTH));
-        LocalDate todayDate = LocalDate.now();
-
-        long dateDiff = DAYS.between(todayDate, closestDate);
+        long dateDiff = cvm.getDateDiff(today, closest);
         Log.d(TAG, "Day difference of today and closest activity: " + dateDiff);
 
         String text;
         String timeOfDay;
         String minutes;
+
+        cal.setTime(closest);
 
         if (dateDiff == 0) {
             minutes = "" + cal.get(Calendar.MINUTE);
@@ -176,7 +147,7 @@ public class CalendarFragment extends Fragment {
             }
             timeOfDay = "" + cal.get(Calendar.HOUR_OF_DAY) + "." + minutes;
             text = "You have an activity happening today!\n\n\"" + closestActivity.getActivityName() + "\" at " + timeOfDay + " o'clock.";
-        } else if (dateDiff > 0 && dateDiff < 365) {
+        } else if (dateDiff > 0 && dateDiff < 1000) {
             minutes = "" + cal.get(Calendar.MINUTE);
             if (minutes.length() < 2) {
                 minutes += "0";
@@ -219,5 +190,38 @@ public class CalendarFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    /*
+    private boolean hasActivity(Date date) {
+        String _date, _aDate;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String year = "" + cal.get(Calendar.YEAR);
+        String month = "" + cal.get(Calendar.MONTH);
+        String day = "" + cal.get(Calendar.DAY_OF_MONTH);
+        if (month.equals("0")) {
+            month = "12";
+            year = "" + (cal.get(Calendar.YEAR) - 1);
+        }
+        _date = year + month + day;
+
+        for (Activity a : activities) {
+            cal.setTime(a.getTime());
+            _aDate = "" + cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH)+1) + cal.get(Calendar.DAY_OF_MONTH);
+            if (_date.equals(_aDate)) {
+                Log.d(TAG, "Activity found: " + a.getActivityName());
+                curActivity = a;
+                return true;
+            }
+        }
+        return false;
+    } */
+
+    /*
+    public static long getDifferenceDays(Date d1, Date d2) {
+        long diff = d2.getTime() - d1.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    }
+    */
 }
 
