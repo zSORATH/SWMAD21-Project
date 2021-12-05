@@ -77,4 +77,5 @@
     <string name="at_location">At location</string>
     <string name="acitvity_upcoming">You have an activity you are attending in</string>
     <string name="days">days</string>
+    <string name="activities_for">"Activities for "</string>
 </resources>

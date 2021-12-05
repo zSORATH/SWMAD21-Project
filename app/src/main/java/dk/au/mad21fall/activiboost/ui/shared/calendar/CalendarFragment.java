@@ -91,10 +91,23 @@ public class CalendarFragment extends Fragment {
                 if (dateHasActivity) {
                     curActivities = cvm.getActivitiesOnDate(date);
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                    String text = "";
+
+                    for (Activity a : curActivities) {
+                        text += getText(R.string.activity) + a.getActivityName() + "\n"
+                                + getText(R.string.description) + " " + a.getDescription() + "\n"
+                                + getText(R.string.time) + " " + a.getTime() + "\n\n";
+                    }
+
+                    String title = "" + getText(R.string.activities_for)
+                            + cal.get(Calendar.DAY_OF_MONTH) + "-"
+                            + cal.get(Calendar.MONTH) + "-"
+                            + cal.get(Calendar.YEAR);
+
                     builder.setIcon(R.drawable.ic_activities)
-                            .setTitle(date.toString())
-                            .setMessage(R.string.activity + curActivities.get(0).getActivityName()
-                                    + "\nDescription: " + curActivities.get(0).getDescription());
+                            .setTitle(title)
+                            .setMessage(text);
 
                     AlertDialog alert = builder.create();
                     alert.show();

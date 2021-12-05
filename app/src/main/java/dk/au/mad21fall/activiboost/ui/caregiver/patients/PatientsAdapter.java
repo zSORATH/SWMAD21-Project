@@ -1,5 +1,6 @@
 package dk.au.mad21fall.activiboost.ui.caregiver.patients;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,11 @@ import dk.au.mad21fall.activiboost.models.Patient;
 public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.PatientViewHolder> {
 
     private ArrayList<Patient> patientList;
+    private Context context;
 
     // Constructor
-    public PatientsAdapter(){
+    public PatientsAdapter(Context context){
+        this.context = context;
     }
 
     public void updatePatientList(ArrayList<Patient> lists){
@@ -39,7 +42,7 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.Patien
 
     @Override
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
-        holder.patient_name.setText(R.string.name_+" "+patientList.get(position).getName()+",");
+        holder.patient_name.setText(context.getText(R.string.name_) +" "+patientList.get(position).getName()+",");
         holder.patient_age.setText(Integer.toString(patientList.get(position).getAge())+" "+R.string.age_);
     }
 

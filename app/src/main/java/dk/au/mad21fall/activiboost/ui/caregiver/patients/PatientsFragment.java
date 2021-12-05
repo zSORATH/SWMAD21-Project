@@ -1,6 +1,7 @@
 package dk.au.mad21fall.activiboost.ui.caregiver.patients;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import dk.au.mad21fall.activiboost.Constants;
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.databinding.FragmentPatientsBinding;
 import dk.au.mad21fall.activiboost.models.Patient;
@@ -31,7 +33,8 @@ public class PatientsFragment extends Fragment {
         binding = FragmentPatientsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        adapter = new PatientsAdapter();
+        Context context = getContext();
+        adapter = new PatientsAdapter(context);
         rcvPatients = root.findViewById(R.id.rcv_patients);
         rcvPatients.setLayoutManager(new LinearLayoutManager(root.getContext()));
         rcvPatients.setAdapter(adapter);
