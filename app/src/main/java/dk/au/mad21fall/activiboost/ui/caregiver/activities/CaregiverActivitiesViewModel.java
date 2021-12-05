@@ -22,9 +22,9 @@ import dk.au.mad21fall.activiboost.repository.Repository;
 public class CaregiverActivitiesViewModel extends AndroidViewModel {
         private Repository repository;
         private LiveData<ArrayList<Activity>> lSugActivities;
-        private MutableLiveData<ArrayList<Activity>> lActivities;
+        private MutableLiveData<ArrayList<Activity>> lActivities, slActivities;
         private MutableLiveData<Caregiver> caregiver;
-        private LiveData<ArrayList<Activity>> activities, sugactivities;
+        private LiveData<ArrayList<Activity>> activities;
 
 
         public CaregiverActivitiesViewModel(@NonNull Application app){
@@ -43,7 +43,7 @@ public class CaregiverActivitiesViewModel extends AndroidViewModel {
         }
 
         public LiveData<ArrayList<Activity>> getActivities(String userId) {
-            sortList(activities, userId);
+            sortList(userId);
             return lActivities;
         }
 
@@ -54,8 +54,23 @@ public class CaregiverActivitiesViewModel extends AndroidViewModel {
             return lSugActivities;
         }
 
+    public LiveData<ArrayList<Activity>> getActivitiesForString(String userId, String search){
+        if(slActivities == null){
+            slActivities = new MutableLiveData<ArrayList<Activity>>();
+        }
+        ArrayList<Activity> sas = new ArrayList<>();
+        sortList(userId);
+        for (Activity a : lActivities.getValue()){
+            if(a.getActivityName().toLowerCase().contains(search.toLowerCase())){
+                sas.add(a);
+            }
+        }
+        slActivities.setValue(sas);
+        return slActivities;
+    }
+
         // Sort list from repository
-        private void sortList(LiveData<ArrayList<Activity>> al, String userId){
+        private void sortList( String userId){
             if(lActivities == null){
                 lActivities = new MutableLiveData<ArrayList<Activity>>();
             }

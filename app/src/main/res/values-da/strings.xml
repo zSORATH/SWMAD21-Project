@@ -90,5 +90,5 @@
     <string name="weather_head">Vejret lige nu</string>
     <string name="home_activities">Dine aktiviteter i dag</string>
     <string name="no_activities_today">Du har ingen aktiviteter i dag</string>
-    <string name="search">Enter search word</string>
+    <string name="search">Indtast søgning</string>
 </resources>
