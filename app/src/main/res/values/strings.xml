@@ -79,4 +79,8 @@
     <string name="no_upcoming_activities">You have no upcoming activies.</string>
     <string name="user_created">User succesfully created!</string>
     <string name="login_cancelled">Login cancelled</string>
+<!--    Home Fragment -->
+    <string name="loading">Loading data. Please hold on!</string>
+    <string name="weather_head">Your location\'s current weather</string>
+
 </resources>

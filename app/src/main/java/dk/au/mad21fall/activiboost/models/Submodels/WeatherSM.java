@@ -17,4 +17,18 @@ public class WeatherSM {
     @Expose
     private String icon;
 
+    // Weather type
+    public void setMain(String main) {
+        this.main = main;
+    }
+    public String getMain() {
+        return main;
+    }
+    // Img icon
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+    public String getIcon() {
+        return icon;
+    }
 }

@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.36" />
+        app:layout_constraintGuide_percent="0.33" />
 
     <TextView
         android:id="@+id/textCity"
@@ -46,7 +46,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guidelineWeatherBottom"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/guideLineHomeTop"
         app:layout_constraintVertical_bias="0.120000005" />
 
     <TextView
@@ -56,7 +56,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:textSize="20sp"
-        android:textStyle="normal"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guidelineWeatherBottom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textCity"
@@ -69,40 +69,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:textSize="20sp"
-        android:textStyle="normal"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guidelineWeatherBottom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textWeatherType"
         app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/weather_head"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideLineHomeTop" />
-
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineWeatherBottom" />
-
-    <ImageView
-        android:id="@+id/imgWeather"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineWeatherBottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCity"
-        tools:src="@android:drawable/ic_menu_recent_history" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -80,4 +80,6 @@
     <string name="no_upcoming_activities">You have no upcoming activies.</string>
     <string name="user_created">User succesfully created!</string>
     <string name="login_cancelled">Login cancelled</string>
+    <string name="loading">Henter data. Vent venligst!</string>
+    <string name="weather_head">Vejret lige nu</string>
 </resources>
