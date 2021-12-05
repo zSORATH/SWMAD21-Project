@@ -18,7 +18,7 @@ public class Activity {
     private Map<String, String> caregivers;
     private String description;
     private Boolean userInActivity = false;
-
+    private String place;
 
     public Activity(){}
 
@@ -26,12 +26,6 @@ public class Activity {
         this.activityName = activityName;
         this.description = description;
     }
-
-   /* public Activity(String activityName, String description, Date time){
-        this.time = time;
-        this.activityName = activityName;
-        this.description = description;
-    }*/
 
     public String getActivityName() {
         return activityName;
@@ -87,5 +81,13 @@ public class Activity {
 
     public void setUserInActivity(Boolean userInActivity) {
         this.userInActivity = userInActivity;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 }

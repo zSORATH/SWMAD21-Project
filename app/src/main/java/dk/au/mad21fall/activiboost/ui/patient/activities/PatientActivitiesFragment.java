@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -155,6 +156,8 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         a.setPatients(patients);
         activitiesViewModel.addUserToActivity(a);
         getActivities();
+        Toast.makeText(getActivity(), getText(R.string.caregiverAdded), Toast.LENGTH_SHORT).show();
+
     }
 
     //show a dialogue
@@ -165,6 +168,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription() + "\n\n" +
                         getText(R.string.time) +" " + a.getTime() + "\n\n" +
+                        getText(R.string.place) +" " + a.getPlace() + "\n\n" +
                         getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
                         getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
@@ -179,9 +183,10 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription() + "\n\n" +
                         getText(R.string.time) +" " + a.getTime() + "\n\n" +
+                        getText(R.string.place) +" " + a.getPlace() + "\n\n" +
                         getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
                         getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
-                .setPositiveButton(R.string.addBtn, (dialogInterface, i) -> {addToActivity(a);})
+                .setPositiveButton(R.string.activitySignupBtn, (dialogInterface, i) -> {addToActivity(a);})
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
         builder.create().show();
     }
@@ -193,6 +198,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         a.setPatients(patients);
         activitiesViewModel.addUserToActivity(a);
         getActivities();
+        Toast.makeText(getActivity(), getText(R.string.caregiverUnsubscribed), Toast.LENGTH_SHORT).show();
     }
 
     private String listOf(Collection<String> c){

@@ -16,6 +16,7 @@ import dk.au.mad21fall.activiboost.models.Caregiver;
 import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.repository.Repository;
 
+// Inspiration to Livedata and ViewModel Tracker demo
 public class CaregiverActivitiesViewModel extends AndroidViewModel {
         private Repository repository;
         private LiveData<ArrayList<Activity>> lSugActivities;
@@ -51,6 +52,7 @@ public class CaregiverActivitiesViewModel extends AndroidViewModel {
             return lSugActivities;
         }
 
+        // Sort list from repository
         private void sortList(LiveData<ArrayList<Activity>> al, String userId){
             if(lActivities == null){
                 lActivities = new MutableLiveData<ArrayList<Activity>>();
@@ -76,7 +78,10 @@ public class CaregiverActivitiesViewModel extends AndroidViewModel {
         }
 
         public void deleteSugActivity(Activity a){
-            repository.deleteActivity(a);
+            repository.deleteActivity("activitySuggestions", a);
         }
 
+        public void cancelActivity(Activity a) {
+            repository.deleteActivity("activities", a);
+        }
 }

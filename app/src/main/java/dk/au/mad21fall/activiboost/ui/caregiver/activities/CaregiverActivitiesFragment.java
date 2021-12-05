@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -65,6 +66,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         binding = FragmentCaregiverActivitiesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // Get the userid from signed ind user
         userId = (String) getActivity().getIntent().getSerializableExtra("user");
 
         add = binding.btnAdd;
@@ -76,7 +78,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         activitiesAdapter = new ActivitiesAdapter(this);
         sugActivitiesAdapter = new MyActivitiesAdapter(this);
 
-        //Recyclerview for activities
+        //Recyclerview for activities - inspiration from Tracker demoh
         rcvActivities = binding.rcvActivities;
         rcvActivities.setLayoutManager(new LinearLayoutManager(getActivity()));
         rcvActivities.setAdapter(activitiesAdapter);
@@ -144,13 +146,14 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         showMyDialogue(al.get(index));
     }
 
-    //show a dialogue
+    //Show dialogue - inspiration from Lists and grid demo
     private void showMyDialogue(Activity a){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setIcon(R.drawable.ic_activities)
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription())
                 .setPositiveButton(R.string.addBtn, (dialogInterface, i) -> {openAddActivtiy(a);})
+                .setNeutralButton(R.string.back, (dialogInterface, i) -> {})
                 .setNegativeButton(R.string.deleteBtn, (dialogInterface, i) -> {deleteSugActivity(a);});
         builder.create().show();
     }
@@ -165,16 +168,24 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         launcher.launch(intent);
     }
 
+    //Show dialogue - inspiration from Lists and grid demo
     private void showDialogue(Activity a){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setIcon(R.drawable.ic_activities)
                 .setTitle(a.getActivityName())
                 .setMessage(getText(R.string.description) +" " + a.getDescription() + "\n\n" +
                         getText(R.string.time) +" " + a.getTime() + "\n\n" +
+                        getText(R.string.place) +" " + a.getPlace() + "\n\n" +
                         getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
                         getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
-                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {});
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
+                .setNegativeButton(R.string.cancelActivity, (dialogInterface, i) -> {cancelActivity(a);});
         builder.create().show();
+    }
+
+    private void cancelActivity(Activity a) {
+        activitiesViewModel.cancelActivity(a);
+        getActivities();
     }
 
     @Override
@@ -184,6 +195,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         a.setCaregivers(caregivers);
         activitiesViewModel.addUserToActivity(a);
         getActivities();
+        Toast.makeText(getActivity(), getText(R.string.caregiverAdded), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -192,6 +204,8 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         caregivers.remove(userId);
         a.setCaregivers(caregivers);
         activitiesViewModel.addUserToActivity(a);
+        Toast.makeText(getActivity(), getText(R.string.caregiverUnsubscribed), Toast.LENGTH_SHORT).show();
+
         getActivities();
     }
 

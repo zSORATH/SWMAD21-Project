@@ -27,11 +27,11 @@ import dk.au.mad21fall.activiboost.models.Activity;
 
 public class AddActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    private EditText title, description;
+    private EditText title, description, place;
     private Button addBtn, cancelBtn
             ;
     private AddActivityViewModel addActivityViewModel;
-    private String activitytitle, activitytime, activitydate, activitydesctiption;
+    private String activitytitle, activitydesctiption;
     private Calendar mC;
     private TextView dateView;
     private LiveData<Date> date;
@@ -45,6 +45,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         setContentView(R.layout.activity_add);
 
         title = findViewById(R.id.addActivityTitle);
+        place = findViewById(R.id.addActivityPlace);
         dateView = findViewById(R.id.addActivityDate);
         description = findViewById(R.id.addActivityDescription);
         addBtn = findViewById(R.id.addActivityBtn);
@@ -69,11 +70,16 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!title.equals("") && !place.equals("") && !date.equals("")){
                 saveActivity();
                 Toast.makeText(getApplicationContext(), getText(R.string.activityAdded), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 setResult(RESULT_OK, intent);
                 finish();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), getText(R.string.fillOut), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -108,6 +114,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         a.setActivityName(title.getText().toString());
         a.setDescription(description.getText().toString());
         a.setTime(date.getValue());
+        a.setPlace(place.getText().toString());
         Map<String, String> caregivers = new HashMap<>();
         a.setCaregivers(caregivers);
         Map<String, String> patients = new HashMap<>();
@@ -131,7 +138,7 @@ public class AddActivity extends AppCompatActivity implements DatePickerDialog.O
         mC.set(Calendar.HOUR_OF_DAY, hourOfDay);
         mC.set(Calendar.MINUTE, minute);
         addActivityViewModel.setDate(mC.getTime());
-       // dateView.setText(date.toString());
+
 
 
 

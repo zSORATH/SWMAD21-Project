@@ -1,15 +1,10 @@
 package dk.au.mad21fall.activiboost.models;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
-import java.util.ArrayList;
-import java.util.Map;
 
-@Entity
+
 public class Patient {
 
-    private int pid;
 
     private String name;
     private int age;
@@ -41,12 +36,5 @@ public class Patient {
         this.id = id;
     }
 
-    public int getPid() {
-        return pid;
-    }
-
-    public void setPid(int pid) {
-        this.pid = pid;
-    }
 
 }

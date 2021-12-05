@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import dk.au.mad21fall.activiboost.R;
@@ -42,7 +43,7 @@ public class SignUpDetailsActivity extends AppCompatActivity implements AdapterV
 
         sdvm = new ViewModelProvider(this).get(SignUpDetailsViewModel.class);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Sign up");
 
         txtName = findViewById(R.id.txtName);
         txtAge = findViewById(R.id.txtAge);
@@ -58,6 +59,7 @@ public class SignUpDetailsActivity extends AppCompatActivity implements AdapterV
 
         btnCancel = findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(view -> {
+            // TODO: Delete also when click back button in nav bar
             sdvm.deleteUser();
             setResult(RESULT_CANCELED);
             finish();
@@ -137,10 +139,16 @@ public class SignUpDetailsActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if (adapterView.getItemAtPosition(i) == "Patient") {
+        String[] userTypes = getResources().getStringArray(R.array.user_types);
+        String selected = adapterView.getItemAtPosition(i).toString();
+        Log.d(TAG, "Selected: " + adapterView.getItemAtPosition(i).toString());
+        Log.d(TAG, "userTypes: " + userTypes[0] + " " + userTypes[1]);
+        if (selected.equals(userTypes[0])) {
             userType = PATIENT;
-        } else {
+        } else if (selected.equals(userTypes[1])){
             userType = CAREGIVER;
+        } else {
+            userType = null;
         }
         Log.d(TAG, "User type: " + userType);
     }

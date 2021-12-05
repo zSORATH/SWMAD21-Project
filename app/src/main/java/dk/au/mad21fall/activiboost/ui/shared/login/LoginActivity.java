@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putSerializable("user", "aDzD01WbDXcWS4zcx5boZpsrzDl1");
             intent.putExtras(bundle);
+
             launcher.launch(intent);
         });
 
@@ -173,6 +174,7 @@ public class LoginActivity extends AppCompatActivity {
                 .setAvailableProviders(providers)
                 .setIsSmartLockEnabled(false)
                 .setTheme(R.style.Theme_ActiviBoost)
+                .setLogo(R.drawable.custom_icon_foreground)
                 .build();
         signInLauncher.launch(signInIntent);
     }

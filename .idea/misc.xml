@@ -3,12 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/drawable/custom_icon_foreground.xml" value="0.24322916666666666" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout-land/activity_add.xml" value="0.26145833333333335" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout-land/activity_suggest.xml" value="0.26145833333333335" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout-land/fragment_caregiver_activities.xml" value="0.26145833333333335" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout-land/fragment_patient_activities.xml" value="0.26145833333333335" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout-ldltr/activity_add.xml" value="0.3046875" />
-        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout-sw600dp/activity_add.xml" value="0.5" />
+        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout-sw600dp/activity_add.xml" value="0.7222222222222222" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout-sw600dp/activity_suggest.xml" value="0.45703125" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout-sw600dp/fragment_caregiver_activities.xml" value="0.43359375" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout-sw600dp/fragment_patient_activities.xml" value="0.43359375" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/activity_login.xml" value="0.2890625" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/activity_main.xml" value="0.1640625" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/activity_patient_main.xml" value="0.2890625" />
+        <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/activity_sign_up_details.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/activity_suggest.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/activitypatientitem.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/Karen/OneDrive - Aarhus universitet/Ingenioer/E21/Bachelorprojekt/SWMAD21-Project/app/src/main/res/layout/fragment_activities.xml" value="0.21197916666666666" />

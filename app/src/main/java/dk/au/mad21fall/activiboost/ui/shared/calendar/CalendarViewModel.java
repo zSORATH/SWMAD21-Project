@@ -13,9 +13,12 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import dk.au.mad21fall.activiboost.models.Activity;
 import dk.au.mad21fall.activiboost.models.Caregiver;
+import dk.au.mad21fall.activiboost.models.Diary;
 import dk.au.mad21fall.activiboost.models.Patient;
 import dk.au.mad21fall.activiboost.repository.Repository;
 
@@ -27,6 +30,7 @@ public class CalendarViewModel extends AndroidViewModel {
 
     private Repository repository;
     private LiveData<ArrayList<Activity>> activities;
+    private LiveData<List<Diary>> diaries;
     private MutableLiveData<ArrayList<Activity>> lActivities;
     private MutableLiveData<Patient> patient;
     private MutableLiveData<Caregiver> caregiver;
@@ -35,6 +39,7 @@ public class CalendarViewModel extends AndroidViewModel {
         super(app);
         repository = Repository.getInstance(getApplication());
         activities = repository.getActivities();
+        diaries = repository.getDiaries();
     }
 
     public LiveData<Patient> getPatient(String uid){
@@ -62,6 +67,7 @@ public class CalendarViewModel extends AndroidViewModel {
         if (getUserType(uid) == PATIENT) {
             for (Activity a : activities.getValue()){
                 if (a.getPatients().containsKey(uid)){
+                    Log.d(TAG, "Activity added: " + a.getActivityName());
                     as.add(a);
                 }
             }
@@ -74,17 +80,23 @@ public class CalendarViewModel extends AndroidViewModel {
         return lActivities;
     }
 
-    //public Activity getActivity(String date) {
-
-    //}
-
     public String getUserType(String uid) {
         if (repository.patientExists(uid)) {
             Log.d(TAG, "User type: PATIENT");
             return PATIENT;
-        } else {
+        } else if (repository.caregiverExists(uid)) {
             Log.d(TAG, "User type: CAREGIVER");
             return CAREGIVER;
+        } else {
+            Log.d(TAG, "Couldn't find matching uid in database.");
+            return null;
         }
+    }
+
+    public LiveData<List<Diary>> getDiaries() {
+        if (diaries == null) {
+            diaries = new MutableLiveData<List<Diary>>();
+        }
+        return diaries;
     }
 }

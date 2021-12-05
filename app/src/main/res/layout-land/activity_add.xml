@@ -6,6 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".ui.caregiver.activities.add.AddActivity">
 
+    <TextView
+        android:id="@+id/textViewEnterPlace"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp"
+        android:text="@string/activityPlace"
+        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addActivityTitle" />
+
+    <EditText
+        android:id="@+id/addActivityPlace"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:clickable="false"
+        android:ems="10"
+        android:focusable="true"
+        android:hint="@string/add_activity_place"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEnterPlace" />
+
     <Button
         android:id="@+id/addActivityBtn"
         android:layout_width="wrap_content"
@@ -22,20 +51,18 @@
     <EditText
         android:id="@+id/addActivityTitle"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="2dp"
-        android:clickable="false"
         android:background="@android:color/transparent"
+        android:clickable="false"
         android:ems="10"
-        android:gravity="top"
         android:focusable="true"
+        android:gravity="top"
         android:hint="@string/activityTitle"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline11"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewEnterTitle" />
@@ -55,8 +82,10 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/addActivityBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEnterDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEnterDescription"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textViewEnterTitle"
@@ -75,13 +104,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:layout_marginEnd="4dp"
         android:text="@string/activityDate"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+        app:layout_constraintTop_toBottomOf="@+id/addActivityPlace" />
 
     <TextView
         android:id="@+id/textViewEnterDescription"
@@ -98,23 +126,25 @@
     <EditText
         android:id="@+id/addActivityDate"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
-        android:ems="10"
-        android:gravity="top"
         android:background="@android:color/transparent"
+        android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:gravity="top"
         android:hint="@string/activityDate"
+        android:minHeight="48dp"
         android:scrollbars="vertical"
         android:singleLine="false"
         app:layout_constraintBottom_toTopOf="@+id/cancelBtn"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEnterDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEnterDate"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/cancelBtn"
