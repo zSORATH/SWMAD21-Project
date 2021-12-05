@@ -332,8 +332,6 @@ public class Repository {
         return false;
     }
 
-
-
     // Adapted from https://firebase.google.com/docs/firestore/manage-data/add-data#java
     public void addPatient(Map<String, Object> patient) {
         fdb.collection("patients").document(patient.get("id").toString())
