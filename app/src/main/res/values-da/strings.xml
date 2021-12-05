@@ -49,6 +49,14 @@
     <string name="caregiver">Personale</string>
     <string name="activityAdded">Aktivitet tilføjet!</string>
     <string name="addActivityBtn">Tilføj aktivitet</string>
+    <string name="back">Tilbage</string>
+    <string name="my_calendar">My calendar</string>
+    <string name="upcoming_activities">Upcoming activities:</string>
+    <string name="diary_text_date">Dato</string>
+    <string name="diary_edit_textfield_hint">Skriv dine noter her...</string>
+    <string name="button_delete_diary">Slet</string>
+    <string name="button_diary_cancel">Annuler</string>
+    <string name="button_save">Gem</string>
 
 
 </resources>

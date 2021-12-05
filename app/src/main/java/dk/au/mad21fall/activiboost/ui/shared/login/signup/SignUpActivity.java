@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         svm = new ViewModelProvider(this).get(SignUpViewModel.class);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Sign up");
 
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPass);
