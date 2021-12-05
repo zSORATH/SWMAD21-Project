@@ -25,10 +25,10 @@ public class LocationUtil {
 
     private double lat;
     private double lon;
-
+    String locationString;
 
     public void getLocationCoordinates(Context context, FragmentActivity activity, FusedLocationProviderClient mFusedLocationClient) {
-        String locationString;
+
         checkLocationPermission(context, activity);
 
 
@@ -37,28 +37,25 @@ public class LocationUtil {
                 // Got a response
                 if (location != null) // Location might be null, if the user never used any location tracking before
                 {
-                    Toast.makeText(context, "Got location!", Toast.LENGTH_LONG).show();
-                    Log.d(TAG, "Got location lat: " +  location.getLatitude());
-                    Log.d(TAG, "Got location long: " +  location.getLongitude());
-
                     lat = location.getLatitude();
                     lon = location.getLongitude();
-                    Constants.LOCATION = "lat="+lat+"&lon="+lon;
-                    Log.d(TAG, "Constant Location: "+ Constants.LOCATION);
-
-//                   api.getLocalWeather(locationString, context);
-
-
+                    setCoordinatesString(lat, lon);
                 } else {
                     Toast.makeText(context, "location: IS NULL", Toast.LENGTH_LONG).show();
                 }
 
             });
         } else {
-
                 Toast.makeText(context, "getLocation ERROR", Toast.LENGTH_LONG).show();
             }
+    }
 
+    private void setCoordinatesString(double lat, double lon) {
+        locationString = "lat="+ lat +"&lon=" + lon;
+    }
+
+    public String getCoordinatesString(){
+        return  locationString;
     }
 
 
@@ -72,10 +69,10 @@ public class LocationUtil {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_COARSE_LOCATION)) {
                // Asynchronous dialog box, explaining the permission request
-                //TODO: Set as string
+                //TODO: Set as @string
                 new AlertDialog.Builder(context)
-                        .setTitle("Permissions request")//TODO: Set as string
-                        .setMessage("We need your permission to show the weather for your location")//TODO: Set as string
+                        .setTitle("Permissions request")//TODO: Set as @string
+                        .setMessage("We need your permission to show the weather for your location")//TODO: Set as @string
                         .setPositiveButton("I understand", (dialogInterface, i) -> {
                             // Asks for the permission
                             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, Constants.LOCATION_REQUEST);
