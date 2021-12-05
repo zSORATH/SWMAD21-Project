@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Activity;
 
+
+// NB: THIS WAS NOT FULLY FINISHED
 //With inspiration from PersonAdapter in Lists and Grid demo
 public class HomeActivityAdapter extends  RecyclerView.Adapter<HomeActivityAdapter.HomeActivityAdapterViewHolder> {
 

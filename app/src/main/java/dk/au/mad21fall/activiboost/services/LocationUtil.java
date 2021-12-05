@@ -69,10 +69,10 @@ public class LocationUtil {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_COARSE_LOCATION)) {
                // Asynchronous dialog box, explaining the permission request
-                //TODO: Set as @string
+
                 new AlertDialog.Builder(context)
-                        .setTitle("Permissions request")//TODO: Set as @string
-                        .setMessage("We need your permission to show the weather for your location")//TODO: Set as @string
+                        .setTitle("Permissions request")
+                        .setMessage("We need your permission to show the weather for your location")
                         .setPositiveButton("I understand", (dialogInterface, i) -> {
                             // Asks for the permission
                             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, Constants.LOCATION_REQUEST);
