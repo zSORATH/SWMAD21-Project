@@ -76,8 +76,7 @@ public class HomeFragment extends Fragment {
         new Handler().postDelayed(() -> {
             if (api == null){
                 new Handler().postDelayed(() -> {
-                   weather = api.getWeather(context,activity,fusedLocationClient);
-
+                    weather = api.getWeather(context,activity,fusedLocationClient);
                     Log.e(TAG, "Received weather after second delay: "+ weather.getName());
                 },1000);
             }  else {
@@ -85,7 +84,7 @@ public class HomeFragment extends Fragment {
 
                 Log.e(TAG, "Received weather: "+ weather.getName());
             }
-        }, 500);
+        }, 1000);
 
     }
 

@@ -62,7 +62,7 @@ public class WeatherApi {
             Log.d(TAG, "StringRequest: "+stringRequest);
             queue.add(stringRequest);
 
-        }, 250);
+        }, 300);
 
     }
 
