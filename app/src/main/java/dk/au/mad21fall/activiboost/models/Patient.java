@@ -1,6 +1,6 @@
 package dk.au.mad21fall.activiboost.models;
 
-
+// This is inspired by "Demo: Rick and Morty Gallery with Volley and Glide" from L6 in this course
 public class Patient {
 
     private String name;
