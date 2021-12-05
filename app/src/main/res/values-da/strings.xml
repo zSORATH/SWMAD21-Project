@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ActiviBoost</string>
-    <string name="title_home">Home</string>
-    <string name="title_calendar">Calendar</string>
-    <string name="title_diary">Diary</string>
-    <string name="title_patients">Patients</string>
+    <string name="title_home">Hjem</string>
+    <string name="title_calendar">Kalender</string>
+    <string name="title_diary">Dagbog</string>
+    <string name="title_patients">Patienter</string>
     <string name="title_activities">Aktiviteter</string>
     <string name="title_suggest">Foreslå aktivitet</string>
     <string name="title_add">Tilføj aktivitet</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="nameTxt">participants</string>
-    <string name="insuranceTxt">time</string>
+    <string name="nameTxt">Deltagere </string>
+    <string name="insuranceTxt">tid </string>
     <string name="diary_date">00-00-0000</string>
-    <string name="diary_entry">Diary entry</string>
-    <string name="button_add_diary">Add New Diary</string>
+    <string name="diary_entry">Dagbog</string>
+    <string name="button_add_diary">Tilføj ny dagbog </string>
     <string name="activitySignupBtn">Tilmeld</string>
     <string name="ok">Ok</string>
     <string name="cancel">Annuller</string>
@@ -39,19 +39,19 @@
     <string name="time">Tid: </string>
     <string name="attendingBtn">Deltager</string>
     <string name="loginSignUp">Tilmeld</string>
-    <string name="login" >Login</string>
-    <string name="password">Password</string>
-    <string name="next">Next</string>
-    <string name="create_user">Create User</string>
-    <string name="name">Name:</string>
-    <string name="age">Age:</string>
+    <string name="login" >Log ind</string>
+    <string name="password">Adgangskode</string>
+    <string name="next">Næste</string>
+    <string name="create_user">Opret bruger</string>
+    <string name="name">Navn: </string>
+    <string name="age">Alder: </string>
     <string name="patient">Patient</string>
     <string name="caregiver">Personale</string>
     <string name="activityAdded">Aktivitet tilføjet!</string>
     <string name="addActivityBtn">Tilføj aktivitet</string>
     <string name="back">Tilbage</string>
-    <string name="my_calendar">My calendar</string>
-    <string name="upcoming_activities">Upcoming activities:</string>
+    <string name="my_calendar">Min kalender</string>
+    <string name="upcoming_activities">Kommende: </string>
     <string name="diary_text_date">Dato</string>
     <string name="diary_edit_textfield_hint">Skriv dine noter her...</string>
     <string name="button_delete_diary">Slet</string>
@@ -60,12 +60,12 @@
     <string name="place">Sted: </string>
     <string name="add_activity_place">Tilføj sted for aktiviteten </string>
     <string name="activityPlace">Sted for aktivitet*</string>
-    <string name="cancelActivity">Aflys activity</string>
+    <string name="cancelActivity">Aflys aktivitet</string>
     <string name="fillOut">Du skal udfylde de påkrævede felter</string>
-    <string name="caregiverUnsubscribed">You have unsubscribed from the activity</string>
-    <string name="caregiverAdded">You are now attending the activity</string>
-    <string name="sureDelete">Sure you want to delete?</string>
-    <string name="deleteActivity">Delete activity</string>
+    <string name="caregiverUnsubscribed">Du er nu afmeldt aktiviteten</string>
+    <string name="caregiverAdded">Du er nu tilmeldt aktiviteten</string>
+    <string name="sureDelete">Sikker på du vil slette?</string>
+    <string name="deleteActivity">Slet aktivitet</string>
 
 
 </resources>
