@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,7 +115,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         lactivities.observe(getActivity(), new Observer<ArrayList<Activity>>() {
             @Override
             public void onChanged(ArrayList<Activity> nactivities) {
-                activitiesAdapter.updateActivitiesList(nactivities);
+                activitiesAdapter.updateActivitiesList(nactivities, "c");
                 activities = nactivities;
             }
         });
@@ -154,7 +155,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
                 .setMessage(getText(R.string.description) +" " + a.getDescription())
                 .setPositiveButton(R.string.addBtn, (dialogInterface, i) -> {openAddActivtiy(a);})
                 .setNeutralButton(R.string.back, (dialogInterface, i) -> {})
-                .setNegativeButton(R.string.deleteBtn, (dialogInterface, i) -> {deleteSugActivity(a);});
+                .setNegativeButton(R.string.deleteBtn, (dialogInterface, i) -> {areYouSureDialogue("activitySuggestions",a);});
         builder.create().show();
     }
 
@@ -179,22 +180,34 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
                         getText(R.string.participants) +" " + listOf(a.getPatients().values()) + "\n\n" +
                         getText(R.string.caregivers) +" " + listOf(a.getCaregivers().values()) )
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> {})
-                .setNegativeButton(R.string.cancelActivity, (dialogInterface, i) -> {cancelActivity(a);});
+                .setNegativeButton(R.string.cancelActivity, (dialogInterface, i) -> {areYouSureDialogue("activities", a);});
         builder.create().show();
     }
 
-    private void cancelActivity(Activity a) {
-        activitiesViewModel.cancelActivity(a);
-        getActivities();
+    private void areYouSureDialogue(String collectionName, Activity a){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setIcon(R.drawable.ic_activities)
+                .setTitle(getText(R.string.deleteActivity))
+                .setMessage(getText(R.string.sureDelete))
+                .setPositiveButton(R.string.deleteBtn, (dialogInterface, i) -> {deleteActivity(collectionName,a);})
+                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
+        builder.create().show();
     }
+
 
     @Override
     public void addToActivity(Activity a){
         Map<String, String> caregivers = a.getCaregivers();
         caregivers.put(userId,caregiver.getValue().getName());
         a.setCaregivers(caregivers);
+        a.setUserInActivity(true);
         activitiesViewModel.addUserToActivity(a);
-        getActivities();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getActivities();
+            }
+        }, 100);
         Toast.makeText(getActivity(), getText(R.string.caregiverAdded), Toast.LENGTH_SHORT).show();
     }
 
@@ -203,10 +216,16 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         Map<String, String> caregivers = a.getCaregivers();
         caregivers.remove(userId);
         a.setCaregivers(caregivers);
+        a.setUserInActivity(false);
         activitiesViewModel.addUserToActivity(a);
         Toast.makeText(getActivity(), getText(R.string.caregiverUnsubscribed), Toast.LENGTH_SHORT).show();
 
-        getActivities();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getActivities();
+            }
+        }, 100);
     }
 
     private String listOf(Collection<String> c){
@@ -222,8 +241,14 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
         return s;
     }
 
-    private void deleteSugActivity(Activity a){
-        activitiesViewModel.deleteSugActivity(a);
+    private void deleteActivity(String collectionName, Activity a){
+        activitiesViewModel.deleteActivity(collectionName, a);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getActivities();
+            }
+        }, 100);
     }
 
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
@@ -235,7 +260,7 @@ public class CaregiverActivitiesFragment extends Fragment implements ActivitiesA
                         Intent data = result.getData();
                         Bundle b = data.getExtras();
                         if(sa!=null) {
-                            deleteSugActivity(sa);
+                            deleteActivity("activitySuggestions",sa);
                         }
                     }
                 }

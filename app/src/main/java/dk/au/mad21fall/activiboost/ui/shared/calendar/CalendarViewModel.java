@@ -12,7 +12,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -32,8 +36,7 @@ public class CalendarViewModel extends AndroidViewModel {
     private LiveData<ArrayList<Activity>> activities;
     private LiveData<List<Diary>> diaries;
     private MutableLiveData<ArrayList<Activity>> lActivities;
-    private MutableLiveData<Patient> patient;
-    private MutableLiveData<Caregiver> caregiver;
+    private Calendar cal = Calendar.getInstance();
 
     public CalendarViewModel(@NonNull Application app) {
         super(app);
@@ -42,24 +45,8 @@ public class CalendarViewModel extends AndroidViewModel {
         diaries = repository.getDiaries();
     }
 
-    public LiveData<Patient> getPatient(String uid){
-        if(patient == null){
-            patient = new MutableLiveData<Patient>();
-        }
-        patient.setValue(repository.findPatient(uid));
-        return patient;
-    }
-
-    public LiveData<Caregiver> getCaregiver(String uid){
-        if(caregiver == null){
-            caregiver = new MutableLiveData<Caregiver>();
-        }
-        caregiver.setValue(repository.findCaregiver(uid));
-        return caregiver;
-    }
-
     public MutableLiveData<ArrayList<Activity>> getActivities(String uid) {
-        if(lActivities == null){
+        if (lActivities == null) {
             lActivities = new MutableLiveData<ArrayList<Activity>>();
         }
         ArrayList<Activity> as = new ArrayList<>();
@@ -93,10 +80,46 @@ public class CalendarViewModel extends AndroidViewModel {
         }
     }
 
-    public LiveData<List<Diary>> getDiaries() {
-        if (diaries == null) {
-            diaries = new MutableLiveData<List<Diary>>();
+    public ArrayList<Activity> getActivitiesOnDate(Date date) {
+        if (lActivities == null) {
+            lActivities = new MutableLiveData<ArrayList<Activity>>();
         }
-        return diaries;
+        ArrayList<Activity> as = new ArrayList<>();
+
+        for (Activity a : lActivities.getValue()) {
+            if (getDateDiff(a.getTime(), date) == 0) {
+                as.add(a);
+            }
+        }
+        return as;
+    }
+
+    public boolean dateHasActivity(Date date) {
+        if (lActivities == null) {
+            return false;
+        }
+
+        for (Activity a : lActivities.getValue()) {
+            Log.d(TAG, "Date difference: " + getDateDiff(date, a.getTime()));
+            if (getDateDiff(date, a.getTime()) == 0) {
+                Log.d(TAG, "Activity found: " + a.getActivityName());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public long getDateDiff(Date date1, Date date2) {
+        LocalDate lDate1 = convertToLocalDateViaInstant(date1);
+        LocalDate lDate2 = convertToLocalDateViaInstant(date2);
+        return ChronoUnit.DAYS.between(lDate1, lDate2);
+
+    }
+
+    //From: https://www.baeldung.com/java-date-to-localdate-and-localdatetime
+    public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 }

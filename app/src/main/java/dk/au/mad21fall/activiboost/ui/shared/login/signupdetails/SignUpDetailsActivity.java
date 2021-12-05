@@ -78,10 +78,7 @@ public class SignUpDetailsActivity extends AppCompatActivity implements AdapterV
                     finish();
                 }
             } else {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Please choose either patient or caregiver",
-                        Toast.LENGTH_SHORT);
-                toast.show();
+                Log.d(TAG, "Something's wrong...");
             }
         });
     }

@@ -1,16 +1,15 @@
 package dk.au.mad21fall.activiboost.ui.caregiver.patients;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import dk.au.mad21fall.activiboost.R;
 import dk.au.mad21fall.activiboost.models.Patient;
@@ -20,9 +19,11 @@ import dk.au.mad21fall.activiboost.models.Patient;
 public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.PatientViewHolder> {
 
     private ArrayList<Patient> patientList;
+    private Context context;
 
     // Constructor
-    public PatientsAdapter(){
+    public PatientsAdapter(Context context){
+        this.context = context;
     }
 
     public void updatePatientList(ArrayList<Patient> lists){
@@ -41,10 +42,8 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.Patien
 
     @Override
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
-        // Using glide inspired from the "Demo: Rick and Morty Gallery with Volley and Glide" from L6 in this course
-        holder.patient_name.setText(patientList.get(position).getName());
-        holder.patient_age.setText(Integer.toString(patientList.get(position).getAge()));
-        holder.patient_id.setText("id: "+patientList.get(position).getId());
+        holder.patient_name.setText(patientList.get(position).getName()+",");
+        holder.patient_age.setText(Integer.toString(patientList.get(position).getAge())+" "+context.getText(R.string.years));
     }
 
     @Override
@@ -61,7 +60,7 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.Patien
 
         TextView patient_name;
         TextView patient_age;
-        TextView patient_id;
+
 
         //constructor
         public PatientViewHolder(@NonNull View itemView) {
@@ -69,7 +68,6 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.Patien
 
             patient_name = itemView.findViewById(R.id.patient_name);
             patient_age = itemView.findViewById(R.id.patient_age);
-            patient_id = itemView.findViewById(R.id.patient_id);
         }
     }
 

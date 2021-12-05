@@ -4,7 +4,6 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.ViewModel;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -38,10 +37,6 @@ public class DiaryEditViewModel extends AndroidViewModel {
     }
 
     public void setDiary(Diary diary){
-        repository.updateDiaryAsynch(diary);
-    }
-
-    public void updateDiary(Diary diary){
         repository.updateDiaryAsynch(diary);
     }
 

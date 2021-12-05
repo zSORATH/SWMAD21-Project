@@ -4,22 +4,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.hsalf.smilerating.SmileRating;
 import com.hsalf.smileyrating.SmileyRating;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import dk.au.mad21fall.activiboost.Constants;
 import dk.au.mad21fall.activiboost.R;
@@ -58,6 +51,8 @@ public class DiaryEditActivity extends AppCompatActivity {
     private void setupUI() {
 
         diary_edit_date = findViewById(R.id.diary_edit_date);
+        diary_edit_date.setText(date);
+
         diary_edit_textfield = findViewById(R.id.diary_edit_textfeld);
         diary_edit_textfield.setText(diary.getContent());
 
@@ -113,6 +108,7 @@ public class DiaryEditActivity extends AppCompatActivity {
     }
 
     private void saveChanges() {
+        //rating is set when the user selects a smiley, so no need to do it again here
         //diary.setRating(rating);
         diary.setContent(diary_edit_textfield.getText().toString());
         diaryEditViewModel.setDiary(diary);
@@ -120,14 +116,14 @@ public class DiaryEditActivity extends AppCompatActivity {
         finish();
     }
 
-    //TODO: LAV STRINGS TIL DENNE PROMT SÅ DER KAN VÆRE FLERE SPROG
+
     private void delete() {
         // Promt is inspired by https://stackoverflow.com/questions/2257963/how-to-show-a-dialog-to-confirm-that-the-user-wishes-to-exit-an-android-activity
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Delete Diary")
-                .setMessage("Are you sure you want to delete this diary entry?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                .setTitle(R.string.delete_diary)
+                .setMessage(R.string.delete_verification)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -136,7 +132,7 @@ public class DiaryEditActivity extends AppCompatActivity {
                     }
 
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(R.string.no, null)
                 .show();
     }
 }
