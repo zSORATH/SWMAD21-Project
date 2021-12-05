@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(view -> {
             gotoSignUp();
         });
+
     }
 
     // Authentication: https://firebase.google.com/docs/auth/android/firebaseui?authuser=0#java
