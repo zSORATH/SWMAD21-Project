@@ -24,7 +24,7 @@
     <string name="button_delete_diary">Delete</string>
     <string name="button_diary_cancel">Cancel</string>
     <string name="button_save">Save</string>
-    />
+
     <string name="activityDescription">Enter description the activity</string>
     <string name="activityTitle">Enter title of activity*</string>
     <string name="suggestBtn">Suggest</string>
@@ -72,6 +72,8 @@
     <string name="diary_dublicate_warning">You already added a diary for today.</string>
     <string name="sureDelete">Sure you want to delete?</string>
     <string name="deleteActivity">Delete activity</string>
+    <string name="name_">Name:</string>
+    <string name="age_">years</string>
 
 
 </resources>
