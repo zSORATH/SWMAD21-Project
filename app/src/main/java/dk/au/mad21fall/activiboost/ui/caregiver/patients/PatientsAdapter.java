@@ -42,8 +42,8 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.Patien
     @Override
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
         // Using glide inspired from the "Demo: Rick and Morty Gallery with Volley and Glide" from L6 in this course
-        holder.patient_name.setText(R.string.name+" "+patientList.get(position).getName()+",");
-        holder.patient_age.setText(Integer.toString(patientList.get(position).getAge())+" "+R.string.years);
+        holder.patient_name.setText(R.string.name_+" "+patientList.get(position).getName()+",");
+        holder.patient_age.setText(Integer.toString(patientList.get(position).getAge())+" "+R.string.age_);
     }
 
     @Override
