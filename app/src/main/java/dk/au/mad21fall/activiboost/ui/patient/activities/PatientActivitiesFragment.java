@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
 import  android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,7 +106,7 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         lactivities.observe(getActivity(), new Observer<ArrayList<Activity>>() {
             @Override
             public void onChanged(ArrayList<Activity> nactivities) {
-                activitiesAdapter.updateActivitiesList(nactivities);
+                activitiesAdapter.updateActivitiesList(nactivities, "p");
                 activities = nactivities;
             }
         });
@@ -155,7 +156,12 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         patients.put(patient.getValue().getId(),patient.getValue().getName());
         a.setPatients(patients);
         activitiesViewModel.addUserToActivity(a);
-        getActivities();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getActivities();
+            }
+        }, 100);
         Toast.makeText(getActivity(), getText(R.string.caregiverAdded), Toast.LENGTH_SHORT).show();
 
     }
@@ -197,7 +203,12 @@ public class PatientActivitiesFragment extends Fragment implements ActivitiesAda
         patients.remove(userId);
         a.setPatients(patients);
         activitiesViewModel.addUserToActivity(a);
-        getActivities();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getActivities();
+            }
+        }, 100);
         Toast.makeText(getActivity(), getText(R.string.caregiverUnsubscribed), Toast.LENGTH_SHORT).show();
     }
 

@@ -64,6 +64,8 @@
     <string name="fillOut">Du skal udfylde de påkrævede felter</string>
     <string name="caregiverUnsubscribed">You have unsubscribed from the activity</string>
     <string name="caregiverAdded">You are now attending the activity</string>
+    <string name="sureDelete">Sure you want to delete?</string>
+    <string name="deleteActivity">Delete activity</string>
 
 
 </resources>

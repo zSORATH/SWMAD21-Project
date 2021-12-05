@@ -1,6 +1,5 @@
 package dk.au.mad21fall.activiboost.models;
 
-import androidx.room.PrimaryKey;
 
 public class Caregiver {
 
