@@ -64,4 +64,12 @@ public class WeatherModel {
     @Expose
     private int cod;
 
+    // City name
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
+    }
+
 }

@@ -4,6 +4,7 @@ import static dk.au.mad21fall.activiboost.Constants.PATIENT;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.google.android.gms.location.LocationServices;
 
 import dk.au.mad21fall.activiboost.Constants;
 import dk.au.mad21fall.activiboost.databinding.FragmentHomeBinding;
+import dk.au.mad21fall.activiboost.models.WeatherModel;
 import dk.au.mad21fall.activiboost.services.LocationUtil;
 import dk.au.mad21fall.activiboost.services.WeatherApi;
 
@@ -35,16 +37,24 @@ public class HomeFragment extends Fragment {
     private LocationUtil locationUtil = new LocationUtil();
     private String location;
 
-    WeatherApi api = new WeatherApi();
+
+    WeatherApi api;
     private FusedLocationProviderClient fusedLocationClient;
+    WeatherModel weather;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+        Context context = getContext();
+        FragmentActivity activity = getActivity();
+        api = new WeatherApi(context,activity,fusedLocationClient);
 
-        getWeather();
+        new Handler().postDelayed(() -> {
+            weather = api.getWeather(context,activity,fusedLocationClient);
+            Log.e(TAG, "Received weather: "+ weather.getName());
+        }, 500);
 
     }
 
@@ -64,6 +74,17 @@ public class HomeFragment extends Fragment {
             name = hmv.getCaregiver(uid).getName();
         }
 
+        new Handler().postDelayed(() -> {
+            if(weather == null){
+                new Handler().postDelayed(() -> {
+                    Log.e(TAG, "Delayed - Received weather: "+ weather.getName());
+                }, 1200);
+            } else{
+                Log.e(TAG, "Received delayed weather: "+weather.getName());
+            }
+        }, 500);
+
+
         final TextView textView = binding.textHome;
         hmv.getText().observe(getViewLifecycleOwner(), s -> textView.setText(s + name));
         return root;
@@ -75,15 +96,4 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    private void getWeather() {
-        Context context = getContext();
-        FragmentActivity activity = getActivity();
-
-         locationUtil.getLocationCoordinates(context, activity, fusedLocationClient);
-
-         Log.d(TAG, "Location from constants: " + Constants.LOCATION);
-         String testLocation =  "lat=56.16216216216216&lon=10.160215237798806";
-         api.getLocalWeather(testLocation, context);
-
-    }
 }
