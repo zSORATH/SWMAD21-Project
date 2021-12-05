@@ -98,6 +98,8 @@
     <!--Notifications-->
     <string name="trythis">Checkout this activity! </string>
     <string name="suggestions">I\' give you suggestions </string>
+    <string name="search">Search</string>
+    <string name="x_activities_today">Number of activities in your calendar today</string>
 
 
 </resources>

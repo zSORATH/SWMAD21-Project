@@ -89,24 +89,6 @@ public class LoginActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(view -> {
             gotoSignUp();
         });
-
-        btnPLogin = findViewById(R.id.btnLogin2);
-        btnPLogin.setOnClickListener(view -> {
-            Intent intent = new Intent(this, PatientMainActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("user", "aDzD01WbDXcWS4zcx5boZpsrzDl1");
-            intent.putExtras(bundle);
-            launcher.launch(intent);
-        });
-
-        btnCLogin = findViewById(R.id.btnLogin3);
-        btnCLogin.setOnClickListener(view -> {
-            Intent intent = new Intent(this, CaregiverMainActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("user", "zX8be2WTWjUL04unsrAHqD4sBnG3");
-            intent.putExtras(bundle);
-            launcher.launch(intent);
-        });
     }
 
     // Authentication: https://firebase.google.com/docs/auth/android/firebaseui?authuser=0#java
