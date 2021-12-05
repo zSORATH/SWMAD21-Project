@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast toast;
                     if (result.getResultCode() == RESULT_OK) {
                         toast = Toast.makeText(getApplicationContext(),
-                                "User created!",
+                                R.string.user_created,
                                 Toast.LENGTH_SHORT);
                         toast.show();
                     } /*else if (result.getResultCode() == RESULT_CANCELED) {
@@ -152,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
             Context context = getApplicationContext();
             String text;
             if (response == null) {
-                text = "Login cancelled";
+                text = getText(R.string.login_cancelled).toString();
             }
             else {
                 text = response.getError().getLocalizedMessage();

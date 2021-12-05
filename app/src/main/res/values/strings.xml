@@ -76,4 +76,7 @@
     <string name="acitvity_upcoming">You have an activity you are attending in</string>
     <string name="days">days</string>
     <string name="activities_for">"Activities for "</string>
+    <string name="no_upcoming_activities">You have no upcoming activies.</string>
+    <string name="user_created">User succesfully created!</string>
+    <string name="login_cancelled">Login cancelled</string>
 </resources>
