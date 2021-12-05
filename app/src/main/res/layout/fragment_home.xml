@@ -50,6 +50,22 @@
         app:layout_constraintVertical_bias="0.120000005" />
 
     <TextView
+        android:id="@+id/txtHomeActivities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/home_activities"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineWeatherBottom"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/textWeatherType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,5 +120,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textCity"
         tools:src="@android:drawable/ic_menu_recent_history" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_todaysActivities"
+        android:layout_width="fill_parent"
+        android:layout_height="284dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHomeActivities"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textNoActivities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHomeActivities" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
