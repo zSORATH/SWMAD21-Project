@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
         boolean dateHasActivity = cvm.dateHasActivity(date);
         if (dateHasActivity){
             activities = cvm.getActivitiesOnDate(date);
-            txtNoActivities.setText(R.string.no_activities_today + activities.size());
+            txtNoActivities.setText(getText(R.string.x_activities_today).toString() + ": " + activities.size());
             Log.e(TAG, "Got some activities!");
 
         } else {

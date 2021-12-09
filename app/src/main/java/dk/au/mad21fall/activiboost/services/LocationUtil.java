@@ -41,7 +41,7 @@ public class LocationUtil {
                     lon = location.getLongitude();
                     setCoordinatesString(lat, lon);
                 } else {
-                    Toast.makeText(context, "location: IS NULL", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(context, "location: IS NULL", Toast.LENGTH_LONG).show();
                 }
 
             });
